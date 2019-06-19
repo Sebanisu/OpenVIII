@@ -151,7 +151,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ArchiveSearch.cs" />
     <Compile Include="ArchiveWorker.cs" />
     <Compile Include="DictionaryEx.cs" />
     <Compile Include="DM_Midi.cs" />
