@@ -223,11 +223,12 @@
     <Compile Include="Menu\IGMDataItem\IGMDataItem_Texture.cs" />
     <Compile Include="Menu\IGMData\IGMData_Container.cs" />
     <Compile Include="Menu\IGMData\IGMData_Group.cs" />
+    <Compile Include="Menu\IGM\IGMData\IGMData_PartyGroup.cs" />
     <Compile Include="Menu\IGM_Items\IGM_Items.cs" />
     <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Abilities_AbilityPool.cs" />
     <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Abilities_AbilitySlots.cs" />
-    <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Abilities_Command.cs" />
     <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Abilities_CommandPool.cs" />
+    <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Abilities_CommandSlots.cs" />
     <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Abilities_Group.cs" />
     <Compile Include="Menu\IGM_Junction\IGMData\IGMData_CharacterInfo.cs" />
     <Compile Include="Menu\IGM_Junction\IGMData\IGMData_Commands.cs" />
