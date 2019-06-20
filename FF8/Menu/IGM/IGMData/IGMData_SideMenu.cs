@@ -6,14 +6,17 @@ namespace FF8
 {
     public partial class Module_main_menu_debug
     {
+
         #region Classes
 
         private partial class IGM
         {
+
             #region Classes
 
             private class IGMData_SideMenu : IGMData
             {
+
                 #region Fields
 
                 private FF8String[] _helpStr;
@@ -75,6 +78,32 @@ namespace FF8
                     return base.Inputs();
                 }
 
+                public override void Inputs_CANCEL()
+                {
+                    base.Inputs_CANCEL();
+                    Input.ResetInputLimit();
+                    Fade = 0.0f;
+                    State = MainMenuStates.LoadGameChooseGame;
+                }
+
+                public override void Inputs_OKAY()
+                {
+                    base.Inputs_OKAY();
+                    switch ((Items)CURSOR_SELECT)
+                    {
+                        case Items.Junction:
+                        case Items.Magic:
+                        case Items.Status:
+                            InGameMenu.SetMode(Mode.ChooseChar);
+                            return;
+
+                        case Items.Item:
+                            State = MainMenuStates.IGM_Items;
+                            InGameMenu_Items.ReInit();
+                            return;
+                    }
+                }
+
                 public override void ReInit()
                 {
                     if (!eventSet && InGameMenu != null)
@@ -110,39 +139,15 @@ namespace FF8
                         Cursor_Status |= Cursor_Status.Blinking;
                     }
                 }
-                
-                public override void Inputs_OKAY()
-                {
-                    base.Inputs_OKAY();
-                    switch ((Items)CURSOR_SELECT)
-                    {
-                        case Items.Junction:
-                        case Items.Magic:
-                        case Items.Status:
-                            InGameMenu.SetMode(Mode.ChooseChar);
-                            return;
-
-                        case Items.Item:
-                            State = MainMenuStates.IGM_Items;
-                            InGameMenu_Items.ReInit();
-                            return;
-                    }
-                }
-
-                public override void Inputs_CANCEL()
-                {
-                    base.Inputs_CANCEL();
-                    Input.ResetInputLimit();
-                    Fade = 0.0f;
-                    State = MainMenuStates.LoadGameChooseGame;
-                }
 
                 #endregion Methods
             }
 
             #endregion Classes
+
         }
 
         #endregion Classes
+
     }
 }
