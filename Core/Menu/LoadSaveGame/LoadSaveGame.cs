@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OpenVIII
 {
-    public class IGMLoadSaveGame : Menu
+    public class LoadSaveGame : Menu
     {
         #region Fields
 
@@ -16,7 +16,7 @@ namespace OpenVIII
         #region Constructors
 
         [SuppressMessage("ReSharper", "NotAccessedField.Local")]
-        public IGMLoadSaveGame()
+        public LoadSaveGame()
         {
         }
 
@@ -89,7 +89,7 @@ namespace OpenVIII
 
         #region Methods
 
-        public static IGMLoadSaveGame Create() => Create<IGMLoadSaveGame>();
+        public static LoadSaveGame Create() => Create<LoadSaveGame>();
 
         public override bool Inputs()
         {

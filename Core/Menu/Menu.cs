@@ -46,7 +46,7 @@ namespace OpenVIII
 
         private static Junction _junction;
 
-        private static IGMLoadSaveGame _igmLoadSaveGame;
+        private static LoadSaveGame _loadSaveGame;
 
         private static IGM_Lobby _igm_lobby;
 
@@ -110,7 +110,7 @@ namespace OpenVIII
         /// <summary>
         /// Lobby Menu
         /// </summary>
-        public static IGMLoadSaveGame IGMLoadSaveGame => _igmLoadSaveGame;
+        public static LoadSaveGame LoadSaveGame => _loadSaveGame;
 
         /// <summary>
         /// Lobby Menu
@@ -315,8 +315,8 @@ namespace OpenVIII
                     _igm_items = IGMItems.Create();
                 if (_battlemenus == null)
                     _battlemenus = BattleMenus.Create();
-                if (_igmLoadSaveGame == null)
-                    _igmLoadSaveGame = IGMLoadSaveGame.Create();
+                if (_loadSaveGame == null)
+                    _loadSaveGame = LoadSaveGame.Create();
                 if (_debug_menu == null)
                     _debug_menu = Debug_Menu.Create();
                 if (_module == null)

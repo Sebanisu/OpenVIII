@@ -43,14 +43,14 @@ namespace OpenVIII
             public override bool Inputs_OKAY()
             {
                 base.Inputs_OKAY();
-                var mode = IGMLoadSaveGame.Mode.Slot |
-                           IGMLoadSaveGame.Mode.Checking |
-                           (Save ? IGMLoadSaveGame.Mode.Save : IGMLoadSaveGame.Mode.Nothing);
+                var mode = LoadSaveGame.Mode.Slot |
+                           LoadSaveGame.Mode.Checking |
+                           (Save ? LoadSaveGame.Mode.Save : LoadSaveGame.Mode.Nothing);
 
                 if (CURSOR_SELECT == 0)
-                    Menu.IGMLoadSaveGame.SetMode(mode | IGMLoadSaveGame.Mode.Slot1);
+                    Menu.LoadSaveGame.SetMode(mode | LoadSaveGame.Mode.Slot1);
                 else if (CURSOR_SELECT == 1)
-                    Menu.IGMLoadSaveGame.SetMode(mode | IGMLoadSaveGame.Mode.Slot2);
+                    Menu.LoadSaveGame.SetMode(mode | LoadSaveGame.Mode.Slot2);
 
                 return true;
             }
@@ -58,10 +58,10 @@ namespace OpenVIII
             public override void ModeChangeEvent(object sender, Enum e)
             {
                 base.ModeChangeEvent(sender, e);
-                if (e.GetType() == typeof(IGMLoadSaveGame.Mode))
+                if (e.GetType() == typeof(LoadSaveGame.Mode))
                 {
-                    Save = e.HasFlag(IGMLoadSaveGame.Mode.Save);
-                    if (e.HasFlag(IGMLoadSaveGame.Mode.Slot) && e.HasFlag(IGMLoadSaveGame.Mode.Choose))
+                    Save = e.HasFlag(LoadSaveGame.Mode.Save);
+                    if (e.HasFlag(LoadSaveGame.Mode.Slot) && e.HasFlag(LoadSaveGame.Mode.Choose))
                         Show();
                     else
                         Hide();

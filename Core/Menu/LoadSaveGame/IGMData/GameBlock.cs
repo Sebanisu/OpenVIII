@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -97,7 +96,6 @@ namespace OpenVIII
                     Face1.Data = Data.Party[0].ToFacesID();
                     Face2.Data = Data.Party[1].ToFacesID();
                     Face3.Data = Data.Party[2].ToFacesID();
-//                    Debug.Assert(Face1.Data != Faces.ID.Kiros_Seagill);
                     if (Data.Party != null)
                     {
                         var characterID = Data.Party.FirstOrDefault(x => !x.Equals(Characters.Blank));
@@ -118,7 +116,7 @@ namespace OpenVIII
                                 : checked((int)Data.AmountOfGil);
                     }
 
-                    DiscNum.Data = checked((int)Data.CurrentDisk+1);
+                    DiscNum.Data = checked((int)Data.CurrentDisk + 1);
                     Hours.Data = checked((int)MathHelper.Clamp((float)Data.TimePlayed.TotalHours, 0, 99));
                     if (Hours.Data < 99)
                         Minutes.Data = checked((int)MathHelper.Clamp((float)Data.TimePlayed.Minutes, 0, 99));

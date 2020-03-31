@@ -36,31 +36,31 @@ namespace OpenVIII.IGMData
         public override void ModeChangeEvent(object sender, Enum e)
         {
             base.ModeChangeEvent(sender, e);
-            if (e.GetType() == typeof(IGMLoadSaveGame.Mode))
+            if (e.GetType() == typeof(LoadSaveGame.Mode))
             {
-                Save = e.HasFlag(IGMLoadSaveGame.Mode.Save);
+                Save = e.HasFlag(LoadSaveGame.Mode.Save);
                 TopRight.Data = Save ? Strings.Name.Save : Strings.Name.Load;
 
-                if (e.HasFlag(IGMLoadSaveGame.Mode.Slot1))
+                if (e.HasFlag(LoadSaveGame.Mode.Slot1))
                     TopLeft.Data = Strings.Name.GameFolderSlot1;
-                else if (e.HasFlag(IGMLoadSaveGame.Mode.Slot2))
+                else if (e.HasFlag(LoadSaveGame.Mode.Slot2))
                     TopLeft.Data = Strings.Name.GameFolderSlot2;
                 else
                     TopLeft.Data = Strings.Name.GameFolder;
 
-                if (e.HasFlag(IGMLoadSaveGame.Mode.Slot) && e.HasFlag(IGMLoadSaveGame.Mode.Choose))
+                if (e.HasFlag(LoadSaveGame.Mode.Slot) && e.HasFlag(LoadSaveGame.Mode.Choose))
                 {
                     Help.Data = Save ? Strings.Name.SaveFF8 : Strings.Name.LoadFF8;
                 }
-                else if (e.HasFlag(IGMLoadSaveGame.Mode.Slot) && e.HasFlag(IGMLoadSaveGame.Mode.Checking))
+                else if (e.HasFlag(LoadSaveGame.Mode.Slot) && e.HasFlag(LoadSaveGame.Mode.Checking))
                 {
                     Help.Data = Strings.Name.CheckGameFolder;
                 }
-                else if (e.HasFlag(IGMLoadSaveGame.Mode.Game) && e.HasFlag(IGMLoadSaveGame.Mode.Choose))
+                else if (e.HasFlag(LoadSaveGame.Mode.Game) && e.HasFlag(LoadSaveGame.Mode.Choose))
                 {
                     Help.Data = Save ? Strings.Name.BlockToSave : Strings.Name.BlockToLoad;
                 }
-                else if (e.HasFlag(IGMLoadSaveGame.Mode.Game) && e.HasFlag(IGMLoadSaveGame.Mode.Checking))
+                else if (e.HasFlag(LoadSaveGame.Mode.Game) && e.HasFlag(LoadSaveGame.Mode.Checking))
                 {
                     Help.Data = Save ? Strings.Name.Saving : Strings.Name.Loading;
                 }
@@ -98,7 +98,7 @@ namespace OpenVIII.IGMData
             CONTAINER.X = ScreenTopLeft.X;
             CONTAINER.Width = ScreenTopRight.X - ScreenTopLeft.X;
             InitSize(true);
-            const int space = IGMLoadSaveGame.Space;
+            const int space = LoadSaveGame.Space;
             var widthRight = (int)(base.Width * 0.18f) - space;
             widthRight -= widthRight % 4;
             var widthLeft = Width - widthRight - space;

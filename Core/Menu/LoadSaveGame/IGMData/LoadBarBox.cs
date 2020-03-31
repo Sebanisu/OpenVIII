@@ -27,9 +27,9 @@ namespace OpenVIII.IGMData
         {
             if (Slot)
             {
-                setMode(IGMLoadSaveGame.Mode.Game |
-                        IGMLoadSaveGame.Mode.Choose |
-                        (Save ? IGMLoadSaveGame.Mode.Save : IGMLoadSaveGame.Mode.Nothing));
+                setMode(LoadSaveGame.Mode.Game |
+                        LoadSaveGame.Mode.Choose |
+                        (Save ? LoadSaveGame.Mode.Save : LoadSaveGame.Mode.Nothing));
                 playSound(35);
                 return true;
             }
@@ -40,9 +40,9 @@ namespace OpenVIII.IGMData
                 Menu.IGM.Refresh();
 
                 //TODO if save ask if you are sure if you are replacing an existing save.
-                setMode(IGMLoadSaveGame.Mode.Game |
-                        IGMLoadSaveGame.Mode.Choose |
-                        (Save ? IGMLoadSaveGame.Mode.Save : IGMLoadSaveGame.Mode.Nothing));
+                setMode(LoadSaveGame.Mode.Game |
+                        LoadSaveGame.Mode.Choose |
+                        (Save ? LoadSaveGame.Mode.Save : LoadSaveGame.Mode.Nothing));
                 playSound(36);
                 return true;
             }
@@ -53,30 +53,28 @@ namespace OpenVIII.IGMData
                 skipsnd = true;
                 base.Inputs_OKAY();
             }
-            void setMode(IGMLoadSaveGame.Mode mode)
+            void setMode(LoadSaveGame.Mode mode)
             {
-                if (Menu.IGMLoadSaveGame.GetMode().HasFlag(IGMLoadSaveGame.Mode.Slot1))
-                    Menu.IGMLoadSaveGame.SetMode(mode | IGMLoadSaveGame.Mode.Slot1);
-                else if (Menu.IGMLoadSaveGame.GetMode().HasFlag(IGMLoadSaveGame.Mode.Slot2))
-                    Menu.IGMLoadSaveGame.SetMode(mode | IGMLoadSaveGame.Mode.Slot2);
+                if (Menu.LoadSaveGame.GetMode().HasFlag(LoadSaveGame.Mode.Slot1))
+                    Menu.LoadSaveGame.SetMode(mode | LoadSaveGame.Mode.Slot1);
+                else if (Menu.LoadSaveGame.GetMode().HasFlag(LoadSaveGame.Mode.Slot2))
+                    Menu.LoadSaveGame.SetMode(mode | LoadSaveGame.Mode.Slot2);
             }
         }
 
         public override void ModeChangeEvent(object sender, Enum e)
         {
             base.ModeChangeEvent(sender, e);
-            if (e.GetType() == typeof(IGMLoadSaveGame.Mode))
+            if (e.GetType() != typeof(LoadSaveGame.Mode)) return;
+            Save = e.HasFlag(LoadSaveGame.Mode.Save);
+            Slot = e.HasFlag(LoadSaveGame.Mode.Slot);
+            if (e.HasFlag(LoadSaveGame.Mode.Checking))
             {
-                Save = e.HasFlag(IGMLoadSaveGame.Mode.Save);
-                Slot = e.HasFlag(IGMLoadSaveGame.Mode.Slot);
-                if (e.HasFlag(IGMLoadSaveGame.Mode.Checking))
-                {
-                    Show();
-                    Refresh();
-                }
-                else
-                    Hide();
+                Show();
+                Refresh();
             }
+            else
+                Hide();
         }
 
         public override void Refresh()

@@ -40,11 +40,11 @@ namespace OpenVIII
             {
                 if (Input2.DelayedButton(FF8TextTagKey.RotateLeft) || Input2.DelayedButton(FF8TextTagKey.RotateRight))
                 {
-                    var mode = (IGMLoadSaveGame.Mode)Menu.IGMLoadSaveGame.GetMode();
+                    var mode = (LoadSaveGame.Mode)Menu.LoadSaveGame.GetMode();
                     AV.Sound.Play(0);
-                    mode ^= IGMLoadSaveGame.Mode.Slot1;
-                    mode ^= IGMLoadSaveGame.Mode.Slot2;
-                    Menu.IGMLoadSaveGame.SetMode(mode);
+                    mode ^= LoadSaveGame.Mode.Slot1;
+                    mode ^= LoadSaveGame.Mode.Slot2;
+                    Menu.LoadSaveGame.SetMode(mode);
                     return true;
                 }
                 else
@@ -54,9 +54,9 @@ namespace OpenVIII
             public override bool Inputs_CANCEL()
             {
                 base.Inputs_CANCEL();
-                Menu.IGMLoadSaveGame.SetMode(IGMLoadSaveGame.Mode.Slot |
-                        IGMLoadSaveGame.Mode.Choose |
-                        (Save ? IGMLoadSaveGame.Mode.Save : IGMLoadSaveGame.Mode.Nothing));
+                Menu.LoadSaveGame.SetMode(LoadSaveGame.Mode.Slot |
+                        LoadSaveGame.Mode.Choose |
+                        (Save ? LoadSaveGame.Mode.Save : LoadSaveGame.Mode.Nothing));
                 return true;
             }
 
@@ -69,22 +69,22 @@ namespace OpenVIII
                     Memory.State = save.Clone();
                 //TODO. Save game here.
 
-                Menu.IGMLoadSaveGame.SetMode(
-                    IGMLoadSaveGame.Mode.Checking |
-                    IGMLoadSaveGame.Mode.Game |
-                    (Menu.IGMLoadSaveGame.GetMode().HasFlag(IGMLoadSaveGame.Mode.Slot1) ? IGMLoadSaveGame.Mode.Slot1 : IGMLoadSaveGame.Mode.Slot2) |
-                    (Save ? IGMLoadSaveGame.Mode.Save : 0));
+                Menu.LoadSaveGame.SetMode(
+                    LoadSaveGame.Mode.Checking |
+                    LoadSaveGame.Mode.Game |
+                    (Menu.LoadSaveGame.GetMode().HasFlag(LoadSaveGame.Mode.Slot1) ? LoadSaveGame.Mode.Slot1 : LoadSaveGame.Mode.Slot2) |
+                    (Save ? LoadSaveGame.Mode.Save : 0));
                 return false;
             }
 
             public override void ModeChangeEvent(object sender, Enum e)
             {
                 base.ModeChangeEvent(sender, e);
-                if (e.GetType() != typeof(IGMLoadSaveGame.Mode)) return;
-                Save = e.HasFlag(IGMLoadSaveGame.Mode.Save);
-                if (e.HasFlag(IGMLoadSaveGame.Mode.Game) && e.HasFlag(IGMLoadSaveGame.Mode.Choose))
+                if (e.GetType() != typeof(LoadSaveGame.Mode)) return;
+                Save = e.HasFlag(LoadSaveGame.Mode.Save);
+                if (e.HasFlag(LoadSaveGame.Mode.Game) && e.HasFlag(LoadSaveGame.Mode.Choose))
                 {
-                    Slot = e.HasFlag(IGMLoadSaveGame.Mode.Slot1) ? (byte)0 : (byte)1;
+                    Slot = e.HasFlag(LoadSaveGame.Mode.Slot1) ? (byte)0 : (byte)1;
                     var total = Count - ExtraCount;
 
                     var r = 0;

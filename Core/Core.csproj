@@ -114,7 +114,10 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Framework.Portable.3.7.1.189\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Vorbis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Vorbis.1.0.0.0\lib\net35\NAudio.Vorbis.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <Private>True</Private>
@@ -428,12 +431,12 @@
     <Compile Include="Menu\Images\HSL.cs" />
     <Compile Include="Menu\Images\TexProps.cs" />
     <Compile Include="Menu\Images\VertexPositionTexture_Texture2D.cs" />
-    <Compile Include="Menu\LGSG\IGMData\GameBlock.cs" />
-    <Compile Include="Menu\LGSG\IGMData\GameChoose.cs" />
-    <Compile Include="Menu\LGSG\IGMData\SlotChoose.cs" />
-    <Compile Include="Menu\LGSG\IGMLoadSaveGame.cs" />
-    <Compile Include="Menu\LGSG\IGMData\LoadBarBox.cs" />
-    <Compile Include="Menu\LGSG\IGMData\ThreePieceHeader.cs" />
+    <Compile Include="Menu\LoadSaveGame\IGMData\GameBlock.cs" />
+    <Compile Include="Menu\LoadSaveGame\IGMData\GameChoose.cs" />
+    <Compile Include="Menu\LoadSaveGame\IGMData\SlotChoose.cs" />
+    <Compile Include="Menu\LoadSaveGame\LoadSaveGame.cs" />
+    <Compile Include="Menu\LoadSaveGame\IGMData\LoadBarBox.cs" />
+    <Compile Include="Menu\LoadSaveGame\IGMData\ThreePieceHeader.cs" />
     <Compile Include="Menu\Lobby\IGMData_Selections.cs" />
     <Compile Include="Battle\Menu\VictoryMenu.cs" />
     <Compile Include="Battle\ModuleBattle.cs" />
