@@ -4,15 +4,15 @@
     /// Push animation on stack?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/14A_PUSHANIME&action=edit&redlink=1"/>
-    public sealed class PUSHANIME : JsmInstruction
+    public sealed class PushAnime : JsmInstruction
     {
         #region Constructors
 
-        public PUSHANIME()
+        public PushAnime()
         {
         }
 
-        public PUSHANIME(int parameter, IStack<IJsmExpression> stack)
+        public PushAnime(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PUSHANIME)}()";
+        public override string ToString() => $"{nameof(PushAnime)}()";
 
         #endregion Methods
     }

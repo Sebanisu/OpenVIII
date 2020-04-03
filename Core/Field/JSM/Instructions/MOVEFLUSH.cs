@@ -4,15 +4,15 @@
     /// Flush Movement; Not confirmed, but I'm pretty sure it halts the current entity's movements.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/148_MOVEFLUSH"/>
-    public sealed class MOVEFLUSH : JsmInstruction
+    public sealed class MoveFlush : JsmInstruction
     {
         #region Constructors
 
-        public MOVEFLUSH()
+        public MoveFlush()
         {
         }
 
-        public MOVEFLUSH(int parameter, IStack<IJsmExpression> stack)
+        public MoveFlush(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MOVEFLUSH)}()";
+        public override string ToString() => $"{nameof(MoveFlush)}()";
 
         #endregion Methods
     }

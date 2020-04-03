@@ -4,15 +4,15 @@
     /// Music Vol Sync?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/149_MUSICVOLSYNC&action=edit&redlink=1"/>
-    public sealed class MUSICVOLSYNC : JsmInstruction
+    public sealed class MusicVolSync : JsmInstruction
     {
         #region Constructors
 
-        public MUSICVOLSYNC()
+        public MusicVolSync()
         {
         }
 
-        public MUSICVOLSYNC(int parameter, IStack<IJsmExpression> stack)
+        public MusicVolSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MUSICVOLSYNC)}()";
+        public override string ToString() => $"{nameof(MusicVolSync)}()";
 
         #endregion Methods
     }

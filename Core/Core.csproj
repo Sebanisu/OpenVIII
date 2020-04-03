@@ -780,7 +780,7 @@
     <Compile Include="Field\JSM\Instructions\Move.cs" />
     <Compile Include="Field\JSM\Instructions\MoveA.cs" />
     <Compile Include="Field\JSM\Instructions\MoveCancel.cs" />
-    <Compile Include="Field\JSM\Instructions\MOVEFLUSH.cs" />
+    <Compile Include="Field\JSM\Instructions\MoveFlush.cs" />
     <Compile Include="Field\JSM\Instructions\MoveSync.cs" />
     <Compile Include="Field\JSM\Instructions\Movie.cs" />
     <Compile Include="Field\JSM\Instructions\MovieCut.cs" />
@@ -795,7 +795,7 @@
     <Compile Include="Field\JSM\Instructions\MusicStop.cs" />
     <Compile Include="Field\JSM\Instructions\MusicVol.cs" />
     <Compile Include="Field\JSM\Instructions\MusicVolFade.cs" />
-    <Compile Include="Field\JSM\Instructions\MUSICVOLSYNC.cs" />
+    <Compile Include="Field\JSM\Instructions\MusicVolSync.cs" />
     <Compile Include="Field\JSM\Instructions\MusicVolTrans.cs" />
     <Compile Include="Field\JSM\Instructions\NOP.cs" />
     <Compile Include="Field\JSM\Instructions\OffsetSync.cs" />
@@ -815,7 +815,7 @@
     <Compile Include="Field\JSM\Instructions\PMoveCancel.cs" />
     <Compile Include="Field\JSM\Instructions\PolyColor.cs" />
     <Compile Include="Field\JSM\Instructions\PolyColorAll.cs" />
-    <Compile Include="Field\JSM\Instructions\POPANIME.cs" />
+    <Compile Include="Field\JSM\Instructions\PopAnime.cs" />
     <Compile Include="Field\JSM\Instructions\POPI_L.cs" />
     <Compile Include="Field\JSM\Instructions\POPM_B.cs" />
     <Compile Include="Field\JSM\Instructions\POPM_L.cs" />
@@ -825,7 +825,7 @@
     <Compile Include="Field\JSM\Instructions\PREQ.cs" />
     <Compile Include="Field\JSM\Instructions\PREQEW.cs" />
     <Compile Include="Field\JSM\Instructions\PREQSW.cs" />
-    <Compile Include="Field\JSM\Instructions\PUSHANIME.cs" />
+    <Compile Include="Field\JSM\Instructions\PushAnime.cs" />
     <Compile Include="Field\JSM\Instructions\PushOff.cs" />
     <Compile Include="Field\JSM\Instructions\PushOn.cs" />
     <Compile Include="Field\JSM\Instructions\PushRadius.cs" />
