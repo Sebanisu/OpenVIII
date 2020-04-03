@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETCAMERA : JsmInstruction
+    public sealed class SetCamera : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SETCAMERA(IJsmExpression arg0) => _arg0 = arg0;
+        public SetCamera(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SETCAMERA(int parameter, IStack<IJsmExpression> stack)
+        public SetCamera(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -20,9 +20,15 @@
 
         #endregion Constructors
 
+        #region Properties
+
+        public IJsmExpression Arg => _arg0;
+
+        #endregion Properties
+
         #region Methods
 
-        public override string ToString() => $"{nameof(SETCAMERA)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(SetCamera)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

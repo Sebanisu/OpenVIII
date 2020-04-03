@@ -2,10 +2,10 @@
 {
     /// <summary>
     /// <para>SPU Sync</para>
-    /// <para>Pauses this script until frame Count frames have passed since SPUREADY was called.</para>
+    /// <para>Pauses this script until frame Count frames have passed since SPUReady was called.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/164_SPUSYNC"/>
-    public sealed class SPUSYNC : JsmInstruction
+    public sealed class SPUSync : JsmInstruction
     {
         #region Fields
 
@@ -18,9 +18,9 @@
 
         #region Constructors
 
-        public SPUSYNC(IJsmExpression frameCount) => _frameCount = frameCount;
+        public SPUSync(IJsmExpression frameCount) => _frameCount = frameCount;
 
-        public SPUSYNC(int parameter, IStack<IJsmExpression> stack)
+        public SPUSync(int parameter, IStack<IJsmExpression> stack)
             : this(
                 frameCount: stack.Pop())
         {
@@ -30,7 +30,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SPUSYNC)}({nameof(_frameCount)}: {_frameCount})";
+        public override string ToString() => $"{nameof(SPUSync)}({nameof(_frameCount)}: {_frameCount})";
 
         #endregion Methods
     }

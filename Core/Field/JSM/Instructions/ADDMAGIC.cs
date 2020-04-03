@@ -5,7 +5,7 @@
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/161_ADDMAGIC"/>
     /// <seealso cref="http://wiki.ffrtt.ru/index.php?title=FF8/Magic_Codes"/>
-    public sealed class ADDMAGIC : JsmInstruction
+    public sealed class AddMagic : JsmInstruction
     {
         #region Fields
 
@@ -28,14 +28,14 @@
 
         #region Constructors
 
-        public ADDMAGIC(IJsmExpression quantity, IJsmExpression magicID, Characters characterid)
+        public AddMagic(IJsmExpression quantity, IJsmExpression magicID, Characters characterid)
         {
             _quantity = quantity;
             _magicID = magicID;
             _characterID = characterid;
         }
 
-        public ADDMAGIC(int parameter, IStack<IJsmExpression> stack)
+        public AddMagic(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterid: ((IConstExpression)stack.Pop()).Characters(),
                 magicID: stack.Pop(),
@@ -47,7 +47,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ADDMAGIC)}({nameof(_quantity)}: {_quantity}, {nameof(_magicID)}: {_magicID}, {nameof(_characterID)}: {_characterID})";
+        public override string ToString() => $"{nameof(AddMagic)}({nameof(_quantity)}: {_quantity}, {nameof(_magicID)}: {_magicID}, {nameof(_characterID)}: {_characterID})";
 
         #endregion Methods
     }

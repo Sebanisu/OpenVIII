@@ -5,7 +5,7 @@
     /// <para>If isHidden is bigger or equal to 1, then hides draw point. If not, the draw point is visible.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/155_SETDRAWPOINT"/>
-    public sealed class SETDRAWPOINT : JsmInstruction
+    public sealed class SetDrawPoint : JsmInstruction
     {
         #region Fields
 
@@ -15,9 +15,9 @@
 
         #region Constructors
 
-        public SETDRAWPOINT(bool isHidden) => _isHidden = isHidden;
+        public SetDrawPoint(bool isHidden) => _isHidden = isHidden;
 
-        public SETDRAWPOINT(int parameter, IStack<IJsmExpression> stack)
+        public SetDrawPoint(int parameter, IStack<IJsmExpression> stack)
             : this(
                 isHidden: ((IConstExpression)stack.Pop()).Boolean())
         {
@@ -27,7 +27,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SETDRAWPOINT)}({nameof(_isHidden)}: {_isHidden})";
+        public override string ToString() => $"{nameof(SetDrawPoint)}({nameof(_isHidden)}: {_isHidden})";
 
         #endregion Methods
     }

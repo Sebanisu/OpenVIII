@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class TALKON : JsmInstruction
+    internal sealed class TalkOn : JsmInstruction
     {
         #region Constructors
 
-        public TALKON()
+        public TalkOn()
         {
         }
 
-        public TALKON(int parameter, IStack<IJsmExpression> stack)
+        public TalkOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Property(nameof(FieldObjectInteraction.IsTalkScriptActive))
                 .Assign(true)
-                .Comment(nameof(TALKON));
+                .Comment(nameof(TalkOn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -30,7 +30,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(TALKON)}()";
+        public override string ToString() => $"{nameof(TalkOn)}()";
 
         #endregion Methods
     }

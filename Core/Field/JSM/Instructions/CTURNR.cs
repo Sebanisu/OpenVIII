@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class CTURNR : JsmInstruction
+    internal sealed class CTurnR : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@
 
         #region Constructors
 
-        public CTURNR(IJsmExpression angle, IJsmExpression frameDuration)
+        public CTurnR(IJsmExpression angle, IJsmExpression frameDuration)
         {
             _angle = angle;
             _frameDuration = frameDuration;
         }
 
-        public CTURNR(int parameter, IStack<IJsmExpression> stack)
+        public CTurnR(int parameter, IStack<IJsmExpression> stack)
             : this(
                 frameDuration: stack.Pop(),
                 angle: stack.Pop())
@@ -34,7 +34,7 @@
                 .Method(nameof(FieldObjectModel.Rotate))
                 .Argument("angle", _angle)
                 .Argument("frameDuration", _frameDuration)
-                .Comment(nameof(CTURNR));
+                .Comment(nameof(CTurnR));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -47,7 +47,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(CTURNR)}({nameof(_angle)}: {_angle}, {nameof(_frameDuration)}: {_frameDuration})";
+        public override string ToString() => $"{nameof(CTurnR)}({nameof(_angle)}: {_angle}, {nameof(_frameDuration)}: {_frameDuration})";
 
         #endregion Methods
     }

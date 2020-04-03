@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class INITTRACE : JsmInstruction
+    internal sealed class InitTrace : JsmInstruction
     {
         #region Constructors
 
-        public INITTRACE()
+        public InitTrace()
         {
         }
 
-        public INITTRACE(int parameter, IStack<IJsmExpression> stack)
+        public InitTrace(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(INITTRACE)}()";
+        public override string ToString() => $"{nameof(InitTrace)}()";
 
         #endregion Methods
     }

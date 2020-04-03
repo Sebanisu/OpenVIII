@@ -3,7 +3,7 @@
     /// <summary>
     /// Sets this entity's movement speed.
     /// </summary>
-    internal sealed class MSPEED : JsmInstruction
+    internal sealed class MSpeed : JsmInstruction
     {
         #region Fields
 
@@ -13,9 +13,9 @@
 
         #region Constructors
 
-        public MSPEED(IJsmExpression speed) => _speed = speed;
+        public MSpeed(IJsmExpression speed) => _speed = speed;
 
-        public MSPEED(int parameter, IStack<IJsmExpression> stack)
+        public MSpeed(int parameter, IStack<IJsmExpression> stack)
             : this(
                 speed: stack.Pop())
         {
@@ -29,7 +29,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Property(nameof(FieldObjectInteraction.MovementSpeed))
                 .Assign(_speed)
-                .Comment(nameof(MSPEED));
+                .Comment(nameof(MSpeed));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -38,7 +38,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MSPEED)}({nameof(_speed)}: {_speed})";
+        public override string ToString() => $"{nameof(MSpeed)}({nameof(_speed)}: {_speed})";
 
         #endregion Methods
     }

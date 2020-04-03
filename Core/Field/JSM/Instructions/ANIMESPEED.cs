@@ -4,7 +4,7 @@
     /// Set animation speed. Sets the speed of this entity's animations.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0E7_ANIMESPEED"/>
-    public sealed class ANIMESPEED : JsmInstruction
+    public sealed class AnimeSpeed : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@
 
         #region Constructors
 
-        public ANIMESPEED(int fps) => _fps = fps;
+        public AnimeSpeed(int fps) => _fps = fps;
 
-        public ANIMESPEED(int parameter, IStack<IJsmExpression> stack)
+        public AnimeSpeed(int parameter, IStack<IJsmExpression> stack)
             : this(
                 //Frame speed of 1 means 2 frames per second. So doubling makes it fps.
                 fps: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32() * 2) // Native: FPS / 2
@@ -34,7 +34,7 @@
                 .Property(nameof(FieldObject.Animation))
                 .Property(nameof(FieldObjectAnimation.FPS))
                 .Assign(_fps)
-                .Comment(nameof(ANIMESPEED));
+                .Comment(nameof(AnimeSpeed));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -42,7 +42,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(ANIMESPEED)}({nameof(_fps)}: {_fps})";
+        public override string ToString() => $"{nameof(AnimeSpeed)}({nameof(_fps)}: {_fps})";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETTIMER : JsmInstruction
+    internal sealed class SetTimer : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SETTIMER(IJsmExpression arg0) => _arg0 = arg0;
+        public SetTimer(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SETTIMER(int parameter, IStack<IJsmExpression> stack)
+        public SetTimer(IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SETTIMER)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(SetTimer)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -4,15 +4,15 @@
     /// Swap?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/162_SWAP&action=edit&redlink=1"/>
-    public sealed class SWAP : JsmInstruction
+    public sealed class Swap : JsmInstruction
     {
         #region Constructors
 
-        public SWAP()
+        public Swap()
         {
         }
 
-        public SWAP(int parameter, IStack<IJsmExpression> stack)
+        public Swap(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SWAP)}()";
+        public override string ToString() => $"{nameof(Swap)}()";
 
         #endregion Methods
     }

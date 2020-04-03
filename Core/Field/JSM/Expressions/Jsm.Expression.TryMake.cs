@@ -47,8 +47,8 @@
 
                     case Jsm.Opcode.CAL:
                         return CAL.Read(param, stack);
-                        //case Opcode.MOVIEREADY:
-                        //    return new Instruction.MOVIEREADY(stack.Pop(), stack.Pop());
+                        //case Opcode.MovieReady:
+                        //    return new Instruction.MovieReady(stack.Pop(), stack.Pop());
                 }
 
                 return null;

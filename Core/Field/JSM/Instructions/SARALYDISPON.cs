@@ -3,15 +3,15 @@
     /// <summary>
     /// Turns on the display of salary alerts.
     /// </summary>
-    internal sealed class SARALYDISPON : JsmInstruction
+    internal sealed class SaralyDispOn : JsmInstruction
     {
         #region Constructors
 
-        public SARALYDISPON()
+        public SaralyDispOn()
         {
         }
 
-        public SARALYDISPON(int parameter, IStack<IJsmExpression> stack)
+        public SaralyDispOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
                 .StaticType(nameof(ISalaryService))
                 .Property(nameof(ISalaryService.IsSalaryAlertEnabled))
                 .Assign(true)
-                .Comment(nameof(SARALYDISPON));
+                .Comment(nameof(SaralyDispOn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SARALYDISPON)}()";
+        public override string ToString() => $"{nameof(SaralyDispOn)}()";
 
         #endregion Methods
     }

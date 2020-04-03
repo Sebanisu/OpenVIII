@@ -2,7 +2,7 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETGETA : JsmInstruction
+    internal sealed class SetGetA : JsmInstruction
     {
         #region Fields
 
@@ -12,9 +12,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public SETGETA(int arg0) => _arg0 = arg0;
+        public SetGetA(int arg0) => _arg0 = arg0;
 
-        public SETGETA(int parameter, IStack<IJsmExpression> stack)
+        public SetGetA(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: ((IConstExpression)stack.Pop()).Int32())
         {
@@ -27,11 +27,11 @@ namespace OpenVIII.Fields.Scripts.Instructions
         public override IAwaitable TestExecute(IServices services)
         {
             // TODO: Field script
-            Console.WriteLine($"NotImplemented: {nameof(SETGETA)}({_arg0})");
+            Console.WriteLine($"NotImplemented: {nameof(SetGetA)}({_arg0})");
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETGETA)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(SetGetA)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

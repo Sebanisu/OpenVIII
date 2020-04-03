@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DSCROLL : JsmInstruction
+    internal sealed class DScroll : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@
 
         #region Constructors
 
-        public DSCROLL(IJsmExpression arg0, IJsmExpression arg1)
+        public DScroll(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public DSCROLL(int parameter, IStack<IJsmExpression> stack)
+        public DScroll(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -28,7 +28,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DSCROLL)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(DScroll)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

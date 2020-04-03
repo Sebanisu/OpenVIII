@@ -26,23 +26,23 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services)
         {
-            formatterContext.GetObjectScriptNamesById(_scriptId, out var typeName, out var methodName);
+            formatterContext.GetObjectScriptNamesById(ScriptID, out var typeName, out var methodName);
 
-            sw.AppendLine($"{nameof(REQEW)}(priority: {_priority}, GetObject<{typeName}>().{methodName}());");
+            sw.AppendLine($"{nameof(REQEW)}(priority: {Priority}, GetObject<{typeName}>().{methodName}());");
         }
 
         public override IAwaitable TestExecute(IServices services)
         {
             var engine = ServiceId.Field[services].Engine;
 
-            var targetObject = engine.GetObject(_objectIndex);
+            var targetObject = engine.GetObject(ObjectIndex);
             if (!targetObject.IsActive)
-                throw new NotSupportedException($"Unknown expected behavior when trying to call a method of the inactive object (Id: {_objectIndex}).");
+                throw new NotSupportedException($"Unknown expected behavior when trying to call a method of the inactive object (Id: {ObjectIndex}).");
 
-            return targetObject.Scripts.Execute(_scriptId, _priority);
+            return targetObject.Scripts.Execute(ScriptID, Priority);
         }
 
-        public override string ToString() => $"{nameof(REQEW)}({nameof(_objectIndex)}: {_objectIndex}, {nameof(_priority)}: {_priority}, {nameof(_scriptId)}: {_scriptId})";
+        public override string ToString() => $"{nameof(REQEW)}({nameof(ObjectIndex)}: {ObjectIndex}, {nameof(Priority)}: {Priority}, {nameof(ScriptID)}: {ScriptID})";
 
         #endregion Methods
     }

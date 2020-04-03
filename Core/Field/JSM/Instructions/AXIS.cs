@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class AXIS : JsmInstruction
+    internal sealed class Axis : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@
 
         #region Constructors
 
-        public AXIS(IJsmExpression arg0, IJsmExpression arg1)
+        public Axis(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public AXIS(int parameter, IStack<IJsmExpression> stack)
+        public Axis(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -28,7 +28,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(AXIS)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(Axis)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

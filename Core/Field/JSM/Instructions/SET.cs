@@ -3,10 +3,10 @@
 namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Place this entity's model at XCoord, YCoord standing on the given walkmesh triangle. Unlike SET3, this function will place the event on the walkable terrain (the ZCoord is interpolated from the walkmesh).
+    /// Place this entity's model at XCoord, YCoord standing on the given walkmesh triangle. Unlike Set3, this function will place the event on the walkable terrain (the ZCoord is interpolated from the walkmesh).
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/01D_SET"/>
-    public sealed class SET : JsmInstruction
+    public sealed class Set : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public SET(int walkmeshTriangleId, int x, int y) => (_walkmeshTriangleId, _pos.X, _pos.Y) = (walkmeshTriangleId, x, y);
+        public Set(int walkmeshTriangleId, int x, int y) => (_walkmeshTriangleId, _pos.X, _pos.Y) = (walkmeshTriangleId, x, y);
 
-        public SET(int walkmeshTriangleId, IStack<IJsmExpression> stack)
+        public Set(int walkmeshTriangleId, IStack<IJsmExpression> stack)
             : this(walkmeshTriangleId,
                 y: ((IConstExpression)stack.Pop()).Int32(),
                 x: ((IConstExpression)stack.Pop()).Int32())
@@ -36,7 +36,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Argument("walkmeshTriangleId", _walkmeshTriangleId)
                 .Argument("x", (int)_pos.X)
                 .Argument("y", (int)_pos.Y)
-                .Comment(nameof(SET3));
+                .Comment(nameof(Set3));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -45,7 +45,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SET)}({nameof(_walkmeshTriangleId)}: {_walkmeshTriangleId}, {nameof(_pos)}: {_pos})";
+        public override string ToString() => $"{nameof(Set)}({nameof(_walkmeshTriangleId)}: {_walkmeshTriangleId}, {nameof(_pos)}: {_pos})";
 
         #endregion Methods
     }

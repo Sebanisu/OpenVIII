@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class BGOFF : JsmInstruction
+    internal sealed class BGOff : JsmInstruction
     {
         #region Constructors
 
-        public BGOFF()
+        public BGOff()
         {
         }
 
-        public BGOFF(int parameter, IStack<IJsmExpression> stack)
+        public BGOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(BGOFF)}()";
+        public override string ToString() => $"{nameof(BGOff)}()";
 
         #endregion Methods
     }

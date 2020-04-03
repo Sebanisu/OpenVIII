@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FOOTSTEPCOPY : JsmInstruction
+    internal sealed class FootStepCopy : JsmInstruction
     {
         #region Constructors
 
-        public FOOTSTEPCOPY()
+        public FootStepCopy()
         {
         }
 
-        public FOOTSTEPCOPY(int parameter, IStack<IJsmExpression> stack)
+        public FootStepCopy(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(FOOTSTEPCOPY)}()";
+        public override string ToString() => $"{nameof(FootStepCopy)}()";
 
         #endregion Methods
     }

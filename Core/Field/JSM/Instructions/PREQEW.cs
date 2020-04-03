@@ -25,24 +25,24 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services)
         {
-            formatterContext.GetObjectScriptNamesById(_scriptId, out var typeName, out var methodName);
+            formatterContext.GetObjectScriptNamesById(ScriptID, out var typeName, out var methodName);
 
-            sw.AppendLine($"{nameof(PREQEW)}(priority: {_priority}, GetObject<{typeName}>().{methodName}());");
+            sw.AppendLine($"{nameof(PREQEW)}(priority: {Priority}, GetObject<{typeName}>().{methodName}());");
         }
 
         public override IAwaitable TestExecute(IServices services)
         {
-            var targetObject = ServiceId.Party[services].FindPartyCharacterObject(_partyId);
+            var targetObject = ServiceId.Party[services].FindPartyCharacterObject(PartyID);
             if (targetObject == null)
-                throw new NotSupportedException($"Unknown expected behavior when trying to call a method of a nonexistent party character (Slot: {_partyId}).");
+                throw new NotSupportedException($"Unknown expected behavior when trying to call a method of a nonexistent party character (Slot: {PartyID}).");
 
             if (!targetObject.IsActive)
-                throw new NotSupportedException($"Unknown expected behavior when trying to call a method of the inactive object (Slot: {_partyId}).");
+                throw new NotSupportedException($"Unknown expected behavior when trying to call a method of the inactive object (Slot: {PartyID}).");
 
-            return targetObject.Scripts.Execute(_scriptId, _priority);
+            return targetObject.Scripts.Execute(ScriptID, Priority);
         }
 
-        public override string ToString() => $"{nameof(PREQEW)}({nameof(_partyId)}: {_partyId}, {nameof(_priority)}: {_priority}, {nameof(_scriptId)}: {_scriptId})";
+        public override string ToString() => $"{nameof(PREQEW)}({nameof(PartyID)}: {PartyID}, {nameof(Priority)}: {Priority}, {nameof(ScriptID)}: {ScriptID})";
 
         #endregion Methods
     }

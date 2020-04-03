@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DISC : JsmInstruction
+    internal sealed class Disc : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public DISC(IJsmExpression arg0) => _arg0 = arg0;
+        public Disc(IJsmExpression arg0) => _arg0 = arg0;
 
-        public DISC(int parameter, IStack<IJsmExpression> stack)
+        public Disc(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DISC)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(Disc)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SAVEENABLE : JsmInstruction
+    internal sealed class SaveEnable : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SAVEENABLE(IJsmExpression arg0) => _arg0 = arg0;
+        public SaveEnable(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SAVEENABLE(int parameter, IStack<IJsmExpression> stack)
+        public SaveEnable(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SAVEENABLE)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(SaveEnable)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

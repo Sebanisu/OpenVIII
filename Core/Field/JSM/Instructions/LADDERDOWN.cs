@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class LADDERDOWN : JsmInstruction
+    internal sealed class LadderDown : JsmInstruction
     {
         #region Fields
 
@@ -14,7 +14,7 @@
 
         #region Constructors
 
-        public LADDERDOWN(int parameter, IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3)
+        public LadderDown(int parameter, IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3)
         {
             _parameter = parameter;
             _arg0 = arg0;
@@ -23,7 +23,7 @@
             _arg3 = arg3;
         }
 
-        public LADDERDOWN(int parameter, IStack<IJsmExpression> stack)
+        public LadderDown(int parameter, IStack<IJsmExpression> stack)
             : this(parameter,
                 arg3: stack.Pop(),
                 arg2: stack.Pop(),
@@ -36,7 +36,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(LADDERDOWN)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3})";
+        public override string ToString() => $"{nameof(LadderDown)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3})";
 
         #endregion Methods
     }

@@ -31,7 +31,7 @@
 
         public override IAwaitable Execute(IServices services) => DummyAwaitable.Instance;
 
-        public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.AppendLine($"// ScriptId: {Label}");
+        public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.AppendLine($"// ScriptID: {Label}");
 
         public override string ToString() => $"{nameof(LBL)}({nameof(Label)}: {Label})";
 

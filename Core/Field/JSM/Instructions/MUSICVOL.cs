@@ -4,7 +4,7 @@
     /// Set the volume of the music.
     /// All the music functions have a parameter that's either 0 or 1.
     /// </summary>
-    internal sealed class MUSICVOL : JsmInstruction
+    internal sealed class MusicVol : JsmInstruction
     {
         #region Fields
 
@@ -15,13 +15,13 @@
 
         #region Constructors
 
-        public MUSICVOL(IJsmExpression flag, IJsmExpression volume)
+        public MusicVol(IJsmExpression flag, IJsmExpression volume)
         {
             _flag = flag;
             _volume = volume;
         }
 
-        public MUSICVOL(int parameter, IStack<IJsmExpression> stack)
+        public MusicVol(int parameter, IStack<IJsmExpression> stack)
             : this(
                 volume: stack.Pop(),
                 flag: stack.Pop())
@@ -37,7 +37,7 @@
                 .Method(nameof(IMusicService.ChangeMusicVolume))
                 .Argument("volume", _volume)
                 .Argument("flag", _flag)
-                .Comment(nameof(MUSICVOL));
+                .Comment(nameof(MusicVol));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -47,7 +47,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MUSICVOL)}({nameof(_flag)}: {_flag}, {nameof(_volume)}: {_volume})";
+        public override string ToString() => $"{nameof(MusicVol)}({nameof(_flag)}: {_flag}, {nameof(_volume)}: {_volume})";
 
         #endregion Methods
     }

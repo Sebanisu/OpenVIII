@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class RMOVEA : JsmInstruction
+    internal sealed class RMoveA : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@
 
         #region Constructors
 
-        public RMOVEA(IJsmExpression arg0, IJsmExpression arg1)
+        public RMoveA(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public RMOVEA(int parameter, IStack<IJsmExpression> stack)
+        public RMoveA(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -28,7 +28,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(RMOVEA)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(RMoveA)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

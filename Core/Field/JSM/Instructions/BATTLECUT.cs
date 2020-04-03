@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class BATTLECUT : JsmInstruction
+    internal sealed class BattleCut : JsmInstruction
     {
         #region Constructors
 
-        public BATTLECUT()
+        public BattleCut()
         {
         }
 
-        public BATTLECUT(int parameter, IStack<IJsmExpression> stack)
+        public BattleCut(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(BATTLECUT)}()";
+        public override string ToString() => $"{nameof(BattleCut)}()";
 
         #endregion Methods
     }

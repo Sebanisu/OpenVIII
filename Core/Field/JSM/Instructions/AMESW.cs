@@ -4,7 +4,7 @@
     /// Pop up a message window and pauses script execution until the player dismisses the window.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/064_AMESW"/>
-    public sealed class AMESW : JsmInstruction
+    public sealed class AMesW : JsmInstruction
     {
         #region Fields
 
@@ -32,7 +32,7 @@
 
         #region Constructors
 
-        public AMESW(IJsmExpression channel, IJsmExpression messageId, IJsmExpression posX, IJsmExpression posY)
+        public AMesW(IJsmExpression channel, IJsmExpression messageId, IJsmExpression posX, IJsmExpression posY)
         {
             _channel = channel;
             _messageId = messageId;
@@ -40,7 +40,7 @@
             _posY = posY;
         }
 
-        public AMESW(int parameter, IStack<IJsmExpression> stack)
+        public AMesW(int parameter, IStack<IJsmExpression> stack)
             : this(
                 posY: stack.Pop(),
                 posX: stack.Pop(),
@@ -66,7 +66,7 @@
                 .Argument("messageId", _messageId)
                 .Argument("posX", _posX)
                 .Argument("posY", _posY)
-                .Comment(nameof(AMESW));
+                .Comment(nameof(AMesW));
         }
 
         public override IAwaitable TestExecute(IServices services) => ServiceId.Message[services].ShowDialog(
@@ -75,7 +75,7 @@
                 _posX.Int32(services),
                 _posY.Int32(services));
 
-        public override string ToString() => $"{nameof(AMESW)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_posX)}: {_posX}, {nameof(_posY)}: {_posY})";
+        public override string ToString() => $"{nameof(AMesW)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_posX)}: {_posX}, {nameof(_posY)}: {_posY})";
 
         #endregion Methods
     }

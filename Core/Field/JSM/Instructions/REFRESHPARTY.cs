@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class REFRESHPARTY : JsmInstruction
+    internal sealed class RefreshParty : JsmInstruction
     {
         #region Constructors
 
-        public REFRESHPARTY()
+        public RefreshParty()
         {
         }
 
-        public REFRESHPARTY(int parameter, IStack<IJsmExpression> stack)
+        public RefreshParty(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(REFRESHPARTY)}()";
+        public override string ToString() => $"{nameof(RefreshParty)}()";
 
         #endregion Methods
     }

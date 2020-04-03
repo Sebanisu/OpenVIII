@@ -1,30 +1,30 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions.Abstract
 {
-    public abstract class BGANIME : JsmInstruction
+    public abstract class BGAnime : JsmInstruction
     {
         #region Fields
 
         /// <summary>
         /// First frame of animation
         /// </summary>
-        protected readonly IJsmExpression _firstFrame;
+        protected readonly IJsmExpression FirstFrame;
 
         /// <summary>
         /// Last frame of animation
         /// </summary>
-        protected readonly IJsmExpression _lastFrame;
+        protected readonly IJsmExpression LastFrame;
 
         #endregion Fields
 
         #region Constructors
 
-        public BGANIME(IJsmExpression firstFrame, IJsmExpression lastFrame)
+        protected BGAnime(IJsmExpression firstFrame, IJsmExpression lastFrame)
         {
-            _firstFrame = firstFrame;
-            _lastFrame = lastFrame;
+            FirstFrame = firstFrame;
+            LastFrame = lastFrame;
         }
 
-        public BGANIME(int parameter, IStack<IJsmExpression> stack)
+        protected BGAnime(int parameter, IStack<IJsmExpression> stack)
             : this(
                 lastFrame: stack.Pop(),
                 firstFrame: stack.Pop())

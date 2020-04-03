@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SCROLLSYNC : JsmInstruction
+    internal sealed class ScrollSync : JsmInstruction
     {
         #region Constructors
 
-        public SCROLLSYNC()
+        public ScrollSync()
         {
         }
 
-        public SCROLLSYNC(int parameter, IStack<IJsmExpression> stack)
+        public ScrollSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SCROLLSYNC)}()";
+        public override string ToString() => $"{nameof(ScrollSync)}()";
 
         #endregion Methods
     }

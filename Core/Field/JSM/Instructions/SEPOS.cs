@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SEPOS : JsmInstruction
+    internal sealed class SEPos : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@
 
         #region Constructors
 
-        public SEPOS(IJsmExpression arg0, IJsmExpression arg1)
+        public SEPos(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public SEPOS(int parameter, IStack<IJsmExpression> stack)
+        public SEPos(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -28,7 +28,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SEPOS)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(SEPos)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

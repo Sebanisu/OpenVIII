@@ -1,9 +1,9 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Pop up a message window and wait for the player to hit "ok." Unlike AMESW, RAMESW will let the script continue running.
+    /// Pop up a message window and wait for the player to hit "ok." Unlike AMesW, RAMesW will let the script continue running.
     /// </summary>
-    internal sealed class RAMESW : JsmInstruction
+    internal sealed class RAMesW : JsmInstruction
     {
         #region Fields
 
@@ -16,7 +16,7 @@
 
         #region Constructors
 
-        public RAMESW(IJsmExpression channel, IJsmExpression messageId, IJsmExpression posX, IJsmExpression posY)
+        public RAMesW(IJsmExpression channel, IJsmExpression messageId, IJsmExpression posX, IJsmExpression posY)
         {
             _channel = channel;
             _messageId = messageId;
@@ -24,7 +24,7 @@
             _posY = posY;
         }
 
-        public RAMESW(int parameter, IStack<IJsmExpression> stack)
+        public RAMesW(int parameter, IStack<IJsmExpression> stack)
             : this(
                 posY: stack.Pop(),
                 posX: stack.Pop(),
@@ -49,7 +49,7 @@
                 .Argument("messageId", _messageId)
                 .Argument("posX", _posX)
                 .Argument("posY", _posY)
-                .Comment(nameof(RAMESW));
+                .Comment(nameof(RAMesW));
         }
 
         public override IAwaitable TestExecute(IServices services)
@@ -62,7 +62,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(RAMESW)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_posX)}: {_posX}, {nameof(_posY)}: {_posY})";
+        public override string ToString() => $"{nameof(RAMesW)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_posX)}: {_posX}, {nameof(_posY)}: {_posY})";
 
         #endregion Methods
     }

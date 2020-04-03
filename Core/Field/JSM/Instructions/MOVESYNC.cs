@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MOVESYNC : JsmInstruction
+    internal sealed class MoveSync : JsmInstruction
     {
         #region Constructors
 
-        public MOVESYNC()
+        public MoveSync()
         {
         }
 
-        public MOVESYNC(int parameter, IStack<IJsmExpression> stack)
+        public MoveSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MOVESYNC)}()";
+        public override string ToString() => $"{nameof(MoveSync)}()";
 
         #endregion Methods
     }

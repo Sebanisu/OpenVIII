@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PHSPOWER : JsmInstruction
+    internal sealed class PHSPower : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public PHSPOWER(bool isPartySwitchEnabled) => _isPartySwitchEnabled = isPartySwitchEnabled;
+        public PHSPower(bool isPartySwitchEnabled) => _isPartySwitchEnabled = isPartySwitchEnabled;
 
-        public PHSPOWER(int parameter, IStack<IJsmExpression> stack)
+        public PHSPower(int parameter, IStack<IJsmExpression> stack)
             : this(
                 isPartySwitchEnabled: ((Jsm.Expression.PSHN_L)stack.Pop()).Boolean())
         {
@@ -26,7 +26,7 @@
                 .StaticType(nameof(IPartyService))
                 .Property(nameof(IPartyService.IsPartySwitchEnabled))
                 .Assign(_isPartySwitchEnabled)
-                .Comment(nameof(PHSPOWER));
+                .Comment(nameof(PHSPower));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -34,7 +34,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(PHSPOWER)}({nameof(_isPartySwitchEnabled)}: {_isPartySwitchEnabled})";
+        public override string ToString() => $"{nameof(PHSPower)}({nameof(_isPartySwitchEnabled)}: {_isPartySwitchEnabled})";
 
         #endregion Methods
     }

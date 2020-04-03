@@ -3,7 +3,7 @@
     /// <summary>
     /// Make this entity face "Angle" in degrees.
     /// </summary>
-    internal sealed class DIR : JsmInstruction
+    internal sealed class Dir : JsmInstruction
     {
         #region Fields
 
@@ -13,9 +13,9 @@
 
         #region Constructors
 
-        public DIR(IJsmExpression angle) => _angle = angle;
+        public Dir(IJsmExpression angle) => _angle = angle;
 
-        public DIR(int parameter, IStack<IJsmExpression> stack)
+        public Dir(int parameter, IStack<IJsmExpression> stack)
             : this(
                 angle: stack.Pop())
         {
@@ -29,7 +29,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Method(nameof(FieldObjectModel.SetDirection))
                 .Argument("angle256", _angle)
-                .Comment(nameof(SET3));
+                .Comment(nameof(Set3));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -38,7 +38,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(DIR)}({nameof(_angle)}: {_angle})";
+        public override string ToString() => $"{nameof(Dir)}({nameof(_angle)}: {_angle})";
 
         #endregion Methods
     }

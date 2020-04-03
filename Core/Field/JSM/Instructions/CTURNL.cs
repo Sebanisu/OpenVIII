@@ -3,7 +3,7 @@
     /// <summary>
     /// Turns this entity.
     /// </summary>
-    internal sealed class CTURNL : JsmInstruction
+    internal sealed class CTurnL : JsmInstruction
     {
         #region Fields
 
@@ -14,13 +14,13 @@
 
         #region Constructors
 
-        public CTURNL(IJsmExpression angle, IJsmExpression frameDuration)
+        public CTurnL(IJsmExpression angle, IJsmExpression frameDuration)
         {
             _angle = angle;
             _frameDuration = frameDuration;
         }
 
-        public CTURNL(int parameter, IStack<IJsmExpression> stack)
+        public CTurnL(int parameter, IStack<IJsmExpression> stack)
             : this(
                 frameDuration: stack.Pop(),
                 angle: stack.Pop())
@@ -37,7 +37,7 @@
                 .Method(nameof(FieldObjectModel.Rotate))
                 .Argument("angle", _angle)
                 .Argument("frameDuration", _frameDuration)
-                .Comment(nameof(CTURNL));
+                .Comment(nameof(CTurnL));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -50,7 +50,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(CTURNL)}({nameof(_angle)}: {_angle}, {nameof(_frameDuration)}: {_frameDuration})";
+        public override string ToString() => $"{nameof(CTurnL)}({nameof(_angle)}: {_angle}, {nameof(_frameDuration)}: {_frameDuration})";
 
         #endregion Methods
     }

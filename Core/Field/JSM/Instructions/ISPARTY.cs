@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class ISPARTY : JsmInstruction
+    internal sealed class IsParty : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public ISPARTY(IJsmExpression arg0) => _arg0 = arg0;
+        public IsParty(IJsmExpression arg0) => _arg0 = arg0;
 
-        public ISPARTY(int parameter, IStack<IJsmExpression> stack)
+        public IsParty(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ISPARTY)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(IsParty)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MESVAR : JsmInstruction
+    internal sealed class MesVar : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@
 
         #region Constructors
 
-        public MESVAR(IJsmExpression arg0, IJsmExpression arg1)
+        public MesVar(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public MESVAR(int parameter, IStack<IJsmExpression> stack)
+        public MesVar(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -28,7 +28,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MESVAR)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(MesVar)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

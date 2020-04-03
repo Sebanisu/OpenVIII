@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MAPFADEOFF : JsmInstruction
+    internal sealed class MapFadeOff : JsmInstruction
     {
         #region Constructors
 
-        public MAPFADEOFF()
+        public MapFadeOff()
         {
         }
 
-        public MAPFADEOFF(int parameter, IStack<IJsmExpression> stack)
+        public MapFadeOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -20,7 +20,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IFieldService))
                 .Method(nameof(IFieldService.FadeOff))
-                .Comment(nameof(MAPFADEOFF));
+                .Comment(nameof(MapFadeOff));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -28,7 +28,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MAPFADEOFF)}()";
+        public override string ToString() => $"{nameof(MapFadeOff)}()";
 
         #endregion Methods
     }

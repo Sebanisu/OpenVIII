@@ -2,7 +2,7 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MOVIEREADY : JsmInstruction
+    internal sealed class MovieReady : JsmInstruction
     {
         #region Fields
 
@@ -13,13 +13,13 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public MOVIEREADY(IJsmExpression movieId, IJsmExpression flag)
+        public MovieReady(IJsmExpression movieId, IJsmExpression flag)
         {
             _movieId = movieId;
             _flag = flag;
         }
 
-        public MOVIEREADY(int parameter, IStack<IJsmExpression> stack)
+        public MovieReady(int parameter, IStack<IJsmExpression> stack)
             : this(
                 flag: stack.Pop(),
                 movieId: stack.Pop())
@@ -42,7 +42,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Method(nameof(IMovieService.PrepareToPlay))
                 .Argument("movieId", _movieId)
                 .Argument("flag", _flag)
-                .Comment(nameof(MOVIEREADY));
+                .Comment(nameof(MovieReady));
         }
 
         public override IAwaitable TestExecute(IServices services)
@@ -52,7 +52,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MOVIEREADY)}({nameof(_movieId)}: {_movieId}, {nameof(_flag)}: {_flag})";
+        public override string ToString() => $"{nameof(MovieReady)}({nameof(_movieId)}: {_movieId}, {nameof(_flag)}: {_flag})";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class JUMP : JsmInstruction
+    internal sealed class Jump : JsmInstruction
     {
         #region Fields
 
@@ -13,7 +13,7 @@
 
         #region Constructors
 
-        public JUMP(int parameter, IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
+        public Jump(int parameter, IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
         {
             _parameter = parameter;
             _arg0 = arg0;
@@ -21,7 +21,7 @@
             _arg2 = arg2;
         }
 
-        public JUMP(int parameter, IStack<IJsmExpression> stack)
+        public Jump(int parameter, IStack<IJsmExpression> stack)
             : this(parameter,
                 arg2: stack.Pop(),
                 arg1: stack.Pop(),
@@ -33,7 +33,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(JUMP)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
+        public override string ToString() => $"{nameof(Jump)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
 
         #endregion Methods
     }

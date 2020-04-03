@@ -7,7 +7,7 @@
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/15F_HOWMANYCARD&action=edit&redlink=1"/>
     /// <seealso cref="https://www.ign.com/wikis/final-fantasy-viii/Timber_TV_Station"/>
-    public sealed class HOWMANYCARD : JsmInstruction
+    public sealed class HowManyCard : JsmInstruction
     {
         #region Fields
 
@@ -20,9 +20,9 @@
 
         #region Constructors
 
-        public HOWMANYCARD(Cards.ID cardID) => _cardID = cardID;
+        public HowManyCard(Cards.ID cardID) => _cardID = cardID;
 
-        public HOWMANYCARD(int parameter, IStack<IJsmExpression> stack)
+        public HowManyCard(int parameter, IStack<IJsmExpression> stack)
             : this(
                 cardID: ((IConstExpression)stack.Pop()).Cards())
         {
@@ -32,7 +32,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(HOWMANYCARD)}({nameof(_cardID)}: {_cardID})";
+        public override string ToString() => $"{nameof(HowManyCard)}({nameof(_cardID)}: {_cardID})";
 
         #endregion Methods
     }

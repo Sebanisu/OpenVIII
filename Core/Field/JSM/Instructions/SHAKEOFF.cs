@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SHAKEOFF : JsmInstruction
+    internal sealed class ShakeOff : JsmInstruction
     {
         #region Constructors
 
-        public SHAKEOFF()
+        public ShakeOff()
         {
         }
 
-        public SHAKEOFF(int parameter, IStack<IJsmExpression> stack)
+        public ShakeOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SHAKEOFF)}()";
+        public override string ToString() => $"{nameof(ShakeOff)}()";
 
         #endregion Methods
     }

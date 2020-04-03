@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class STOPVIBRATE : JsmInstruction
+    internal sealed class StopVibrate : JsmInstruction
     {
         #region Constructors
 
-        public STOPVIBRATE() => throw new NotSupportedException();
+        public StopVibrate() => throw new NotSupportedException();
 
         #endregion Constructors
     }

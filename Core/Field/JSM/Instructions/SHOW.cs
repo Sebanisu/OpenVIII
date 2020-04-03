@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SHOW : JsmInstruction
+    internal sealed class Show : JsmInstruction
     {
         #region Constructors
 
-        public SHOW()
+        public Show()
         {
         }
 
-        public SHOW(int parameter, IStack<IJsmExpression> stack)
+        public Show(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -20,7 +20,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Property(nameof(FieldObject.Model))
                 .Method(nameof(FieldObjectModel.Show))
-                .Comment(nameof(SHOW));
+                .Comment(nameof(Show));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -29,7 +29,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SHOW)}()";
+        public override string ToString() => $"{nameof(Show)}()";
 
         #endregion Methods
     }

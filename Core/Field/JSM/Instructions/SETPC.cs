@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETPC : JsmInstruction
+    internal sealed class SetPC : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SETPC(Characters characterId) => _characterId = characterId;
+        public SetPC(Characters characterId) => _characterId = characterId;
 
-        public SETPC(int parameter, IStack<IJsmExpression> stack)
+        public SetPC(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterId: (Characters)((Jsm.Expression.PSHN_L)stack.Pop()).Value)
         {
@@ -25,7 +25,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Method(nameof(FieldObject.BindCharacter))
                 .Enum(_characterId)
-                .Comment(nameof(SETPC));
+                .Comment(nameof(SetPC));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -34,7 +34,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETPC)}({nameof(_characterId)}: {_characterId})";
+        public override string ToString() => $"{nameof(SetPC)}({nameof(_characterId)}: {_characterId})";
 
         #endregion Methods
     }

@@ -3,15 +3,15 @@
     /// <summary>
     /// Hides this entity's model on the field. See also SHOW.
     /// </summary>
-    internal sealed class HIDE : JsmInstruction
+    internal sealed class Hide : JsmInstruction
     {
         #region Constructors
 
-        public HIDE()
+        public Hide()
         {
         }
 
-        public HIDE(int parameter, IStack<IJsmExpression> stack)
+        public Hide(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -23,7 +23,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Property(nameof(FieldObject.Model))
                 .Method(nameof(FieldObjectModel.Hide))
-                .Comment(nameof(HIDE));
+                .Comment(nameof(Hide));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(HIDE)}()";
+        public override string ToString() => $"{nameof(Hide)}()";
 
         #endregion Methods
     }

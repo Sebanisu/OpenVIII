@@ -1,23 +1,15 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class RUNDISABLE : JsmInstruction
+    /// <summary>
+    /// Disable Running
+    /// </summary>
+    /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0F7_RUNDISABLE"/>
+    /// <remarks>no arguments</remarks>
+    internal sealed class RunDisable : JsmInstruction
     {
-        #region Constructors
-
-        public RUNDISABLE()
-        {
-        }
-
-        public RUNDISABLE(int parameter, IStack<IJsmExpression> stack)
-            : this()
-        {
-        }
-
-        #endregion Constructors
-
         #region Methods
 
-        public override string ToString() => $"{nameof(RUNDISABLE)}()";
+        public override string ToString() => $"{nameof(RunDisable)}()";
 
         #endregion Methods
     }

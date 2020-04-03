@@ -4,7 +4,7 @@
     /// Exits the current script and all scripts that are waiting on it. To end only the current script, use RET instead.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/01C_HALT"/>
-    public sealed class HALT : JsmInstruction
+    public sealed class Halt : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@
 
         #region Constructors
 
-        public HALT(int parameter) => _parameter = parameter;
+        public Halt(int parameter) => _parameter = parameter;
 
-        public HALT(int parameter, IStack<IJsmExpression> stack)
+        public Halt(int parameter, IStack<IJsmExpression> stack)
             : this(parameter)
         {
         }
@@ -31,7 +31,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Property(nameof(FieldObject.Scripts))
                 .Method(nameof(FieldObjectScripts.CancelAll))
-                .Comment(nameof(HALT));
+                .Comment(nameof(Halt));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -40,7 +40,7 @@
             return BreakAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(HALT)}({nameof(_parameter)}: {_parameter})";
+        public override string ToString() => $"{nameof(Halt)}({nameof(_parameter)}: {_parameter})";
 
         #endregion Methods
     }

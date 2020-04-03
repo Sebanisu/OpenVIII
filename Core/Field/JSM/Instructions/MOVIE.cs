@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MOVIE : JsmInstruction
+    internal sealed class Movie : JsmInstruction
     {
         #region Constructors
 
-        public MOVIE()
+        public Movie()
         {
         }
 
-        public MOVIE(int parameter, IStack<IJsmExpression> stack)
+        public Movie(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -20,7 +20,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IMovieService))
                 .Method(nameof(IMovieService.Play))
-                .Comment(nameof(MOVIE));
+                .Comment(nameof(Movie));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -28,7 +28,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MOVIE)}()";
+        public override string ToString() => $"{nameof(Movie)}()";
 
         #endregion Methods
     }

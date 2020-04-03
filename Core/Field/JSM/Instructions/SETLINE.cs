@@ -4,7 +4,7 @@
     /// Sets the bounds of this line object (for its touchOn, touchOff, and across scripts).
     /// Lines are actually 3d hitboxes, not lines.
     /// </summary>
-    internal sealed class SETLINE : JsmInstruction
+    internal sealed class SetLine : JsmInstruction
     {
         #region Fields
 
@@ -15,13 +15,13 @@
 
         #region Constructors
 
-        public SETLINE(int x1, int y1, int z1, int x2, int y2, int z2)
+        public SetLine(int x1, int y1, int z1, int x2, int y2, int z2)
         {
             _p1 = new Coords3D(x1, y1, z1);
             _p2 = new Coords3D(x2, y2, z2);
         }
 
-        public SETLINE(int parameter, IStack<IJsmExpression> stack)
+        public SetLine(int parameter, IStack<IJsmExpression> stack)
             : this(
                 z2: ((IConstExpression)stack.Pop()).Int32(),
                 y2: ((IConstExpression)stack.Pop()).Int32(),
@@ -41,7 +41,7 @@
                 .Method(nameof(FieldObjectModel.SetHitBox))
                 .Argument("p1", _p1.ToString())
                 .Argument("p2", _p2.ToString())
-                .Comment(nameof(SETLINE));
+                .Comment(nameof(SetLine));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -50,7 +50,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETLINE)}({nameof(_p1)}: {_p1}, {nameof(_p2)}: {_p2})";
+        public override string ToString() => $"{nameof(SetLine)}({nameof(_p1)}: {_p1}, {nameof(_p2)}: {_p2})";
 
         #endregion Methods
     }

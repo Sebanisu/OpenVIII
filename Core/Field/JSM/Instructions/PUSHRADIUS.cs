@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PUSHRADIUS : JsmInstruction
+    internal sealed class PushRadius : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public PUSHRADIUS(IJsmExpression arg0) => _arg0 = arg0;
+        public PushRadius(IJsmExpression arg0) => _arg0 = arg0;
 
-        public PUSHRADIUS(int parameter, IStack<IJsmExpression> stack)
+        public PushRadius(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PUSHRADIUS)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(PushRadius)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

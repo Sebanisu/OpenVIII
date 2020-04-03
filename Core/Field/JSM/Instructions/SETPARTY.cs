@@ -3,7 +3,7 @@
     /// <summary>
     /// Sets the active party to be the members with the input IDs. These IDs also work with the other party related functions.
     /// </summary>
-    internal sealed class SETPARTY : JsmInstruction
+    internal sealed class SetParty : JsmInstruction
     {
         #region Fields
 
@@ -15,14 +15,14 @@
 
         #region Constructors
 
-        public SETPARTY(IJsmExpression character1, IJsmExpression character2, IJsmExpression character3)
+        public SetParty(IJsmExpression character1, IJsmExpression character2, IJsmExpression character3)
         {
             _character1 = character1;
             _character2 = character2;
             _character3 = character3;
         }
 
-        public SETPARTY(int parameter, IStack<IJsmExpression> stack)
+        public SetParty(int parameter, IStack<IJsmExpression> stack)
             : this(
                 character3: stack.Pop(),
                 character2: stack.Pop(),
@@ -40,7 +40,7 @@
                 .Enum<Characters>(_character1)
                 .Enum<Characters>(_character2)
                 .Enum<Characters>(_character3)
-                .Comment(nameof(SETPARTY));
+                .Comment(nameof(SetParty));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -51,7 +51,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETPARTY)}({nameof(_character1)}: {_character1}, {nameof(_character2)}: {_character2}, {nameof(_character3)}: {_character3})";
+        public override string ToString() => $"{nameof(SetParty)}({nameof(_character1)}: {_character1}, {nameof(_character2)}: {_character2}, {nameof(_character3)}: {_character3})";
 
         #endregion Methods
     }

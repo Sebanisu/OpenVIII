@@ -2,7 +2,7 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DCOLADD : JsmInstruction
+    internal sealed class DColAdd : JsmInstruction
     {
         #region Fields
 
@@ -14,14 +14,14 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public DCOLADD(IJsmExpression r, IJsmExpression g, IJsmExpression b)
+        public DColAdd(IJsmExpression r, IJsmExpression g, IJsmExpression b)
         {
             _r = r;
             _g = g;
             _b = b;
         }
 
-        public DCOLADD(int parameter, IStack<IJsmExpression> stack)
+        public DColAdd(int parameter, IStack<IJsmExpression> stack)
             : this(
                 b: stack.Pop(),
                 g: stack.Pop(),
@@ -39,7 +39,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Argument("r", _r)
                 .Argument("g", _g)
                 .Argument("b", _b)
-                .Comment(nameof(DCOLADD));
+                .Comment(nameof(DColAdd));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -51,7 +51,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(DCOLADD)}({nameof(_r)}: {_r}, {nameof(_g)}: {_g}, {nameof(_b)}: {_b})";
+        public override string ToString() => $"{nameof(DColAdd)}({nameof(_r)}: {_r}, {nameof(_g)}: {_g}, {nameof(_b)}: {_b})";
 
         #endregion Methods
     }

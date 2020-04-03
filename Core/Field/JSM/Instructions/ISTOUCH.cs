@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class ISTOUCH : JsmInstruction
+    internal sealed class IsTouch : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public ISTOUCH(IJsmExpression arg0) => _arg0 = arg0;
+        public IsTouch(IJsmExpression arg0) => _arg0 = arg0;
 
-        public ISTOUCH(int parameter, IStack<IJsmExpression> stack)
+        public IsTouch(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ISTOUCH)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(IsTouch)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

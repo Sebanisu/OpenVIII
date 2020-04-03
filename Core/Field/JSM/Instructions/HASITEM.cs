@@ -6,7 +6,7 @@
     /// <para>It's possible this just returns the number of the item the party has.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/170_UNKNOWN5"/>
-    public sealed class HASITEM : JsmInstruction
+    public sealed class HasItem : JsmInstruction
     {
         #region Fields
 
@@ -19,9 +19,9 @@
 
         #region Constructors
 
-        public HASITEM(IJsmExpression itemID) => _itemID = itemID;
+        public HasItem(IJsmExpression itemID) => _itemID = itemID;
 
-        public HASITEM(int parameter, IStack<IJsmExpression> stack)
+        public HasItem(int parameter, IStack<IJsmExpression> stack)
             : this(
                 itemID: stack.Pop())
         {
@@ -31,7 +31,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(HASITEM)}({nameof(_itemID)}: {_itemID})";
+        public override string ToString() => $"{nameof(HasItem)}({nameof(_itemID)}: {_itemID})";
 
         #endregion Methods
     }

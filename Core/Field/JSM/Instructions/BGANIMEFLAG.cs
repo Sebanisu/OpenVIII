@@ -6,11 +6,11 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// Unused
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0CE_BGANIMEFLAG&action=edit&redlink=1"/>
-    public sealed class BGANIMEFLAG : JsmInstruction
+    public sealed class BGAnimeFlag : JsmInstruction
     {
         #region Constructors
 
-        public BGANIMEFLAG() => throw new NotSupportedException();
+        public BGAnimeFlag() => throw new NotSupportedException();
 
         #endregion Constructors
     }

@@ -3,15 +3,15 @@
     /// <summary>
     /// Disables the payment of salaries.
     /// </summary>
-    internal sealed class SARALYOFF : JsmInstruction
+    internal sealed class SaralyOff : JsmInstruction
     {
         #region Constructors
 
-        public SARALYOFF()
+        public SaralyOff()
         {
         }
 
-        public SARALYOFF(int parameter, IStack<IJsmExpression> stack)
+        public SaralyOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
                 .StaticType(nameof(ISalaryService))
                 .Property(nameof(ISalaryService.IsSalaryEnabled))
                 .Assign(false)
-                .Comment(nameof(SARALYOFF));
+                .Comment(nameof(SaralyOff));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SARALYOFF)}()";
+        public override string ToString() => $"{nameof(SaralyOff)}()";
 
         #endregion Methods
     }

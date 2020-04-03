@@ -4,7 +4,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// Controls transparency/blinking effects on models (might also control whether Squall/Seifer's gunblades are visible).
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/12D_ACTORMODE"/>
-    public sealed class ACTORMODE : JsmInstruction
+    public sealed class ActorMode : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public ACTORMODE(IJsmExpression arg0) => _arg0 = arg0;
+        public ActorMode(IJsmExpression arg0) => _arg0 = arg0;
 
-        public ACTORMODE(int parameter, IStack<IJsmExpression> stack)
+        public ActorMode(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -29,7 +29,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ACTORMODE)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(ActorMode)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

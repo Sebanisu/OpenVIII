@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class ENDING : JsmInstruction
+    internal sealed class Ending : JsmInstruction
     {
         #region Constructors
 
-        public ENDING() => throw new NotSupportedException();
+        public Ending() => throw new NotSupportedException();
 
         #endregion Constructors
     }

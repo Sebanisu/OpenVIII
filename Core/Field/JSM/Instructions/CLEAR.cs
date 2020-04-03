@@ -4,15 +4,15 @@
     /// Resets all variables and game data.
     /// Only used when starting a new game (and in debug rooms).
     /// </summary>
-    internal sealed class CLEAR : JsmInstruction
+    internal sealed class Clear : JsmInstruction
     {
         #region Constructors
 
-        public CLEAR()
+        public Clear()
         {
         }
 
-        public CLEAR(int parameter, IStack<IJsmExpression> stack)
+        public Clear(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IGameplayService))
                 .Method(nameof(IGameplayService.ResetAllData))
-                .Comment(nameof(CLEAR));
+                .Comment(nameof(Clear));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(CLEAR)}()";
+        public override string ToString() => $"{nameof(Clear)}()";
 
         #endregion Methods
     }

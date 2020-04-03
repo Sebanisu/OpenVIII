@@ -3,7 +3,7 @@
     /// <summary>
     /// Removes a PC from the available party and the active party.
     /// </summary>
-    internal sealed class SUBMEMBER : JsmInstruction
+    internal sealed class SubMember : JsmInstruction
     {
         #region Fields
 
@@ -13,9 +13,9 @@
 
         #region Constructors
 
-        public SUBMEMBER(Characters characterId) => _characterId = characterId;
+        public SubMember(Characters characterId) => _characterId = characterId;
 
-        public SUBMEMBER(int parameter, IStack<IJsmExpression> stack)
+        public SubMember(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterId: (Characters)((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
         {
@@ -29,7 +29,7 @@
                 .StaticType(nameof(IPartyService))
                 .Method(nameof(IPartyService.RemovePlayableCharacter))
                 .Enum(_characterId)
-                .Comment(nameof(SUBMEMBER));
+                .Comment(nameof(SubMember));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -37,7 +37,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SUBMEMBER)}({nameof(_characterId)}: {_characterId})";
+        public override string ToString() => $"{nameof(SubMember)}({nameof(_characterId)}: {_characterId})";
 
         #endregion Methods
     }

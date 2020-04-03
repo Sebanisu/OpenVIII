@@ -1,6 +1,6 @@
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PLTURN : JsmInstruction
+    internal sealed class PLTurn : JsmInstruction
     {
         #region Fields
 
@@ -11,13 +11,13 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public PLTURN(IJsmExpression arg0, IJsmExpression arg1)
+        public PLTurn(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public PLTURN(int parameter, IStack<IJsmExpression> stack)
+        public PLTurn(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -28,7 +28,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PLTURN)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(PLTurn)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

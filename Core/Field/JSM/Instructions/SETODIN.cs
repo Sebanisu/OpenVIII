@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETODIN : JsmInstruction
+    internal sealed class SetOdin : JsmInstruction
     {
         #region Constructors
 
-        public SETODIN()
+        public SetOdin()
         {
         }
 
-        public SETODIN(int parameter, IStack<IJsmExpression> stack)
+        public SetOdin(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SETODIN)}()";
+        public override string ToString() => $"{nameof(SetOdin)}()";
 
         #endregion Methods
     }

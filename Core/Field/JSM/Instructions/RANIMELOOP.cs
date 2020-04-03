@@ -4,15 +4,15 @@
     /// Resume script, Play looping animation
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/035_RANIMELOOP"/>
-    public sealed class RANIMELOOP : Abstract.ANIME
+    public sealed class RAnimeLoop : Abstract.Anime
     {
         #region Constructors
 
-        public RANIMELOOP(int animationId) : base(animationId)
+        public RAnimeLoop(int animationId) : base(animationId)
         {
         }
 
-        public RANIMELOOP(int animationId, IStack<IJsmExpression> stack) : base(animationId, stack)
+        public RAnimeLoop(int animationId, IStack<IJsmExpression> stack) : base(animationId)
         {
         }
 
@@ -20,7 +20,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(RANIMELOOP)}({nameof(_animationId)}: {_animationId})";
+        public override string ToString() => $"{nameof(RAnimeLoop)}({nameof(AnimationId)}: {AnimationId})";
 
         #endregion Methods
     }

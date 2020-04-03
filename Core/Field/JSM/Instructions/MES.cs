@@ -3,9 +3,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// <summary>
     /// Popup a message window.
     /// This is usually used on lines to popup text when the player crosses a certain point on a screen.
-    /// The size of the message window can be set with WINSIZE.
+    /// The size of the message window can be set with WinSize.
     /// </summary>
-    internal sealed class MES : JsmInstruction
+    internal sealed class Mes : JsmInstruction
     {
         #region Fields
 
@@ -16,13 +16,13 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public MES(int channel, int messageId)
+        public Mes(int channel, int messageId)
         {
             _channel = channel;
             _messageId = messageId;
         }
 
-        public MES(int parameter, IStack<IJsmExpression> stack)
+        public Mes(int parameter, IStack<IJsmExpression> stack)
             : this(
                 messageId: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32(),
                 channel: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
@@ -42,7 +42,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Method(nameof(IMessageService.Show))
                 .Argument("channel", _channel)
                 .Argument("messageId", _messageId)
-                .Comment(nameof(MES));
+                .Comment(nameof(Mes));
         }
 
         public override IAwaitable TestExecute(IServices services)
@@ -51,7 +51,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MES)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId})";
+        public override string ToString() => $"{nameof(Mes)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId})";
 
         #endregion Methods
     }

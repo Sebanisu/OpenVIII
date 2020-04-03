@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MENUNORMAL : JsmInstruction
+    internal sealed class MenuNormal : JsmInstruction
     {
         #region Constructors
 
-        public MENUNORMAL()
+        public MenuNormal()
         {
         }
 
-        public MENUNORMAL(int parameter, IStack<IJsmExpression> stack)
+        public MenuNormal(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUNORMAL)}()";
+        public override string ToString() => $"{nameof(MenuNormal)}()";
 
         #endregion Methods
     }

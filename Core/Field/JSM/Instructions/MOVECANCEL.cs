@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MOVECANCEL : JsmInstruction
+    internal sealed class MoveCancel : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public MOVECANCEL(IJsmExpression arg0) => _arg0 = arg0;
+        public MoveCancel(IJsmExpression arg0) => _arg0 = arg0;
 
-        public MOVECANCEL(int parameter, IStack<IJsmExpression> stack)
+        public MoveCancel(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MOVECANCEL)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(MoveCancel)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

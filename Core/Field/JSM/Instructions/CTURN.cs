@@ -3,7 +3,7 @@
     /// <summary>
     /// Make this entity face the entity with the ID of the first parameter.
     /// </summary>
-    internal sealed class CTURN : JsmInstruction
+    internal sealed class CTurn : JsmInstruction
     {
         #region Fields
 
@@ -14,13 +14,13 @@
 
         #region Constructors
 
-        public CTURN(int targetObject, IJsmExpression frameDuration)
+        public CTurn(int targetObject, IJsmExpression frameDuration)
         {
             _targetObject = targetObject;
             _frameDuration = frameDuration;
         }
 
-        public CTURN(int parameter, IStack<IJsmExpression> stack)
+        public CTurn(int parameter, IStack<IJsmExpression> stack)
             : this(
                 frameDuration: stack.Pop(),
                 targetObject: ((IConstExpression)stack.Pop()).Int32())
@@ -37,7 +37,7 @@
                 .Method(nameof(FieldObjectModel.RotateToObject))
                 .Argument("targetObject", _targetObject)
                 .Argument("frameDuration", _frameDuration)
-                .Comment(nameof(CTURN));
+                .Comment(nameof(CTurn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -49,7 +49,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(CTURN)}({nameof(_targetObject)}: {_targetObject}, {nameof(_frameDuration)}: {_frameDuration})";
+        public override string ToString() => $"{nameof(CTurn)}({nameof(_targetObject)}: {_targetObject}, {nameof(_frameDuration)}: {_frameDuration})";
 
         #endregion Methods
     }

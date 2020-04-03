@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class JOIN : JsmInstruction
+    internal sealed class Join : JsmInstruction
     {
         #region Constructors
 
-        public JOIN()
+        public Join()
         {
         }
 
-        public JOIN(int parameter, IStack<IJsmExpression> stack)
+        public Join(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(JOIN)}()";
+        public override string ToString() => $"{nameof(Join)}()";
 
         #endregion Methods
     }

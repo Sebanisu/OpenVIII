@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MENUSAVE : JsmInstruction
+    internal sealed class MenuSave : JsmInstruction
     {
         #region Constructors
 
-        public MENUSAVE()
+        public MenuSave()
         {
         }
 
-        public MENUSAVE(int parameter, IStack<IJsmExpression> stack)
+        public MenuSave(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUSAVE)}()";
+        public override string ToString() => $"{nameof(MenuSave)}()";
 
         #endregion Methods
     }

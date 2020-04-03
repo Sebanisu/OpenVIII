@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class CSCROLLP2 : JsmInstruction
+    internal sealed class CScrollP2 : JsmInstruction
     {
         #region Constructors
 
-        public CSCROLLP2() => throw new NotSupportedException();
+        public CScrollP2() => throw new NotSupportedException();
 
         #endregion Constructors
     }

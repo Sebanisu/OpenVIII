@@ -4,15 +4,15 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// Replay music?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/141_MUSICREPLAY&action=edit&redlink=1"/>
-    public sealed class MUSICREPLAY : JsmInstruction
+    public sealed class MusicReplay : JsmInstruction
     {
         #region Constructors
 
-        public MUSICREPLAY()
+        public MusicReplay()
         {
         }
 
-        public MUSICREPLAY(int parameter, IStack<IJsmExpression> stack)
+        public MusicReplay(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MUSICREPLAY)}()";
+        public override string ToString() => $"{nameof(MusicReplay)}()";
 
         #endregion Methods
     }

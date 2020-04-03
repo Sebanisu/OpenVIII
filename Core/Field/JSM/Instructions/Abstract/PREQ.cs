@@ -4,11 +4,11 @@
     {
         #region Constructors
 
-        public PREQ(int objectIndex, IStack<IJsmExpression> stack) : base(objectIndex, stack)
+        protected PREQ(int objectIndex, IStack<IJsmExpression> stack) : base(objectIndex, stack)
         {
         }
 
-        public PREQ(int objectIndex, int priority, int scriptId) : base(objectIndex, priority, scriptId)
+        protected PREQ(int objectIndex, int priority, int scriptId) : base(objectIndex, priority, scriptId)
         {
         }
 
@@ -19,7 +19,7 @@
         /// <summary>
         /// The ID of the current party member Entity (0, 1 or 2).
         /// </summary>
-        protected int _partyId => checked((byte)_objectIndex);
+        protected int PartyID => checked((byte)ObjectIndex);
 
         #endregion Properties
     }

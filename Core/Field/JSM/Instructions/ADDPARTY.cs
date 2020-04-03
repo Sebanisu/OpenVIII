@@ -4,7 +4,7 @@
     /// Add party member to active party
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/086_ADDPARTY"/>
-    public sealed class ADDPARTY : JsmInstruction
+    public sealed class AddParty : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@
 
         #region Constructors
 
-        public ADDPARTY(Characters characterId) => _characterId = characterId;
+        public AddParty(Characters characterId) => _characterId = characterId;
 
-        public ADDPARTY(int parameter, IStack<IJsmExpression> stack)
+        public AddParty(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterId: (Characters)((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
         {
@@ -33,7 +33,7 @@
                 .StaticType(nameof(IPartyService))
                 .Method(nameof(IPartyService.AddPartyCharacter))
                 .Enum(_characterId)
-                .Comment(nameof(ADDPARTY));
+                .Comment(nameof(AddParty));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -41,7 +41,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(ADDPARTY)}({nameof(_characterId)}: {_characterId})";
+        public override string ToString() => $"{nameof(AddParty)}({nameof(_characterId)}: {_characterId})";
 
         #endregion Methods
     }

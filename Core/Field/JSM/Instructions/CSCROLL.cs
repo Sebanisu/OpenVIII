@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class CSCROLL : JsmInstruction
+    internal sealed class CScroll : JsmInstruction
     {
         #region Fields
 
@@ -12,14 +12,14 @@
 
         #region Constructors
 
-        public CSCROLL(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
+        public CScroll(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
         {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
         }
 
-        public CSCROLL(int parameter, IStack<IJsmExpression> stack)
+        public CScroll(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg2: stack.Pop(),
                 arg1: stack.Pop(),
@@ -31,7 +31,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(CSCROLL)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
+        public override string ToString() => $"{nameof(CScroll)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
 
         #endregion Methods
     }

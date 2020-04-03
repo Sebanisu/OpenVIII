@@ -2,11 +2,11 @@
 {
     /// <summary>
     /// <para>Play sound effect</para>
-    /// <para>Plays a sound effect through the given sound channel. The channel is important because it's the parameter used in SESTOP to halt a specific sound effect (and to prevent multiple counds from silencing each other). AFAIK Channels go up to 2^20 (which is 1048576), so you can theoretically have 20 sounds playing at once. 0 doesn't seem like it's a usable channel, but this is untested.</para>
-    /// <para>Note: It seems each area can have a maximum of 32 sounds predefined(meaning sound ID 31 is the highest you can play with this). You have to use EFFECTPLAY to use more than 32 sounds.</para>
+    /// <para>Plays a sound effect through the given sound channel. The channel is important because it's the parameter used in SEStop to halt a specific sound effect (and to prevent multiple counds from silencing each other). AFAIK Channels go up to 2^20 (which is 1048576), so you can theoretically have 20 sounds playing at once. 0 doesn't seem like it's a usable channel, but this is untested.</para>
+    /// <para>Note: It seems each area can have a maximum of 32 sounds predefined(meaning sound ID 31 is the highest you can play with this). You have to use EffectPlay to use more than 32 sounds.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/021_EFFECTPLAY2"/>
-    public sealed class EFFECTPLAY2 : JsmInstruction
+    public sealed class EffectPlay2 : JsmInstruction
     {
         #region Fields
 
@@ -31,7 +31,7 @@
 
         #region Constructors
 
-        public EFFECTPLAY2(int fieldSoundIndex, IJsmExpression pan, IJsmExpression volume, IJsmExpression channel)
+        public EffectPlay2(int fieldSoundIndex, IJsmExpression pan, IJsmExpression volume, IJsmExpression channel)
         {
             _fieldSoundIndex = fieldSoundIndex;
             _pan = pan;
@@ -39,7 +39,7 @@
             _channel = channel;
         }
 
-        public EFFECTPLAY2(int parameter, IStack<IJsmExpression> stack)
+        public EffectPlay2(int parameter, IStack<IJsmExpression> stack)
             : this(parameter,
                 channel: stack.Pop(),
                 volume: stack.Pop(),
@@ -62,7 +62,7 @@
                 .Argument("pan", _pan)
                 .Argument("volume", _volume)
                 .Argument("channel", _channel)
-                .Comment(nameof(MUSICLOAD));
+                .Comment(nameof(MusicLoad));
         }
 
         public override IAwaitable TestExecute(IServices services)
@@ -75,7 +75,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(EFFECTPLAY2)}({nameof(_fieldSoundIndex)}: {_fieldSoundIndex}, {nameof(_pan)}: {_pan}, {nameof(_volume)}: {_volume}, {nameof(_channel)}: {_channel})";
+        public override string ToString() => $"{nameof(EffectPlay2)}({nameof(_fieldSoundIndex)}: {_fieldSoundIndex}, {nameof(_pan)}: {_pan}, {nameof(_volume)}: {_volume}, {nameof(_channel)}: {_channel})";
 
         #endregion Methods
     }

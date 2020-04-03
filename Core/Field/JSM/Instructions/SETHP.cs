@@ -4,7 +4,7 @@
     /// Set HP
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/146_SETHP&action=edit&redlink=1"/>
-    public sealed class SETHP : JsmInstruction
+    public sealed class SetHP : JsmInstruction
     {
         #region Fields
 
@@ -15,13 +15,13 @@
 
         #region Constructors
 
-        public SETHP(Characters character, int hp)
+        public SetHP(Characters character, int hp)
         {
             _character = character;
             _hp = hp;
         }
 
-        public SETHP(int parameter, IStack<IJsmExpression> stack)
+        public SetHP(int parameter, IStack<IJsmExpression> stack)
             : this(
                 hp: ((IConstExpression)stack.Pop()).Int32(),
                 character: ((IConstExpression)stack.Pop()).Characters())
@@ -32,7 +32,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SETHP)}({nameof(_character)}: {_character}, {nameof(_hp)}: {_hp})";
+        public override string ToString() => $"{nameof(SetHP)}({nameof(_character)}: {_character}, {nameof(_hp)}: {_hp})";
 
         #endregion Methods
     }

@@ -1,23 +1,15 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class RUNENABLE : JsmInstruction
+    /// <summary>
+    /// Enable Running
+    /// </summary>
+    /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0F6_RUNENABLE"/>
+    /// <remarks>no arguments</remarks>
+    internal sealed class RunEnable : JsmInstruction
     {
-        #region Constructors
-
-        public RUNENABLE()
-        {
-        }
-
-        public RUNENABLE(int parameter, IStack<IJsmExpression> stack)
-            : this()
-        {
-        }
-
-        #endregion Constructors
-
         #region Methods
 
-        public override string ToString() => $"{nameof(RUNENABLE)}()";
+        public override string ToString() => $"{nameof(RunEnable)}";
 
         #endregion Methods
     }

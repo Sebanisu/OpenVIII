@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class TALKRADIUS : JsmInstruction
+    internal sealed class TalkRadius : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public TALKRADIUS(IJsmExpression arg0) => _arg0 = arg0;
+        public TalkRadius(IJsmExpression arg0) => _arg0 = arg0;
 
-        public TALKRADIUS(int parameter, IStack<IJsmExpression> stack)
+        public TalkRadius(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(TALKRADIUS)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(TalkRadius)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

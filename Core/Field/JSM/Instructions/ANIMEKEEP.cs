@@ -2,21 +2,21 @@
 {
     /// <summary>
     /// <para>Play an animation.</para>
-    /// <para>ANIME, CANIME, RANIME, RCANIME, ANIMEKEEP, CANIMEKEEP, RANIMEKEEP, RCANIMEKEEP</para>
+    /// <para>Anime, CAnime, RAnime, RCAnime, AnimeKeep, CAnimeKeep, RAnimeKeep, RCAnimeKeep</para>
     /// <para>R - Async (don't wait for the animation)</para>
     /// <para>C - Range (play frame range)</para>
     /// <para>KEEP - Freeze (don't return the base animation, freeze on the last frame)</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/02E_ANIMEKEEP"/>
-    public sealed class ANIMEKEEP : Abstract.ANIME
+    public sealed class AnimeKeep : Abstract.Anime
     {
         #region Constructors
 
-        public ANIMEKEEP(int animationId) : base(animationId)
+        public AnimeKeep(int animationId) : base(animationId)
         {
         }
 
-        public ANIMEKEEP(int animationId, IStack<IJsmExpression> stack) : base(animationId, stack)
+        public AnimeKeep(int animationId, IStack<IJsmExpression> stack) : base(animationId)
         {
         }
 
@@ -28,14 +28,14 @@
                 .Await()
                 .Property(nameof(FieldObject.Animation))
                 .Method(nameof(FieldObjectAnimation.Play))
-                .Argument("animationId", _animationId)
-                .Comment(nameof(ANIMEKEEP));
+                .Argument("animationId", AnimationId)
+                .Comment(nameof(AnimeKeep));
 
         public override IAwaitable TestExecute(IServices services) =>
             // Sync call
-            ServiceId.Field[services].Engine.CurrentObject.Animation.Play(_animationId, freeze: true);
+            ServiceId.Field[services].Engine.CurrentObject.Animation.Play(AnimationId, freeze: true);
 
-        public override string ToString() => $"{nameof(ANIMEKEEP)}({nameof(_animationId)}: {_animationId})";
+        public override string ToString() => $"{nameof(AnimeKeep)}({nameof(AnimationId)}: {AnimationId})";
 
         #endregion Methods
     }

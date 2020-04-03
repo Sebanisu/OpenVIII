@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class OFFSETSYNC : JsmInstruction
+    internal sealed class OffsetSync : JsmInstruction
     {
         #region Constructors
 
-        public OFFSETSYNC()
+        public OffsetSync()
         {
         }
 
-        public OFFSETSYNC(int parameter, IStack<IJsmExpression> stack)
+        public OffsetSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(OFFSETSYNC)}()";
+        public override string ToString() => $"{nameof(OffsetSync)}()";
 
         #endregion Methods
     }

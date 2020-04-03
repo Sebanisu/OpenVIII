@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class LINEOFF : JsmInstruction
+    internal sealed class LineOff : JsmInstruction
     {
         #region Constructors
 
-        public LINEOFF()
+        public LineOff()
         {
         }
 
-        public LINEOFF(int parameter, IStack<IJsmExpression> stack)
+        public LineOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(LINEOFF)}()";
+        public override string ToString() => $"{nameof(LineOff)}()";
 
         #endregion Methods
     }

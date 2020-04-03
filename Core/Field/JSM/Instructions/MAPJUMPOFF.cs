@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MAPJUMPOFF : JsmInstruction
+    internal sealed class MapJumpOff : JsmInstruction
     {
         #region Constructors
 
-        public MAPJUMPOFF()
+        public MapJumpOff()
         {
         }
 
-        public MAPJUMPOFF(int parameter, IStack<IJsmExpression> stack)
+        public MapJumpOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MAPJUMPOFF)}()";
+        public override string ToString() => $"{nameof(MapJumpOff)}()";
 
         #endregion Methods
     }

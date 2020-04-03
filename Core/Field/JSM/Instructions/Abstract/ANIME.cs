@@ -1,23 +1,19 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions.Abstract
 {
-    public abstract class ANIME : JsmInstruction
+    public abstract class Anime : JsmInstruction
     {
         #region Fields
 
         /// <summary>
         /// Model Animation ID
         /// </summary>
-        protected readonly int _animationId;
+        protected readonly int AnimationId;
 
         #endregion Fields
 
         #region Constructors
 
-        public ANIME(int animationId) => _animationId = animationId;
-
-        public ANIME(int animationId, IStack<IJsmExpression> stack)
-            : this(animationId)
-        { }
+        protected Anime(int animationId) => AnimationId = animationId;
 
         #endregion Constructors
 

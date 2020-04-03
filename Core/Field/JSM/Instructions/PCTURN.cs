@@ -3,7 +3,7 @@
     /// <summary>
     /// Make this entity face the PC. Speed is number of frames (larger = slower turn).
     /// </summary>
-    internal sealed class PCTURN : JsmInstruction
+    internal sealed class PCTurn : JsmInstruction
     {
         #region Fields
 
@@ -14,13 +14,13 @@
 
         #region Constructors
 
-        public PCTURN(IJsmExpression unknown, IJsmExpression frameDuration)
+        public PCTurn(IJsmExpression unknown, IJsmExpression frameDuration)
         {
             _unknown = unknown;
             _frameDuration = frameDuration;
         }
 
-        public PCTURN(int parameter, IStack<IJsmExpression> stack)
+        public PCTurn(int parameter, IStack<IJsmExpression> stack)
             : this(
                 frameDuration: stack.Pop(),
                 unknown: stack.Pop())
@@ -37,7 +37,7 @@
                 .Method(nameof(FieldObjectModel.RotateToPlayer))
                 .Argument("unknown", _unknown)
                 .Argument("frameDuration", _frameDuration)
-                .Comment(nameof(PCTURN));
+                .Comment(nameof(PCTurn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -50,7 +50,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(PCTURN)}({nameof(_unknown)}: {_unknown}, {nameof(_frameDuration)}: {_frameDuration})";
+        public override string ToString() => $"{nameof(PCTurn)}({nameof(_unknown)}: {_unknown}, {nameof(_frameDuration)}: {_frameDuration})";
 
         #endregion Methods
     }

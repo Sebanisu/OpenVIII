@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETMODEL : JsmInstruction
+    internal sealed class SetModel : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SETMODEL(int modelId) => _modelId = modelId;
+        public SetModel(int modelId) => _modelId = modelId;
 
-        public SETMODEL(int parameter, IStack<IJsmExpression> stack)
+        public SetModel(int parameter, IStack<IJsmExpression> stack)
             : this(parameter)
         {
         }
@@ -25,7 +25,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Method(nameof(FieldObjectModel.Change))
                 .Argument("modelId", _modelId)
-                .Comment(nameof(SETMODEL));
+                .Comment(nameof(SetModel));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -34,7 +34,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETMODEL)}({nameof(_modelId)}: {_modelId})";
+        public override string ToString() => $"{nameof(SetModel)}({nameof(_modelId)}: {_modelId})";
 
         #endregion Methods
     }

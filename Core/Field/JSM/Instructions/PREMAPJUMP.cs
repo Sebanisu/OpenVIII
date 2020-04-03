@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PREMAPJUMP : JsmInstruction
+    internal sealed class PreMapJump : JsmInstruction
     {
         #region Fields
 
@@ -15,7 +15,7 @@
 
         #region Constructors
 
-        public PREMAPJUMP(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3)
+        public PreMapJump(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -23,7 +23,7 @@
             _arg3 = arg3;
         }
 
-        public PREMAPJUMP(int parameter, IStack<IJsmExpression> stack)
+        public PreMapJump(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg3: stack.Pop(),
                 arg2: stack.Pop(),
@@ -36,7 +36,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PREMAPJUMP)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3})";
+        public override string ToString() => $"{nameof(PreMapJump)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3})";
 
         #endregion Methods
     }

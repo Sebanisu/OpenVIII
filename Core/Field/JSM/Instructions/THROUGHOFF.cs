@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class THROUGHOFF : JsmInstruction
+    internal sealed class ThroughOff : JsmInstruction
     {
         #region Constructors
 
-        public THROUGHOFF()
+        public ThroughOff()
         {
         }
 
-        public THROUGHOFF(int parameter, IStack<IJsmExpression> stack)
+        public ThroughOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(THROUGHOFF)}()";
+        public override string ToString() => $"{nameof(ThroughOff)}()";
 
         #endregion Methods
     }

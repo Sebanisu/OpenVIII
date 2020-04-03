@@ -7,11 +7,11 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// <para>No apparent function. Most likely, this did various things during the game's development.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/01B_DEBUG"/>
-    internal sealed class DEBUG : JsmInstruction
+    internal sealed class Debug : JsmInstruction
     {
         #region Constructors
 
-        public DEBUG() => throw new NotSupportedException();
+        public Debug() => throw new NotSupportedException();
 
         #endregion Constructors
     }

@@ -3,7 +3,7 @@
     /// <summary>
     /// Sets whether the PC character can be moved/selected in the switch menu.
     /// </summary>
-    internal sealed class HOLD : JsmInstruction
+    internal sealed class Hold : JsmInstruction
     {
         #region Fields
 
@@ -15,14 +15,14 @@
 
         #region Constructors
 
-        public HOLD(IJsmExpression characterId, bool isSwitchable, bool isSelectable)
+        public Hold(IJsmExpression characterId, bool isSwitchable, bool isSelectable)
         {
             _characterId = characterId;
             _isSwitchable = isSwitchable;
             _isSelectable = isSelectable;
         }
 
-        public HOLD(int parameter, IStack<IJsmExpression> stack)
+        public Hold(int parameter, IStack<IJsmExpression> stack)
             : this(
                 isSelectable: ((Jsm.Expression.PSHN_L)stack.Pop()).Boolean(),
                 isSwitchable: ((Jsm.Expression.PSHN_L)stack.Pop()).Boolean(),
@@ -40,7 +40,7 @@
                 .Enum<Characters>(_characterId)
                 .Argument("isSwitchable", _isSwitchable)
                 .Argument("isSelectable", _isSelectable)
-                .Comment(nameof(HOLD));
+                .Comment(nameof(Hold));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -49,7 +49,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(HOLD)}({nameof(_characterId)}: {_characterId}, {nameof(_isSwitchable)}: {_isSwitchable}, {nameof(_isSelectable)}: {_isSelectable})";
+        public override string ToString() => $"{nameof(Hold)}({nameof(_characterId)}: {_characterId}, {nameof(_isSwitchable)}: {_isSwitchable}, {nameof(_isSelectable)}: {_isSelectable})";
 
         #endregion Methods
     }

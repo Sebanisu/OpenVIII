@@ -1,17 +1,17 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Enables user control. See UCOFF for details.
+    /// Enables user control. See UCOff for details.
     /// </summary>
-    internal sealed class UCON : JsmInstruction
+    internal sealed class UCOn : JsmInstruction
     {
         #region Constructors
 
-        public UCON()
+        public UCOn()
         {
         }
 
-        public UCON(int parameter, IStack<IJsmExpression> stack)
+        public UCOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
                 .StaticType(nameof(IGameplayService))
                 .Property(nameof(IGameplayService.IsUserControlEnabled))
                 .Assign(true)
-                .Comment(nameof(UCON));
+                .Comment(nameof(UCOn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(UCON)}()";
+        public override string ToString() => $"{nameof(UCOn)}()";
 
         #endregion Methods
     }

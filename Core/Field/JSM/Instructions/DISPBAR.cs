@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DISPBAR : JsmInstruction
+    internal sealed class DispBar : JsmInstruction
     {
         #region Fields
 
@@ -16,7 +16,7 @@
 
         #region Constructors
 
-        public DISPBAR(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4, IJsmExpression arg5, IJsmExpression arg6)
+        public DispBar(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4, IJsmExpression arg5, IJsmExpression arg6)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -27,7 +27,7 @@
             _arg6 = arg6;
         }
 
-        public DISPBAR(int parameter, IStack<IJsmExpression> stack)
+        public DispBar(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg6: stack.Pop(),
                 arg5: stack.Pop(),
@@ -43,7 +43,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DISPBAR)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4}, {nameof(_arg5)}: {_arg5}, {nameof(_arg6)}: {_arg6})";
+        public override string ToString() => $"{nameof(DispBar)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4}, {nameof(_arg5)}: {_arg5}, {nameof(_arg6)}: {_arg6})";
 
         #endregion Methods
     }

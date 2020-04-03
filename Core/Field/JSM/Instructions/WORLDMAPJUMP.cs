@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class WORLDMAPJUMP : JsmInstruction
+    internal sealed class WorldMapJump : JsmInstruction
     {
         #region Fields
 
@@ -12,14 +12,14 @@
 
         #region Constructors
 
-        public WORLDMAPJUMP(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
+        public WorldMapJump(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
         {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
         }
 
-        public WORLDMAPJUMP(int parameter, IStack<IJsmExpression> stack)
+        public WorldMapJump(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg2: stack.Pop(),
                 arg1: stack.Pop(),
@@ -31,7 +31,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(WORLDMAPJUMP)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
+        public override string ToString() => $"{nameof(WorldMapJump)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SPLIT : JsmInstruction
+    internal sealed class Split : JsmInstruction
     {
         #region Fields
 
@@ -18,7 +18,7 @@
 
         #region Constructors
 
-        public SPLIT(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4, IJsmExpression arg5, IJsmExpression arg6, IJsmExpression arg7, IJsmExpression arg8)
+        public Split(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4, IJsmExpression arg5, IJsmExpression arg6, IJsmExpression arg7, IJsmExpression arg8)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -31,7 +31,7 @@
             _arg8 = arg8;
         }
 
-        public SPLIT(int parameter, IStack<IJsmExpression> stack)
+        public Split(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg8: stack.Pop(),
                 arg7: stack.Pop(),
@@ -49,7 +49,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SPLIT)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4}, {nameof(_arg5)}: {_arg5}, {nameof(_arg6)}: {_arg6}, {nameof(_arg7)}: {_arg7}, {nameof(_arg8)}: {_arg8})";
+        public override string ToString() => $"{nameof(Split)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4}, {nameof(_arg5)}: {_arg5}, {nameof(_arg6)}: {_arg6}, {nameof(_arg7)}: {_arg7}, {nameof(_arg8)}: {_arg8})";
 
         #endregion Methods
     }

@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MAPJUMPON : JsmInstruction
+    internal sealed class MapJumpOn : JsmInstruction
     {
         #region Constructors
 
-        public MAPJUMPON()
+        public MapJumpOn()
         {
         }
 
-        public MAPJUMPON(int parameter, IStack<IJsmExpression> stack)
+        public MapJumpOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MAPJUMPON)}()";
+        public override string ToString() => $"{nameof(MapJumpOn)}()";
 
         #endregion Methods
     }

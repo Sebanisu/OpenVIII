@@ -1,17 +1,17 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Enables "pushing" this entity. An entity's "push" script is run when the player walks into it. Detection range can presumably be set with PUSHRADIUS
+    /// Enables "pushing" this entity. An entity's "push" script is run when the player walks into it. Detection range can presumably be set with PushRadius
     /// </summary>
-    internal sealed class PUSHON : JsmInstruction
+    internal sealed class PushOn : JsmInstruction
     {
         #region Constructors
 
-        public PUSHON()
+        public PushOn()
         {
         }
 
-        public PUSHON(int parameter, IStack<IJsmExpression> stack)
+        public PushOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Property(nameof(FieldObjectInteraction.IsPushScriptActive))
                 .Assign(true)
-                .Comment(nameof(PUSHON));
+                .Comment(nameof(PushOn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -33,7 +33,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(PUSHON)}()";
+        public override string ToString() => $"{nameof(PushOn)}()";
 
         #endregion Methods
     }

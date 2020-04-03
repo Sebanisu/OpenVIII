@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PMOVECANCEL : JsmInstruction
+    internal sealed class PMoveCancel : JsmInstruction
     {
         #region Constructors
 
-        public PMOVECANCEL() => throw new NotSupportedException();
+        public PMoveCancel() => throw new NotSupportedException();
 
         #endregion Constructors
     }

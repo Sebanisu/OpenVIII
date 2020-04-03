@@ -4,7 +4,7 @@
     /// Adds a PC to the available party (not to the active party).
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/08C_ADDMEMBER"/>
-    public sealed class ADDMEMBER : JsmInstruction
+    public sealed class AddMember : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@
 
         #region Constructors
 
-        public ADDMEMBER(Characters characterId) => _characterId = characterId;
+        public AddMember(Characters characterId) => _characterId = characterId;
 
-        public ADDMEMBER(int parameter, IStack<IJsmExpression> stack)
+        public AddMember(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterId: (Characters)((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
         {
@@ -33,7 +33,7 @@
                 .StaticType(nameof(IPartyService))
                 .Method(nameof(IPartyService.AddPlayableCharacter))
                 .Enum(_characterId)
-                .Comment(nameof(ADDMEMBER));
+                .Comment(nameof(AddMember));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -41,7 +41,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(ADDMEMBER)}({nameof(_characterId)}: {_characterId})";
+        public override string ToString() => $"{nameof(AddMember)}({nameof(_characterId)}: {_characterId})";
 
         #endregion Methods
     }

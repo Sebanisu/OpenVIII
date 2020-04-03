@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class RFACEDIROFF : JsmInstruction
+    internal sealed class RFaceDirOff : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public RFACEDIROFF(IJsmExpression arg0) => _arg0 = arg0;
+        public RFaceDirOff(IJsmExpression arg0) => _arg0 = arg0;
 
-        public RFACEDIROFF(int parameter, IStack<IJsmExpression> stack)
+        public RFaceDirOff(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(RFACEDIROFF)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(RFaceDirOff)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

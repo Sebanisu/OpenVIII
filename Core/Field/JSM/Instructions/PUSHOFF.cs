@@ -1,17 +1,17 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Disables this entity's "push" script. See PUSHON.
+    /// Disables this entity's "push" script. See PushOn.
     /// </summary>
-    internal sealed class PUSHOFF : JsmInstruction
+    internal sealed class PushOff : JsmInstruction
     {
         #region Constructors
 
-        public PUSHOFF()
+        public PushOff()
         {
         }
 
-        public PUSHOFF(int parameter, IStack<IJsmExpression> stack)
+        public PushOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Property(nameof(FieldObjectInteraction.IsPushScriptActive))
                 .Assign(false)
-                .Comment(nameof(PUSHOFF));
+                .Comment(nameof(PushOff));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -33,7 +33,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(PUSHOFF)}()";
+        public override string ToString() => $"{nameof(PushOff)}()";
 
         #endregion Methods
     }

@@ -4,7 +4,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// Set Pan for all Sound Effects, (Never Used In Game)
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0C5_ALLSEPOS"/>
-    public sealed class ALLSEPOS : JsmInstruction
+    public sealed class AllSEPos : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public ALLSEPOS(IJsmExpression arg0) => _arg0 = arg0;
+        public AllSEPos(IJsmExpression arg0) => _arg0 = arg0;
 
-        public ALLSEPOS(int parameter, IStack<IJsmExpression> stack)
+        public AllSEPos(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -29,7 +29,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ALLSEPOS)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(AllSEPos)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

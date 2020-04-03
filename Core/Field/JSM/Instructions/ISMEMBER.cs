@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class ISMEMBER : JsmInstruction
+    internal sealed class IsMember : JsmInstruction
     {
         #region Constructors
 
-        public ISMEMBER() => throw new NotSupportedException();
+        public IsMember() => throw new NotSupportedException();
 
         #endregion Constructors
     }

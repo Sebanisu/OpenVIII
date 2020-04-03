@@ -2,21 +2,21 @@
 {
     /// <summary>
     /// <para>Play an animation.</para>
-    /// <para>ANIME, CANIME, RANIME, RCANIME, ANIMEKEEP, CANIMEKEEP, RANIMEKEEP, RCANIMEKEEP</para>
+    /// <para>Anime, CAnime, RAnime, RCAnime, AnimeKeep, CAnimeKeep, RAnimeKeep, RCAnimeKeep</para>
     /// <para>R - Async (don't wait for the animation)</para>
     /// <para>C - Range (play frame range)</para>
     /// <para>KEEP - Freeze (don't return the base animation, freeze on the last frame)</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/032_RANIMEKEEP"/>
-    public sealed class RANIMEKEEP : Abstract.ANIME
+    public sealed class RAnimeKeep : Abstract.Anime
     {
         #region Constructors
 
-        public RANIMEKEEP(int animationId) : base(animationId)
+        public RAnimeKeep(int animationId) : base(animationId)
         {
         }
 
-        public RANIMEKEEP(int animationId, IStack<IJsmExpression> stack) : base(animationId, stack)
+        public RAnimeKeep(int animationId, IStack<IJsmExpression> stack) : base(animationId)
         {
         }
 
@@ -27,18 +27,18 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Property(nameof(FieldObject.Animation))
                 .Method(nameof(FieldObjectAnimation.Play))
-                .Argument("animationId", _animationId)
-                .Comment(nameof(RANIMEKEEP));
+                .Argument("animationId", AnimationId)
+                .Comment(nameof(RAnimeKeep));
 
         public override IAwaitable TestExecute(IServices services)
         {
-            ServiceId.Field[services].Engine.CurrentObject.Animation.Play(_animationId, freeze: true);
+            ServiceId.Field[services].Engine.CurrentObject.Animation.Play(AnimationId, freeze: true);
 
             // Async call
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(RANIMEKEEP)}({nameof(_animationId)}: {_animationId})";
+        public override string ToString() => $"{nameof(RAnimeKeep)}({nameof(AnimationId)}: {AnimationId})";
 
         #endregion Methods
     }

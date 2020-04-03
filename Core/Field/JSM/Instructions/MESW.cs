@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MESW : JsmInstruction
+    internal sealed class MesW : JsmInstruction
     {
         #region Constructors
 
-        public MESW() => throw new NotSupportedException();
+        public MesW() => throw new NotSupportedException();
 
         #endregion Constructors
     }

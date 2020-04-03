@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FOLLOWON : JsmInstruction
+    internal sealed class FollowOn : JsmInstruction
     {
         #region Constructors
 
-        public FOLLOWON()
+        public FollowOn()
         {
         }
 
-        public FOLLOWON(int parameter, IStack<IJsmExpression> stack)
+        public FollowOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(FOLLOWON)}()";
+        public override string ToString() => $"{nameof(FollowOn)}()";
 
         #endregion Methods
     }

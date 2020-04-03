@@ -2,21 +2,21 @@
 {
     /// <summary>
     /// <para>Play an animation.</para>
-    /// <para>ANIME, CANIME, RANIME, RCANIME, ANIMEKEEP, CANIMEKEEP, RANIMEKEEP, RCANIMEKEEP</para>
+    /// <para>Anime, CAnime, RAnime, RCAnime, AnimeKeep, CAnimeKeep, RAnimeKeep, RCAnimeKeep</para>
     /// <para>R - Async (don't wait for the animation)</para>
     /// <para>C - Range (play frame range)</para>
     /// <para>KEEP - Freeze (don't return the base animation, freeze on the last frame)</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/02D_ANIME"/>
-    public sealed class ANIME : Abstract.ANIME
+    public sealed class Anime : Abstract.Anime
     {
         #region Constructors
 
-        public ANIME(int animationId) : base(animationId)
+        public Anime(int animationId) : base(animationId)
         {
         }
 
-        public ANIME(int animationId, IStack<IJsmExpression> stack) : base(animationId, stack)
+        public Anime(int animationId, IStack<IJsmExpression> stack) : base(animationId)
         {
         }
 
@@ -28,14 +28,14 @@
                 .Await()
                 .Property(nameof(FieldObject.Animation))
                 .Method(nameof(FieldObjectAnimation.Play))
-                .Argument("animationId", _animationId)
-                .Comment(nameof(ANIME));
+                .Argument("animationId", AnimationId)
+                .Comment(nameof(Anime));
 
         public override IAwaitable TestExecute(IServices services) =>
             // Sync call
-            ServiceId.Field[services].Engine.CurrentObject.Animation.Play(_animationId, freeze: false);
+            ServiceId.Field[services].Engine.CurrentObject.Animation.Play(AnimationId, freeze: false);
 
-        public override string ToString() => $"{nameof(ANIME)}({nameof(_animationId)}: {_animationId})";
+        public override string ToString() => $"{nameof(Anime)}({nameof(AnimationId)}: {AnimationId})";
 
         #endregion Methods
     }

@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class THROUGHON : JsmInstruction
+    internal sealed class ThroughOn : JsmInstruction
     {
         #region Constructors
 
-        public THROUGHON()
+        public ThroughOn()
         {
         }
 
-        public THROUGHON(int parameter, IStack<IJsmExpression> stack)
+        public ThroughOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(THROUGHON)}()";
+        public override string ToString() => $"{nameof(ThroughOn)}()";
 
         #endregion Methods
     }

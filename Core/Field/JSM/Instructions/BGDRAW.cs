@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class BGDRAW : JsmInstruction
+    internal sealed class BGDraw : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public BGDRAW(IJsmExpression arg0) => _arg0 = arg0;
+        public BGDraw(IJsmExpression arg0) => _arg0 = arg0;
 
-        public BGDRAW(int parameter, IStack<IJsmExpression> stack)
+        public BGDraw(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -25,7 +25,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IRenderingService))
                 .Method(nameof(IRenderingService.DrawBackground))
-                .Comment(nameof(BGDRAW));
+                .Comment(nameof(BGDraw));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -33,7 +33,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(BGDRAW)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(BGDraw)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

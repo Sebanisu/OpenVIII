@@ -5,7 +5,7 @@
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/125_ADDITEM"/>
     /// <seealso cref="http://wiki.ffrtt.ru/index.php?title=FF8/Item_Codes"/>
-    public sealed class ADDITEM : JsmInstruction
+    public sealed class AddItem : JsmInstruction
     {
         #region Fields
 
@@ -16,13 +16,13 @@
 
         #region Constructors
 
-        public ADDITEM(IJsmExpression id, IJsmExpression qty)
+        public AddItem(IJsmExpression id, IJsmExpression qty)
         {
             _id = id;
             _qty = qty;
         }
 
-        public ADDITEM(int parameter, IStack<IJsmExpression> stack)
+        public AddItem(int parameter, IStack<IJsmExpression> stack)
             : this(
                 qty: stack.Pop(),
                 id: stack.Pop())
@@ -33,7 +33,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ADDITEM)}({nameof(_id)}: {_id}, {nameof(_qty)}: {_qty}";
+        public override string ToString() => $"{nameof(AddItem)}({nameof(_id)}: {_id}, {nameof(_qty)}: {_qty}";
 
         #endregion Methods
     }

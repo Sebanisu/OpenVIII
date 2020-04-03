@@ -6,7 +6,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// RBG Shade Loop between two colors.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0D2_RBGSHADELOOP&action=edit&redlink=1"/>
-    public sealed class RBGSHADELOOP : JsmInstruction
+    public sealed class RBGShadeLoop : JsmInstruction
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public RBGSHADELOOP(int fadeFrames0, int fadeFrames1, byte red0, byte green0, byte blue0, byte red1, byte green1, byte blue1, int holdFrames0, int holdFrames1)
+        public RBGShadeLoop(int fadeFrames0, int fadeFrames1, byte red0, byte green0, byte blue0, byte red1, byte green1, byte blue1, int holdFrames0, int holdFrames1)
         {
             _fadeFrames0 = fadeFrames0; // transitional frame time 0 being instant color change
             _fadeFrames1 = fadeFrames1; // transitional frame time 0 being instant color change
@@ -31,7 +31,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             _holdFrames1 = holdFrames1 < 1 ? 1 : holdFrames1; //frames to stay on color
         }
 
-        public RBGSHADELOOP(int parameter, IStack<IJsmExpression> stack)
+        public RBGShadeLoop(int parameter, IStack<IJsmExpression> stack)
             : this(
                 holdFrames1: ((IConstExpression)stack.Pop()).Int32(),
                 holdFrames0: ((IConstExpression)stack.Pop()).Int32(),
@@ -64,7 +64,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(RBGSHADELOOP)}({nameof(_fadeFrames0)}: {_fadeFrames0}, {nameof(_fadeFrames1)}: {_fadeFrames1}, {nameof(_c0)}: {_c0}, {nameof(_c1)}: {_c1}, {nameof(_holdFrames0)}: {_holdFrames0}, {nameof(_holdFrames1)}: {_holdFrames1})";
+        public override string ToString() => $"{nameof(RBGShadeLoop)}({nameof(_fadeFrames0)}: {_fadeFrames0}, {nameof(_fadeFrames1)}: {_fadeFrames1}, {nameof(_c0)}: {_c0}, {nameof(_c1)}: {_c1}, {nameof(_holdFrames0)}: {_holdFrames0}, {nameof(_holdFrames1)}: {_holdFrames1})";
 
         #endregion Methods
     }

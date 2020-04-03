@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PGETINFO : JsmInstruction
+    internal sealed class PGetInfo : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public PGETINFO(IJsmExpression arg0) => _arg0 = arg0;
+        public PGetInfo(IJsmExpression arg0) => _arg0 = arg0;
 
-        public PGETINFO(int parameter, IStack<IJsmExpression> stack)
+        public PGetInfo(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PGETINFO)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(PGetInfo)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -3,15 +3,15 @@
     /// <summary>
     /// Enable random battles.
     /// </summary>
-    internal sealed class BATTLEON : JsmInstruction
+    internal sealed class BattleOn : JsmInstruction
     {
         #region Constructors
 
-        public BATTLEON()
+        public BattleOn()
         {
         }
 
-        public BATTLEON(int parameter, IStack<IJsmExpression> stack)
+        public BattleOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -24,7 +24,7 @@
                 .StaticType(nameof(IGameplayService))
                 .Property(nameof(IGameplayService.IsRandomBattlesEnabled))
                 .Assign(true)
-                .Comment(nameof(BATTLEOFF));
+                .Comment(nameof(BattleOff));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(BATTLEON)}()";
+        public override string ToString() => $"{nameof(BattleOn)}()";
 
         #endregion Methods
     }

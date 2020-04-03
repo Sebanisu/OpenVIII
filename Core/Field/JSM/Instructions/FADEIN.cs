@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FADEIN : JsmInstruction
+    internal sealed class FadeIn : JsmInstruction
     {
         #region Constructors
 
-        public FADEIN()
+        public FadeIn()
         {
         }
 
-        public FADEIN(int parameter, IStack<IJsmExpression> stack)
+        public FadeIn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -20,7 +20,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IFieldService))
                 .Method(nameof(IFieldService.FadeIn))
-                .Comment(nameof(FADEIN));
+                .Comment(nameof(FadeIn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -28,7 +28,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(FADEIN)}()";
+        public override string ToString() => $"{nameof(FadeIn)}()";
 
         #endregion Methods
     }

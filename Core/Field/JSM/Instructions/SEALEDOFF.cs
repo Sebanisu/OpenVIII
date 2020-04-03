@@ -4,13 +4,13 @@ namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
     /// <para>Enable Sealed Options (Ultimecia's Castle)</para>
-    /// <para>SEALEDOFF? on testbl9 only.</para>
+    /// <para>SealedOff? on testbl9 only.</para>
     /// <para>Enables features of the game pertaining to the last dungeon's mechanic (items, saving, etc).</para>
     /// <para>Whether or not these are enabled/disabled is stored in byte 334. 0=Sealed, 1=Unsealed</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/159_SEALEDOFF"/>
     /// <seealso cref="http://wiki.ffrtt.ru/index.php?title=FF8/Variables"/>
-    public sealed class SEALEDOFF : JsmInstruction
+    public sealed class SealedOff : JsmInstruction
     {
         #region Fields
 
@@ -23,9 +23,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public SEALEDOFF(SFlags flags) => _flags = flags;
+        public SealedOff(SFlags flags) => _flags = flags;
 
-        public SEALEDOFF(int parameter, IStack<IJsmExpression> stack)
+        public SealedOff(int parameter, IStack<IJsmExpression> stack)
             : this(
                 flags: (SFlags)((IConstExpression)stack.Pop()).Int32())
         {
@@ -53,7 +53,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SEALEDOFF)}({nameof(_flags)}: {_flags})";
+        public override string ToString() => $"{nameof(SealedOff)}({nameof(_flags)}: {_flags})";
 
         #endregion Methods
     }

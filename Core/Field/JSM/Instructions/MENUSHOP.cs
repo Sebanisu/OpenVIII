@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MENUSHOP : JsmInstruction
+    internal sealed class MenuShop : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public MENUSHOP(IJsmExpression arg0) => _arg0 = arg0;
+        public MenuShop(IJsmExpression arg0) => _arg0 = arg0;
 
-        public MENUSHOP(int parameter, IStack<IJsmExpression> stack)
+        public MenuShop(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUSHOP)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(MenuShop)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

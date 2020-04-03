@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Debug = System.Diagnostics.Debug;
 
 namespace OpenVIII.Fields
 {
@@ -63,8 +64,8 @@ namespace OpenVIII.Fields
              from jsmObject in JSMObjects
              from script in jsmObject.Scripts
              from instruction in script.Segment.Flatten()
-             where instruction is SETPLACE
-             let setPlace = ((SETPLACE)instruction)
+             where instruction is SetPlace
+             let setPlace = ((SetPlace)instruction)
              select setPlace.AreaName()).ToHashSet() : null;
 
         public bool Init(ushort? inputFieldID = null, Sections flags = Sections.ALL)

@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class GETTIMER : JsmInstruction
+    internal sealed class GetTimer : JsmInstruction
     {
         #region Constructors
 
-        public GETTIMER()
+        public GetTimer()
         {
         }
 
-        public GETTIMER(int parameter, IStack<IJsmExpression> stack)
+        public GetTimer(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(GETTIMER)}()";
+        public override string ToString() => $"{nameof(GetTimer)}()";
 
         #endregion Methods
     }

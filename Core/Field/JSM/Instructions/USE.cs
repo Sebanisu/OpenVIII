@@ -1,17 +1,17 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Opposite of UNUSE.
+    /// Opposite of Unuse.
     /// </summary>
-    internal sealed class USE : JsmInstruction
+    internal sealed class Use : JsmInstruction
     {
         #region Constructors
 
-        public USE()
+        public Use()
         {
         }
 
-        public USE(int parameter, IStack<IJsmExpression> stack)
+        public Use(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -23,7 +23,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Property(nameof(FieldObject.IsActive))
                 .Assign(true)
-                .Comment(nameof(USE));
+                .Comment(nameof(Use));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -32,7 +32,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(USE)}()";
+        public override string ToString() => $"{nameof(Use)}()";
 
         #endregion Methods
     }

@@ -31,7 +31,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ALLSEPOS)}({nameof(_arg0)}: {_arg0},{nameof(_arg1)}: {_arg1},{nameof(_arg2)}: {_arg2})";
+        public override string ToString() => $"{nameof(AllSEPos)}({nameof(_arg0)}: {_arg0},{nameof(_arg1)}: {_arg1},{nameof(_arg2)}: {_arg2})";
 
         #endregion Methods
     }

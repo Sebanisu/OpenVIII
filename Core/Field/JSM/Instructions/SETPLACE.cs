@@ -5,7 +5,7 @@
     /// <para>This controls what shows up at the bottom of the menu and in your saved game slots.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/133_SETPLACE"/>
-    public sealed class SETPLACE : JsmInstruction
+    public sealed class SetPlace : JsmInstruction
     {
         #region Fields
 
@@ -15,9 +15,9 @@
 
         #region Constructors
 
-        public SETPLACE(int areaId) => _areaId = areaId;
+        public SetPlace(int areaId) => _areaId = areaId;
 
-        public SETPLACE(int parameter, IStack<IJsmExpression> stack)
+        public SetPlace(int parameter, IStack<IJsmExpression> stack)
             : this(
                 areaId: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
         {
@@ -46,7 +46,7 @@
                 .StaticType(nameof(IFieldService))
                 .Method(nameof(IFieldService.BindArea))
                 .Argument("areaId", _areaId)
-                .Comment(nameof(SETPLACE));
+                .Comment(nameof(SetPlace));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -54,7 +54,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETPLACE)}({nameof(_areaId)}: {_areaId}, {nameof(AreaName)}: {AreaName()})";
+        public override string ToString() => $"{nameof(SetPlace)}({nameof(_areaId)}: {_areaId}, {nameof(AreaName)}: {AreaName()})";
 
         #endregion Methods
     }

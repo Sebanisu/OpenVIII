@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class COLSYNC : JsmInstruction
+    internal sealed class ColSync : JsmInstruction
     {
         #region Constructors
 
-        public COLSYNC()
+        public ColSync()
         {
         }
 
-        public COLSYNC(int parameter, IStack<IJsmExpression> stack)
+        public ColSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -20,11 +20,11 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IRenderingService))
                 .Method(nameof(IRenderingService.Wait))
-                .Comment(nameof(COLSYNC));
+                .Comment(nameof(ColSync));
 
         public override IAwaitable TestExecute(IServices services) => ServiceId.Rendering[services].Wait();
 
-        public override string ToString() => $"{nameof(COLSYNC)}()";
+        public override string ToString() => $"{nameof(ColSync)}()";
 
         #endregion Methods
     }

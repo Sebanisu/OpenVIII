@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class REST : JsmInstruction
+    internal sealed class Rest : JsmInstruction
     {
         #region Constructors
 
-        public REST()
+        public Rest()
         {
         }
 
-        public REST(int parameter, IStack<IJsmExpression> stack)
+        public Rest(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(REST)}()";
+        public override string ToString() => $"{nameof(Rest)}()";
 
         #endregion Methods
     }

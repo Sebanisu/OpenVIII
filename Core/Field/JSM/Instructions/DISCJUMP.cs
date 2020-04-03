@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DISCJUMP : JsmInstruction
+    internal sealed class DiscJump : JsmInstruction
     {
         #region Fields
 
@@ -15,7 +15,7 @@
 
         #region Constructors
 
-        public DISCJUMP(int parameter, IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
+        public DiscJump(int parameter, IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
         {
             _parameter = parameter;
             _arg0 = arg0;
@@ -25,7 +25,7 @@
             _arg4 = arg4;
         }
 
-        public DISCJUMP(int parameter, IStack<IJsmExpression> stack)
+        public DiscJump(int parameter, IStack<IJsmExpression> stack)
             : this(parameter,
                 arg4: stack.Pop(),
                 arg3: stack.Pop(),
@@ -39,7 +39,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DISCJUMP)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
+        public override string ToString() => $"{nameof(DiscJump)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
 
         #endregion Methods
     }

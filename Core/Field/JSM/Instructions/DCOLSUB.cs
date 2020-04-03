@@ -2,7 +2,7 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DCOLSUB : JsmInstruction
+    internal sealed class DColSub : JsmInstruction
     {
         #region Fields
 
@@ -14,14 +14,14 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public DCOLSUB(IJsmExpression r, IJsmExpression g, IJsmExpression b)
+        public DColSub(IJsmExpression r, IJsmExpression g, IJsmExpression b)
         {
             _r = r;
             _g = g;
             _b = b;
         }
 
-        public DCOLSUB(int parameter, IStack<IJsmExpression> stack)
+        public DColSub(int parameter, IStack<IJsmExpression> stack)
             : this(
                 b: stack.Pop(),
                 g: stack.Pop(),
@@ -39,7 +39,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Argument("r", _r)
                 .Argument("g", _g)
                 .Argument("b", _b)
-                .Comment(nameof(DCOLSUB));
+                .Comment(nameof(DColSub));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -51,7 +51,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(DCOLSUB)}({nameof(_r)}: {_r}, {nameof(_g)}: {_g}, {nameof(_b)}: {_b})";
+        public override string ToString() => $"{nameof(DColSub)}({nameof(_r)}: {_r}, {nameof(_g)}: {_g}, {nameof(_b)}: {_b})";
 
         #endregion Methods
     }

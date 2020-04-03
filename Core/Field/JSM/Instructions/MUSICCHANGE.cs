@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MUSICCHANGE : JsmInstruction
+    internal sealed class MusicChange : JsmInstruction
     {
         #region Constructors
 
-        public MUSICCHANGE()
+        public MusicChange()
         {
         }
 
-        public MUSICCHANGE(int parameter, IStack<IJsmExpression> stack)
+        public MusicChange(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -20,7 +20,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IMusicService))
                 .Method(nameof(IMusicService.PlayFieldMusic))
-                .Comment(nameof(MUSICCHANGE));
+                .Comment(nameof(MusicChange));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -28,7 +28,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MUSICCHANGE)}()";
+        public override string ToString() => $"{nameof(MusicChange)}()";
 
         #endregion Methods
     }

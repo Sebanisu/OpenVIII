@@ -3,9 +3,9 @@
 namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Pop up a message window until WINCLOSE or MESSYNC is called.
+    /// Pop up a message window until WinClose or MesSync is called.
     /// </summary>
-    public sealed class AMES : JsmInstruction
+    public sealed class AMes : JsmInstruction
     {
         #region Fields
 
@@ -28,14 +28,14 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public AMES(int channel, int messageId, int posX, int posY)
+        public AMes(int channel, int messageId, int posX, int posY)
         {
             _channel = channel;
             _messageId = messageId;
             (_pos.X, _pos.Y) = (posX, posY);
         }
 
-        public AMES(int parameter, IStack<IJsmExpression> stack)
+        public AMes(int parameter, IStack<IJsmExpression> stack)
             : this(
                 posY: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32(),
                 posX: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32(),
@@ -59,7 +59,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Argument("messageId", _messageId)
                 .Argument("posX", _pos.X)
                 .Argument("posY", _pos.Y)
-                .Comment(nameof(AMES));
+                .Comment(nameof(AMes));
         }
 
         public override IAwaitable TestExecute(IServices services)
@@ -68,7 +68,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(AMES)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_pos)}: {_pos})";
+        public override string ToString() => $"{nameof(AMes)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_pos)}: {_pos})";
 
         #endregion Methods
     }

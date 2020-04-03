@@ -4,7 +4,7 @@
     /// Set Background Animation Speed
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/09B_BGANIMESPEED&action=edit&redlink=1"/>
-    public sealed class BGANIMESPEED : JsmInstruction
+    public sealed class BGAnimeSpeed : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@
 
         #region Constructors
 
-        public BGANIMESPEED(IJsmExpression halfFps) => _halfFps = halfFps;
+        public BGAnimeSpeed(IJsmExpression halfFps) => _halfFps = halfFps;
 
-        public BGANIMESPEED(int parameter, IStack<IJsmExpression> stack)
+        public BGAnimeSpeed(int parameter, IStack<IJsmExpression> stack)
             : this(
                 halfFps: stack.Pop())
         {
@@ -33,7 +33,7 @@
                 .StaticType(nameof(IRenderingService))
                 .Property(nameof(IRenderingService.BackgroundFPS))
                 .Assign(_halfFps)
-                .Comment(nameof(BGANIMESPEED));
+                .Comment(nameof(BGAnimeSpeed));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -42,7 +42,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(BGANIMESPEED)}({nameof(_halfFps)}: {_halfFps})";
+        public override string ToString() => $"{nameof(BGAnimeSpeed)}({nameof(_halfFps)}: {_halfFps})";
 
         #endregion Methods
     }

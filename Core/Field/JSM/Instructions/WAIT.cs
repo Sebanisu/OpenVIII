@@ -3,7 +3,7 @@
     /// <summary>
     /// Pauses this script for some number of frames.
     /// </summary>
-    internal sealed class WAIT : JsmInstruction
+    internal sealed class Wait : JsmInstruction
     {
         #region Fields
 
@@ -13,9 +13,9 @@
 
         #region Constructors
 
-        public WAIT(IJsmExpression frameNumber) => _frameNumber = frameNumber;
+        public Wait(IJsmExpression frameNumber) => _frameNumber = frameNumber;
 
-        public WAIT(int parameter, IStack<IJsmExpression> stack)
+        public Wait(int parameter, IStack<IJsmExpression> stack)
             : this(
                 frameNumber: stack.Pop())
         {
@@ -30,7 +30,7 @@
                 .StaticType(nameof(IInteractionService))
                 .Method(nameof(IInteractionService.Wait))
                 .Argument("frameNumber", _frameNumber)
-                .Comment(nameof(WAIT));
+                .Comment(nameof(Wait));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -38,7 +38,7 @@
             return ServiceId.Interaction[services].Wait(frameNumber);
         }
 
-        public override string ToString() => $"{nameof(WAIT)}({nameof(_frameNumber)}: {_frameNumber})";
+        public override string ToString() => $"{nameof(Wait)}({nameof(_frameNumber)}: {_frameNumber})";
 
         #endregion Methods
     }

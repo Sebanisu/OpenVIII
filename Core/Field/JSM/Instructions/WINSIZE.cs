@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class WINSIZE : JsmInstruction
+    internal sealed class WinSize : JsmInstruction
     {
         #region Fields
 
@@ -14,7 +14,7 @@
 
         #region Constructors
 
-        public WINSIZE(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
+        public WinSize(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -23,7 +23,7 @@
             _arg4 = arg4;
         }
 
-        public WINSIZE(int parameter, IStack<IJsmExpression> stack)
+        public WinSize(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg4: stack.Pop(),
                 arg3: stack.Pop(),
@@ -37,7 +37,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(WINSIZE)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
+        public override string ToString() => $"{nameof(WinSize)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
 
         #endregion Methods
     }

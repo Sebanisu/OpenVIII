@@ -4,15 +4,15 @@
     /// door line on? enable door?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/143_DOORLINEON&action=edit&redlink=1"/>
-    public sealed class DOORLINEON : JsmInstruction
+    public sealed class DoorLineOn : JsmInstruction
     {
         #region Constructors
 
-        public DOORLINEON()
+        public DoorLineOn()
         {
         }
 
-        public DOORLINEON(int parameter, IStack<IJsmExpression> stack)
+        public DoorLineOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DOORLINEON)}()";
+        public override string ToString() => $"{nameof(DoorLineOn)}()";
 
         #endregion Methods
     }

@@ -6,7 +6,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// Place this entity's model at XCoord, YCoord, ZCoord standing on the given walkmesh triangle.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/01E_SET3"/>
-    public sealed class SET3 : JsmInstruction
+    public sealed class Set3 : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public SET3(int walkmeshTriangleId, int x, int y, int z) => (_walkmeshTriangleId, _pos.X, _pos.Y, _pos.Z) = (walkmeshTriangleId, x, y, z);
+        public Set3(int walkmeshTriangleId, int x, int y, int z) => (_walkmeshTriangleId, _pos.X, _pos.Y, _pos.Z) = (walkmeshTriangleId, x, y, z);
 
-        public SET3(int walkmeshTriangleId, IStack<IJsmExpression> stack)
+        public Set3(int walkmeshTriangleId, IStack<IJsmExpression> stack)
             : this(walkmeshTriangleId,
                 z: ((IConstExpression)stack.Pop()).Int32(),
                 y: ((IConstExpression)stack.Pop()).Int32(),
@@ -38,7 +38,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Argument("x", (int)_pos.X)
                 .Argument("y", (int)_pos.Y)
                 .Argument("z", (int)_pos.Z)
-                .Comment(nameof(SET3));
+                .Comment(nameof(Set3));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -47,7 +47,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SET3)}({nameof(_walkmeshTriangleId)}: {_walkmeshTriangleId}, {nameof(_pos)}: {_pos})";
+        public override string ToString() => $"{nameof(Set3)}({nameof(_walkmeshTriangleId)}: {_walkmeshTriangleId}, {nameof(_pos)}: {_pos})";
 
         #endregion Methods
     }

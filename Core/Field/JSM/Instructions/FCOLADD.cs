@@ -2,7 +2,7 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FCOLADD : JsmInstruction
+    internal sealed class FColAdd : JsmInstruction
     {
         #region Fields
 
@@ -18,7 +18,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public FCOLADD(IJsmExpression r1, IJsmExpression g1, IJsmExpression b1, IJsmExpression r2, IJsmExpression g2, IJsmExpression b2, IJsmExpression transitionDuration)
+        public FColAdd(IJsmExpression r1, IJsmExpression g1, IJsmExpression b1, IJsmExpression r2, IJsmExpression g2, IJsmExpression b2, IJsmExpression transitionDuration)
         {
             _r1 = r1;
             _g1 = g1;
@@ -29,7 +29,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             _transitionDuration = transitionDuration;
         }
 
-        public FCOLADD(int parameter, IStack<IJsmExpression> stack)
+        public FColAdd(int parameter, IStack<IJsmExpression> stack)
             : this(
                 transitionDuration: stack.Pop(),
                 b2: stack.Pop(),
@@ -55,7 +55,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
                 .Argument("g2", _g2)
                 .Argument("b2", _b2)
                 .Argument("transitionDuration", _transitionDuration)
-                .Comment(nameof(FCOLADD));
+                .Comment(nameof(FColAdd));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -73,7 +73,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(FCOLADD)}({nameof(_r1)}: {_r1}, {nameof(_g1)}: {_g1}, {nameof(_b1)}: {_b1}, {nameof(_r2)}: {_r2}, {nameof(_g2)}: {_g2}, {nameof(_b2)}: {_b2}, {nameof(_transitionDuration)}: {_transitionDuration})";
+        public override string ToString() => $"{nameof(FColAdd)}({nameof(_r1)}: {_r1}, {nameof(_g1)}: {_g1}, {nameof(_b1)}: {_b1}, {nameof(_r2)}: {_r2}, {nameof(_g2)}: {_g2}, {nameof(_b2)}: {_b2}, {nameof(_transitionDuration)}: {_transitionDuration})";
 
         #endregion Methods
     }

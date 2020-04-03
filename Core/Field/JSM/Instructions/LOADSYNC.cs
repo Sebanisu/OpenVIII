@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class LOADSYNC : JsmInstruction
+    internal sealed class LoadSync : JsmInstruction
     {
         #region Constructors
 
-        public LOADSYNC()
+        public LoadSync()
         {
         }
 
-        public LOADSYNC(int parameter, IStack<IJsmExpression> stack)
+        public LoadSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(LOADSYNC)}()";
+        public override string ToString() => $"{nameof(LoadSync)}()";
 
         #endregion Methods
     }

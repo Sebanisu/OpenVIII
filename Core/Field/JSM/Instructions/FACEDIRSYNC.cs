@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FACEDIRSYNC : JsmInstruction
+    internal sealed class FaceDirSync : JsmInstruction
     {
         #region Constructors
 
-        public FACEDIRSYNC()
+        public FaceDirSync()
         {
         }
 
-        public FACEDIRSYNC(int parameter, IStack<IJsmExpression> stack)
+        public FaceDirSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(FACEDIRSYNC)}()";
+        public override string ToString() => $"{nameof(FaceDirSync)}()";
 
         #endregion Methods
     }

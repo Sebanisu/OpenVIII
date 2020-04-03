@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SUBPARTY : JsmInstruction
+    internal sealed class SubParty : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SUBPARTY(IJsmExpression characterId) => _characterId = characterId;
+        public SubParty(IJsmExpression characterId) => _characterId = characterId;
 
-        public SUBPARTY(int parameter, IStack<IJsmExpression> stack)
+        public SubParty(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterId: stack.Pop())
         {
@@ -26,7 +26,7 @@
                 .StaticType(nameof(IPartyService))
                 .Method(nameof(IPartyService.RemovePartyCharacter))
                 .Enum<Characters>(_characterId)
-                .Comment(nameof(SUBPARTY));
+                .Comment(nameof(SubParty));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -35,7 +35,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SUBPARTY)}({nameof(_characterId)}: {_characterId})";
+        public override string ToString() => $"{nameof(SubParty)}({nameof(_characterId)}: {_characterId})";
 
         #endregion Methods
     }

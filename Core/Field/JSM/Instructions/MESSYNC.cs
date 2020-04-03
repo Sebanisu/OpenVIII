@@ -1,6 +1,6 @@
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MESSYNC : JsmInstruction
+    internal sealed class MesSync : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public MESSYNC(IJsmExpression arg0) => _arg0 = arg0;
+        public MesSync(IJsmExpression arg0) => _arg0 = arg0;
 
-        public MESSYNC(int parameter, IStack<IJsmExpression> stack)
+        public MesSync(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MESSYNC)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(MesSync)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -7,7 +7,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// trigger Battle encounter
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/069_BATTLE"/>
-    public sealed class BATTLE : JsmInstruction
+    public sealed class Battle : JsmInstruction
     {
         #region Fields
 
@@ -18,7 +18,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public BATTLE(IJsmExpression encounter, IJsmExpression flags)
+        public Battle(IJsmExpression encounter, IJsmExpression flags)
         {
             if (encounter is PSHI_L || encounter is PSHSM_W)
             {
@@ -30,7 +30,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
             _flags = (BFlags)((IConstExpression)flags).Int32();
         }
 
-        public BATTLE(int parameter, IStack<IJsmExpression> stack)
+        public Battle(int parameter, IStack<IJsmExpression> stack)
             : this(
                 flags: stack.Pop(),
                 encounter: stack.Pop())
@@ -71,7 +71,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(BATTLE)}({nameof(_encounter)}: {_encounter}, {nameof(_flags)}: {_flags})";
+        public override string ToString() => $"{nameof(Battle)}({nameof(_encounter)}: {_encounter}, {nameof(_flags)}: {_flags})";
 
         #endregion Methods
     }

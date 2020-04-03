@@ -4,7 +4,7 @@
     /// Something having to do with field loading.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/182_UNKNOWN17"/>
-    public sealed class PREMAPJUMP2 : JsmInstruction
+    public sealed class PreMapJump2 : JsmInstruction
     {
         #region Fields
 
@@ -17,9 +17,9 @@
 
         #region Constructors
 
-        public PREMAPJUMP2(int fieldMapId) => _fieldMapId = fieldMapId;
+        public PreMapJump2(int fieldMapId) => _fieldMapId = fieldMapId;
 
-        public PREMAPJUMP2(int parameter, IStack<IJsmExpression> stack)
+        public PreMapJump2(int parameter, IStack<IJsmExpression> stack)
             : this(
                 fieldMapId: ((IConstExpression)stack.Pop()).Int32())
         {
@@ -34,7 +34,7 @@
                 .StaticType(nameof(IFieldService))
                 .Method(nameof(IFieldService.PrepareGoTo))
                 .Enum(_fieldMapId)
-                .Comment(nameof(PREMAPJUMP2));
+                .Comment(nameof(PreMapJump2));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -42,7 +42,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(PREMAPJUMP2)}({nameof(_fieldMapId)}: {_fieldMapId})";
+        public override string ToString() => $"{nameof(PreMapJump2)}({nameof(_fieldMapId)}: {_fieldMapId})";
 
         #endregion Methods
     }

@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MENUDISABLE : JsmInstruction
+    internal sealed class MenuDisable : JsmInstruction
     {
         #region Constructors
 
-        public MENUDISABLE()
+        public MenuDisable()
         {
         }
 
-        public MENUDISABLE(int parameter, IStack<IJsmExpression> stack)
+        public MenuDisable(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUDISABLE)}()";
+        public override string ToString() => $"{nameof(MenuDisable)}()";
 
         #endregion Methods
     }

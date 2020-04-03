@@ -6,11 +6,11 @@ namespace OpenVIII.Fields.Scripts.Instructions
     /// unused
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/09E_SHADETIMER&action=edit&redlink=1"/>
-    public sealed class SHADETIMER : JsmInstruction
+    public sealed class ShadeTimer : JsmInstruction
     {
         #region Constructors
 
-        public SHADETIMER() => throw new NotSupportedException();
+        public ShadeTimer() => throw new NotSupportedException();
 
         #endregion Constructors
     }

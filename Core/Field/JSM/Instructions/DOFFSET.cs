@@ -2,7 +2,7 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DOFFSET : JsmInstruction
+    internal sealed class DOffset : JsmInstruction
     {
         #region Fields
 
@@ -14,14 +14,14 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public DOFFSET(IJsmExpression x, IJsmExpression y, IJsmExpression z)
+        public DOffset(IJsmExpression x, IJsmExpression y, IJsmExpression z)
         {
             _x = x;
             _y = y;
             _z = z;
         }
 
-        public DOFFSET(int parameter, IStack<IJsmExpression> stack)
+        public DOffset(int parameter, IStack<IJsmExpression> stack)
             : this(
                 z: (IConstExpression)stack.Pop(),
                 y: (IConstExpression)stack.Pop(),
@@ -36,11 +36,11 @@ namespace OpenVIII.Fields.Scripts.Instructions
         public override IAwaitable TestExecute(IServices services)
         {
             // TODO: Field script
-            Console.WriteLine($"NotImplemented: {nameof(DOFFSET)}({_x}, {_y}, {_z})");
+            Console.WriteLine($"NotImplemented: {nameof(DOffset)}({_x}, {_y}, {_z})");
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(DOFFSET)}({nameof(_x)}: {_x}, {nameof(_y)}: {_y}, {nameof(_z)}: {_z})";
+        public override string ToString() => $"{nameof(DOffset)}({nameof(_x)}: {_x}, {nameof(_y)}: {_y}, {nameof(_z)}: {_z})";
 
         #endregion Methods
     }

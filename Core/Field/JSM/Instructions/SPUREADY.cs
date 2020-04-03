@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SPUREADY : JsmInstruction
+    internal sealed class SPUReady : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SPUREADY(IJsmExpression arg0) => _arg0 = arg0;
+        public SPUReady(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SPUREADY(int parameter, IStack<IJsmExpression> stack)
+        public SPUReady(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SPUREADY)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(SPUReady)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

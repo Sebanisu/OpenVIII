@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class GAMEOVER : JsmInstruction
+    internal sealed class GameOver : JsmInstruction
     {
         #region Constructors
 
-        public GAMEOVER()
+        public GameOver()
         {
         }
 
-        public GAMEOVER(int parameter, IStack<IJsmExpression> stack)
+        public GameOver(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(GAMEOVER)}()";
+        public override string ToString() => $"{nameof(GameOver)}()";
 
         #endregion Methods
     }

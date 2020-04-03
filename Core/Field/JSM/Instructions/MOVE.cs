@@ -3,7 +3,7 @@
     /// <summary>
     /// Make this entity walk/run to the given coordinates.
     /// </summary>
-    internal sealed class MOVE : JsmInstruction
+    internal sealed class Move : JsmInstruction
     {
         #region Fields
 
@@ -16,7 +16,7 @@
 
         #region Constructors
 
-        public MOVE(IJsmExpression x, IJsmExpression y, IJsmExpression z, IJsmExpression unknown)
+        public Move(IJsmExpression x, IJsmExpression y, IJsmExpression z, IJsmExpression unknown)
         {
             _x = x;
             _y = y;
@@ -24,7 +24,7 @@
             _unknown = unknown;
         }
 
-        public MOVE(int parameter, IStack<IJsmExpression> stack)
+        public Move(int parameter, IStack<IJsmExpression> stack)
             : this(
                 unknown: stack.Pop(),
                 z: stack.Pop(),
@@ -44,7 +44,7 @@
                 .Argument("y", _y)
                 .Argument("z", _z)
                 .Argument("unknown", _unknown)
-                .Comment(nameof(MOVE));
+                .Comment(nameof(Move));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -61,7 +61,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MOVE)}({nameof(_x)}: {_x}, {nameof(_y)}: {_y}, {nameof(_z)}: {_z}, {nameof(_unknown)}: {_unknown})";
+        public override string ToString() => $"{nameof(Move)}({nameof(_x)}: {_x}, {nameof(_y)}: {_y}, {nameof(_z)}: {_z}, {nameof(_unknown)}: {_unknown})";
 
         #endregion Methods
     }

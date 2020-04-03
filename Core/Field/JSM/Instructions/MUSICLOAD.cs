@@ -1,9 +1,9 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Preloads a new field music track. You can start the new track by calling MUSICCHANGE.
+    /// Preloads a new field music track. You can start the new track by calling MusicChange.
     /// </summary>
-    internal sealed class MUSICLOAD : JsmInstruction
+    internal sealed class MusicLoad : JsmInstruction
     {
         #region Fields
 
@@ -13,9 +13,9 @@
 
         #region Constructors
 
-        public MUSICLOAD(IJsmExpression musicId) => _musicId = musicId;
+        public MusicLoad(IJsmExpression musicId) => _musicId = musicId;
 
-        public MUSICLOAD(int parameter, IStack<IJsmExpression> stack)
+        public MusicLoad(int parameter, IStack<IJsmExpression> stack)
             : this(
                 musicId: stack.Pop())
         {
@@ -36,7 +36,7 @@
                 .StaticType(nameof(IMusicService))
                 .Method(nameof(IMusicService.LoadFieldMusic))
                 .Argument("musicId", _musicId)
-                .Comment(nameof(MUSICLOAD));
+                .Comment(nameof(MusicLoad));
         }
 
         public override IAwaitable TestExecute(IServices services)
@@ -45,7 +45,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MUSICLOAD)}({nameof(_musicId)}: {_musicId})";
+        public override string ToString() => $"{nameof(MusicLoad)}({nameof(_musicId)}: {_musicId})";
 
         #endregion Methods
     }

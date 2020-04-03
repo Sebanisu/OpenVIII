@@ -5,7 +5,7 @@
     /// <para>Pushes the value of this character's "real world" character into temp variable 0.</para>
     /// <para>This is only used twice in the game - both at Esthar's "front gate" before the last dream sequence.</para>
     /// </summary>
-    public sealed class WHOAMI : JsmInstruction
+    public sealed class WhoAmI : JsmInstruction
     {
         #region Fields
 
@@ -15,9 +15,9 @@
 
         #region Constructors
 
-        public WHOAMI(Characters characterID) => _characterID = characterID;
+        public WhoAmI(Characters characterID) => _characterID = characterID;
 
-        public WHOAMI(int parameter, IStack<IJsmExpression> stack)
+        public WhoAmI(int parameter, IStack<IJsmExpression> stack)
             : this(
                 characterID: ((IConstExpression)stack.Pop()).Characters())
         {
@@ -33,7 +33,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(WHOAMI)}({nameof(_characterID)}: {_characterID})";
+        public override string ToString() => $"{nameof(WhoAmI)}({nameof(_characterID)}: {_characterID})";
 
         #endregion Methods
     }

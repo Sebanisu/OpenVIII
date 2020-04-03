@@ -4,7 +4,7 @@
     /// two sets of 4 values. i think it could be colors but unsure.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0B0_SHADEFORM&action=edit&redlink=1"/>
-    public sealed class SHADEFORM : JsmInstruction
+    public sealed class ShadeForm : JsmInstruction
     {
         #region Fields
 
@@ -21,7 +21,7 @@
 
         #region Constructors
 
-        public SHADEFORM(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4, IJsmExpression arg5, IJsmExpression arg6, IJsmExpression arg7)
+        public ShadeForm(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4, IJsmExpression arg5, IJsmExpression arg6, IJsmExpression arg7)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -33,7 +33,7 @@
             _arg7 = arg7;
         }
 
-        public SHADEFORM(int parameter, IStack<IJsmExpression> stack)
+        public ShadeForm(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg7: stack.Pop(),
                 arg6: stack.Pop(),
@@ -50,7 +50,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SHADEFORM)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4}, {nameof(_arg5)}: {_arg5}, {nameof(_arg6)}: {_arg6}, {nameof(_arg7)}: {_arg7})";
+        public override string ToString() => $"{nameof(ShadeForm)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4}, {nameof(_arg5)}: {_arg5}, {nameof(_arg6)}: {_arg6}, {nameof(_arg7)}: {_arg7})";
 
         #endregion Methods
     }

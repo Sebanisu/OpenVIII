@@ -1,30 +1,30 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions.Abstract
 {
-    public abstract class ANIMELOOP : ANIME
+    public abstract class AnimeLoop : Anime
     {
         #region Fields
 
         /// <summary>
         /// First frame of animation
         /// </summary>
-        protected readonly int _firstFrame;
+        protected readonly int FirstFrame;
 
         /// <summary>
         /// Last frame of animation
         /// </summary>
-        protected readonly int _lastFrame;
+        protected readonly int LastFrame;
 
         #endregion Fields
 
         #region Constructors
 
-        public ANIMELOOP(int animationId, int firstFrame, int lastFrame) : base(animationId)
+        protected AnimeLoop(int animationId, int firstFrame, int lastFrame) : base(animationId)
         {
-            _firstFrame = firstFrame;
-            _lastFrame = lastFrame;
+            FirstFrame = firstFrame;
+            LastFrame = lastFrame;
         }
 
-        public ANIMELOOP(int animationId, IStack<IJsmExpression> stack)
+        protected AnimeLoop(int animationId, IStack<IJsmExpression> stack)
             : this(animationId,
                 lastFrame: ((IConstExpression)stack.Pop()).Int32(),
                 firstFrame: ((IConstExpression)stack.Pop()).Int32())

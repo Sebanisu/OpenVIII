@@ -5,7 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using OpenVIII.Battle;
 using OpenVIII.Fields;
 using OpenVIII.Fields.Scripts.Instructions;
@@ -306,24 +309,60 @@ namespace OpenVIII.Dat_Dump
              from jsmObject in fieldArchive.Value.JSMObjects
              from script in jsmObject.Scripts
              from instruction in script.Segment.Flatten()
-             where instruction is BATTLE
-             let battle = ((BATTLE)instruction)
+             where instruction is Fields.Scripts.Instructions.Battle
+             let battle = ((Fields.Scripts.Instructions.Battle)instruction)
              select (new KeyValuePair<string, ushort>(fieldArchive.Value.FileName, battle.Encounter))).ToHashSet();
 
-            //    Dictionary<(int, Color, Color), string> dictionary = (from fieldArchive in FieldData
-            //            where fieldArchive.Value.jsmObjects != null && fieldArchive.Value.jsmObjects.Count > 0
-            //            from jsmObject in fieldArchive.Value.jsmObjects
-            //            from script in jsmObject.Scripts
-            //            from jsmInstruction in script.Segment.Flatten()
-            // ReSharper disable once CommentTypo
-            //            where jsmInstruction is BGSHADE
-            // ReSharper disable once CommentTypo
-            //            let instruction = ((BGSHADE)jsmInstruction)
-            //            select (new KeyValuePair<string, (int, Color, Color)>(fieldArchive.Value.FileName,
-            //                (instruction.FadeFrames,
-            //                    instruction.C0,
-            //                    instruction.C1)))).ToHashSet()
-            //        .GroupBy(x => x.Value).ToDictionary(x => x.Key, x => string.Join("; ", x.Select(y => y.Key).ToHashSet()));
+            var output = (from fieldArchive in FieldData
+                where fieldArchive.Value.JSMObjects != null && fieldArchive.Value.JSMObjects.Count > 0
+                from jsmObject in fieldArchive.Value.JSMObjects
+                from script in jsmObject.Scripts
+                from jsmInstruction in script.Segment.Flatten()
+                where jsmInstruction is SetCamera
+                let instruction = jsmInstruction as SetCamera
+                select new {fieldArchive.Value.FileName, instruction.Arg}).ToHashSet();
+
+            var outputD = (from fieldArchive in FieldData
+                where fieldArchive.Value.JSMObjects != null && fieldArchive.Value.JSMObjects.Count > 0
+                from jsmObject in fieldArchive.Value.JSMObjects
+                from script in jsmObject.Scripts
+                from jsmInstruction in script.Segment.Flatten()
+                where jsmInstruction is SetDCamera
+                let instruction = jsmInstruction as SetDCamera
+                select new { fieldArchive.Value.FileName, instruction.Arg }).ToHashSet();
+
+
+            var outputDress = (from fieldArchive in FieldData
+                where fieldArchive.Value.JSMObjects != null && fieldArchive.Value.JSMObjects.Count > 0
+                from jsmObject in fieldArchive.Value.JSMObjects
+                from script in jsmObject.Scripts
+                from jsmInstruction in script.Segment.Flatten()
+                where jsmInstruction is SetDress
+                let instruction = jsmInstruction as SetDress
+                select new { fieldArchive.Value.FileName, instruction.Character, instruction.Costume }).ToHashSet();
+
+            using (var bw = new StreamWriter(new FileStream("SetCamera.csv", FileMode.Create, FileAccess.Write,
+                FileShare.ReadWrite),Encoding.UTF8))
+            {
+                bw.WriteLine("filename,arg");
+                foreach(var line in output)
+                    bw.WriteLine($"{line.FileName},{line.Arg}");
+            }
+            using (var bw = new StreamWriter(new FileStream("SetDCamera.csv", FileMode.Create, FileAccess.Write,
+                FileShare.ReadWrite), Encoding.UTF8))
+            {
+                bw.WriteLine("filename,arg");
+                foreach (var line in outputD)
+                    bw.WriteLine($"{line.FileName},{line.Arg}");
+            }
+
+            using (var bw = new StreamWriter(new FileStream("SetDress.csv", FileMode.Create, FileAccess.Write,
+                FileShare.ReadWrite), Encoding.UTF8))
+            {
+                bw.WriteLine("filename,character,costume");
+                foreach (var line in outputDress)
+                    bw.WriteLine($"{line.FileName},{line.Character},{line.Costume}");
+            }
         }
 
         private static void LoadWorld()

@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class LINEON : JsmInstruction
+    internal sealed class LineOn : JsmInstruction
     {
         #region Constructors
 
-        public LINEON()
+        public LineOn()
         {
         }
 
-        public LINEON(int parameter, IStack<IJsmExpression> stack)
+        public LineOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(LINEON)}()";
+        public override string ToString() => $"{nameof(LineOn)}()";
 
         #endregion Methods
     }

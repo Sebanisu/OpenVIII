@@ -5,7 +5,7 @@
     /// <para>Unlocks a walkmesh triangle so things can walk over it.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/020_IDUNLOCK"/>
-    public sealed class IDUNLOCK : JsmInstruction
+    public sealed class IDUnlock : JsmInstruction
     {
         #region Fields
 
@@ -18,9 +18,9 @@
 
         #region Constructors
 
-        public IDUNLOCK(int parameter) => _parameter = parameter;
+        public IDUnlock(int parameter) => _parameter = parameter;
 
-        public IDUNLOCK(int parameter, IStack<IJsmExpression> stack)
+        public IDUnlock(int parameter, IStack<IJsmExpression> stack)
             : this(parameter)
         {
         }
@@ -29,7 +29,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(IDUNLOCK)}({nameof(_parameter)}: {_parameter})";
+        public override string ToString() => $"{nameof(IDUnlock)}({nameof(_parameter)}: {_parameter})";
 
         #endregion Methods
     }

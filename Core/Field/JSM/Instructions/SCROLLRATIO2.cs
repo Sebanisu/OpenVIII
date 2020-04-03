@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SCROLLRATIO2 : JsmInstruction
+    internal sealed class ScrollRatio2 : JsmInstruction
     {
         #region Fields
 
@@ -12,14 +12,14 @@
 
         #region Constructors
 
-        public SCROLLRATIO2(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
+        public ScrollRatio2(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2)
         {
             _arg0 = arg0;
             _arg1 = arg1;
             _arg2 = arg2;
         }
 
-        public SCROLLRATIO2(int parameter, IStack<IJsmExpression> stack)
+        public ScrollRatio2(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg2: stack.Pop(),
                 arg1: stack.Pop(),
@@ -31,7 +31,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SCROLLRATIO2)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
+        public override string ToString() => $"{nameof(ScrollRatio2)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2})";
 
         #endregion Methods
     }

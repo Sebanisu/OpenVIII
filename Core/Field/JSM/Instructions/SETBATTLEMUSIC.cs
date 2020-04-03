@@ -15,7 +15,7 @@
     /// <remarks>90 = The Legendary Beast (Junctioned Griever))</remarks>
     /// <remarks>93 = The Extreme(Ultimecia final battle)</remarks>
 
-    public sealed class SETBATTLEMUSIC : JsmInstruction
+    public sealed class SetBattleMusic : JsmInstruction
     {
         #region Fields
 
@@ -25,9 +25,9 @@
 
         #region Constructors
 
-        public SETBATTLEMUSIC(MusicId musicId) => _musicId = musicId;
+        public SetBattleMusic(MusicId musicId) => _musicId = musicId;
 
-        public SETBATTLEMUSIC(int parameter, IStack<IJsmExpression> stack)
+        public SetBattleMusic(int parameter, IStack<IJsmExpression> stack)
             : this(
                 musicId: (MusicId)((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
         {
@@ -42,7 +42,7 @@
                 .StaticType(nameof(IMusicService))
                 .Method(nameof(IMusicService.ChangeBattleMusic))
                 .Enum(_musicId)
-                .Comment(nameof(SETBATTLEMUSIC));
+                .Comment(nameof(SetBattleMusic));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -50,7 +50,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(SETBATTLEMUSIC)}({nameof(_musicId)}: {_musicId})";
+        public override string ToString() => $"{nameof(SetBattleMusic)}({nameof(_musicId)}: {_musicId})";
 
         #endregion Methods
     }

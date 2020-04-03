@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FMOVEP : JsmInstruction
+    internal sealed class FMoveP : JsmInstruction
     {
         #region Constructors
 
-        public FMOVEP() => throw new NotSupportedException();
+        public FMoveP() => throw new NotSupportedException();
 
         #endregion Constructors
     }

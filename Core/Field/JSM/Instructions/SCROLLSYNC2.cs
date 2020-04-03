@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SCROLLSYNC2 : JsmInstruction
+    internal sealed class ScrollSync2 : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SCROLLSYNC2(IJsmExpression arg0) => _arg0 = arg0;
+        public ScrollSync2(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SCROLLSYNC2(int parameter, IStack<IJsmExpression> stack)
+        public ScrollSync2(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SCROLLSYNC2)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(ScrollSync2)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

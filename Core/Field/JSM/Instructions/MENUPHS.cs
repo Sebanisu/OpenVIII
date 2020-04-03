@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MENUPHS : JsmInstruction
+    internal sealed class MenuPHS : JsmInstruction
     {
         #region Constructors
 
-        public MENUPHS()
+        public MenuPHS()
         {
         }
 
-        public MENUPHS(int parameter, IStack<IJsmExpression> stack)
+        public MenuPHS(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUPHS)}()";
+        public override string ToString() => $"{nameof(MenuPHS)}()";
 
         #endregion Methods
     }

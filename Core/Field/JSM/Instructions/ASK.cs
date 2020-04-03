@@ -2,10 +2,10 @@
 {
     /// <summary>
     /// Opens a field message window and lets player choose a single line.
-    /// ASK saves the chosen line index into a temp variable which you can retrieve with PSHI_L 0.
+    /// Ask saves the chosen line index into a temp variable which you can retrieve with PSHI_L 0.
     /// AASK is an upgrade that also lets you set the window position.
     /// </summary>
-    internal sealed class ASK : JsmInstruction
+    internal sealed class Ask : JsmInstruction
     {
         #region Fields
 
@@ -20,7 +20,7 @@
 
         #region Constructors
 
-        public ASK(IJsmExpression channel, IJsmExpression messageId, IJsmExpression firstLine, IJsmExpression lastLine, IJsmExpression beginLine, IJsmExpression cancelLine)
+        public Ask(IJsmExpression channel, IJsmExpression messageId, IJsmExpression firstLine, IJsmExpression lastLine, IJsmExpression beginLine, IJsmExpression cancelLine)
         {
             _channel = channel;
             _messageId = messageId;
@@ -30,7 +30,7 @@
             _cancelLine = cancelLine;
         }
 
-        public ASK(int parameter, IStack<IJsmExpression> stack)
+        public Ask(int parameter, IStack<IJsmExpression> stack)
             : this(
                 cancelLine: stack.Pop(),
                 beginLine: stack.Pop(),
@@ -71,7 +71,7 @@
                 _beginLine.Int32(services),
                 _cancelLine.Int32(services));
 
-        public override string ToString() => $"{nameof(ASK)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_firstLine)}: {_firstLine}, {nameof(_lastLine)}: {_lastLine}, {nameof(_beginLine)}: {_beginLine}, {nameof(_cancelLine)}: {_cancelLine})";
+        public override string ToString() => $"{nameof(Ask)}({nameof(_channel)}: {_channel}, {nameof(_messageId)}: {_messageId}, {nameof(_firstLine)}: {_firstLine}, {nameof(_lastLine)}: {_lastLine}, {nameof(_beginLine)}: {_beginLine}, {nameof(_cancelLine)}: {_cancelLine})";
 
         #endregion Methods
     }

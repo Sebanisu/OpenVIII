@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class RESETGF : JsmInstruction
+    internal sealed class ResetGF : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public RESETGF(IJsmExpression arg0) => _arg0 = arg0;
+        public ResetGF(IJsmExpression arg0) => _arg0 = arg0;
 
-        public RESETGF(int parameter, IStack<IJsmExpression> stack)
+        public ResetGF(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(RESETGF)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(ResetGF)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

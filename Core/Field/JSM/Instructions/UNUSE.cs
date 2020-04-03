@@ -5,7 +5,7 @@
     /// <para>Disable this entity's scripts, hides its model, and makes it throughable. Call USE to re-enable. </para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/01A_UNUSE"/>
-    public sealed class UNUSE : JsmInstruction
+    public sealed class Unuse : JsmInstruction
     {
         #region Fields
 
@@ -18,9 +18,9 @@
 
         #region Constructors
 
-        public UNUSE(int parameter) => _parameter = parameter;
+        public Unuse(int parameter) => _parameter = parameter;
 
-        public UNUSE(int parameter, IStack<IJsmExpression> stack)
+        public Unuse(int parameter, IStack<IJsmExpression> stack)
             : this(parameter)
         {
         }
@@ -32,7 +32,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .Property(nameof(FieldObject.IsActive))
                 .Assign(false)
-                .Comment(nameof(UNUSE));
+                .Comment(nameof(Unuse));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -41,7 +41,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(UNUSE)}({nameof(_parameter)}: {_parameter})";
+        public override string ToString() => $"{nameof(Unuse)}({nameof(_parameter)}: {_parameter})";
 
         #endregion Methods
     }

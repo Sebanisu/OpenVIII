@@ -3,7 +3,7 @@
     /// <summary>
     /// <para>Unknown. All footstep calls from the game use the following sets of parameters-arguments: 0-0, 0-1, 1-0, 1-2, 2-3, 3-4, 4-5, 5-6, 6-7, 8-9, 10-11</para>
     /// </summary>
-    public sealed class FOOTSTEP : JsmInstruction
+    public sealed class FootStep : JsmInstruction
     {
         #region Fields
 
@@ -14,13 +14,13 @@
 
         #region Constructors
 
-        public FOOTSTEP(int parameter, IJsmExpression arg0)
+        public FootStep(int parameter, IJsmExpression arg0)
         {
             _parameter = parameter;
             _arg0 = arg0;
         }
 
-        public FOOTSTEP(int parameter, IStack<IJsmExpression> stack)
+        public FootStep(int parameter, IStack<IJsmExpression> stack)
             : this(parameter,
                 arg0: stack.Pop())
         {
@@ -30,7 +30,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(FOOTSTEP)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(FootStep)}({nameof(_parameter)}: {_parameter}, {nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

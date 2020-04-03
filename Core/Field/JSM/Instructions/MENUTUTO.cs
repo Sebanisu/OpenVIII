@@ -4,15 +4,15 @@
     /// MENU tutorial? used in bgroom_5 only which is your computer in the classroom.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/15A_MENUTUTO&action=edit&redlink=1"/>
-    public sealed class MENUTUTO : JsmInstruction
+    public sealed class MenuTUTO : JsmInstruction
     {
         #region Constructors
 
-        public MENUTUTO()
+        public MenuTUTO()
         {
         }
 
-        public MENUTUTO(int parameter, IStack<IJsmExpression> stack)
+        public MenuTUTO(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUTUTO)}()";
+        public override string ToString() => $"{nameof(MenuTUTO)}()";
 
         #endregion Methods
     }

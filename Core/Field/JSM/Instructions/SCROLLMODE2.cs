@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SCROLLMODE2 : JsmInstruction
+    internal sealed class ScrollMode2 : JsmInstruction
     {
         #region Fields
 
@@ -14,7 +14,7 @@
 
         #region Constructors
 
-        public SCROLLMODE2(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
+        public ScrollMode2(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -23,7 +23,7 @@
             _arg4 = arg4;
         }
 
-        public SCROLLMODE2(int parameter, IStack<IJsmExpression> stack)
+        public ScrollMode2(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg4: stack.Pop(),
                 arg3: stack.Pop(),
@@ -37,7 +37,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SCROLLMODE2)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
+        public override string ToString() => $"{nameof(ScrollMode2)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
 
         #endregion Methods
     }

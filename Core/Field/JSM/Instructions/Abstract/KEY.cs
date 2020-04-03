@@ -2,21 +2,23 @@
 
 namespace OpenVIII.Fields.Scripts.Instructions.Abstract
 {
-    public abstract class KEY : JsmInstruction
+    public abstract class Key : JsmInstruction
     {
+        protected readonly int Parameter;
+
         #region Fields
 
-        protected readonly KeyFlags _flags;
+        protected readonly KeyFlags Flags;
 
         #endregion Fields
 
         #region Constructors
 
-        public KEY(KeyFlags flags) => _flags = flags;
+        protected Key(int parameter, KeyFlags flags) => (Parameter,Flags) = (parameter,flags);
 
-        public KEY(int parameter, IStack<IJsmExpression> stack)
-            : this(
-                flags: (KeyFlags)((IConstExpression)stack.Pop()).Int32())
+        protected Key(int parameter, IStack<IJsmExpression> stack)
+            : this(parameter,
+                (KeyFlags)((IConstExpression)stack.Pop()).Int32())
         {
         }
 

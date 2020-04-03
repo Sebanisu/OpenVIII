@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FADENONE : JsmInstruction
+    internal sealed class FadeNOne : JsmInstruction
     {
         #region Constructors
 
-        public FADENONE()
+        public FadeNOne()
         {
         }
 
-        public FADENONE(int parameter, IStack<IJsmExpression> stack)
+        public FadeNOne(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(FADENONE)}()";
+        public override string ToString() => $"{nameof(FadeNOne)}()";
 
         #endregion Methods
     }

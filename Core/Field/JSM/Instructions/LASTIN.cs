@@ -6,7 +6,7 @@
     /// <para>test6, ffbrdg1</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/157_LASTIN"/>
-    public sealed class LASTIN : JsmInstruction
+    public sealed class LastIn : JsmInstruction
     {
         #region Fields
 
@@ -19,9 +19,9 @@
 
         #region Constructors
 
-        public LASTIN(IJsmExpression arg0) => _arg0 = arg0;
+        public LastIn(IJsmExpression arg0) => _arg0 = arg0;
 
-        public LASTIN(int parameter, IStack<IJsmExpression> stack)
+        public LastIn(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -31,7 +31,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(LASTIN)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(LastIn)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

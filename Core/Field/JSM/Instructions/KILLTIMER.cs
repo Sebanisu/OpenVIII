@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class KILLTIMER : JsmInstruction
+    internal sealed class KillTimer : JsmInstruction
     {
         #region Constructors
 
-        public KILLTIMER()
+        public KillTimer()
         {
         }
 
-        public KILLTIMER(int parameter, IStack<IJsmExpression> stack)
+        public KillTimer(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(KILLTIMER)}()";
+        public override string ToString() => $"{nameof(KillTimer)}()";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MENUNAME : JsmInstruction
+    internal sealed class MenuName : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public MENUNAME(IJsmExpression entityName) => _entityName = entityName;
+        public MenuName(IJsmExpression entityName) => _entityName = entityName;
 
-        public MENUNAME(int parameter, IStack<IJsmExpression> stack)
+        public MenuName(int parameter, IStack<IJsmExpression> stack)
             : this(
                 entityName: stack.Pop())
         {
@@ -27,7 +27,7 @@
                 .StaticType(nameof(IMenuService))
                 .Method(nameof(IMenuService.ShowEnterNameDialog))
                 .Argument("entityName", _entityName)
-                .Comment(nameof(MENUNAME));
+                .Comment(nameof(MenuName));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -35,7 +35,7 @@
             return ServiceId.Menu[services].ShowEnterNameDialog(targetEntity);
         }
 
-        public override string ToString() => $"{nameof(MENUNAME)}({nameof(_entityName)}: {_entityName})";
+        public override string ToString() => $"{nameof(MenuName)}({nameof(_entityName)}: {_entityName})";
 
         #endregion Methods
     }

@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PHSENABLE : JsmInstruction
+    internal sealed class PHSEnable : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public PHSENABLE(IJsmExpression arg0) => _arg0 = arg0;
+        public PHSEnable(IJsmExpression arg0) => _arg0 = arg0;
 
-        public PHSENABLE(int parameter, IStack<IJsmExpression> stack)
+        public PHSEnable(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PHSENABLE)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(PHSEnable)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

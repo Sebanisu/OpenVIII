@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class SETROOTTRANS : JsmInstruction
+    internal sealed class SetRootTrans : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public SETROOTTRANS(IJsmExpression arg0) => _arg0 = arg0;
+        public SetRootTrans(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SETROOTTRANS(int parameter, IStack<IJsmExpression> stack)
+        public SetRootTrans(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SETROOTTRANS)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(SetRootTrans)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

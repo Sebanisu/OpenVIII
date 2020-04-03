@@ -2,17 +2,17 @@
 {
     /// <summary>
     /// Disable user control.
-    /// Player will only be able to press "ok" (and pause?) to advance through dialogue. Ends when UCON is called.
+    /// Player will only be able to press "ok" (and pause?) to advance through dialogue. Ends when UCOn is called.
     /// </summary>
-    internal sealed class UCOFF : JsmInstruction
+    internal sealed class UCOff : JsmInstruction
     {
         #region Constructors
 
-        public UCOFF()
+        public UCOff()
         {
         }
 
-        public UCOFF(int parameter, IStack<IJsmExpression> stack)
+        public UCOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -25,7 +25,7 @@
                 .StaticType(nameof(IGameplayService))
                 .Property(nameof(IGameplayService.IsUserControlEnabled))
                 .Assign(false)
-                .Comment(nameof(UCOFF));
+                .Comment(nameof(UCOff));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -33,7 +33,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(UCOFF)}()";
+        public override string ToString() => $"{nameof(UCOff)}()";
 
         #endregion Methods
     }

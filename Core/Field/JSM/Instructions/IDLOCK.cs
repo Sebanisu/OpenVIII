@@ -5,7 +5,7 @@
     /// <para>Locks a walkmesh triangle so nothing can walk over it.</para>
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/01F_IDLOCK"/>
-    public sealed class IDLOCK : JsmInstruction
+    public sealed class IDLock : JsmInstruction
     {
         #region Fields
 
@@ -18,9 +18,9 @@
 
         #region Constructors
 
-        public IDLOCK(int parameter) => _parameter = parameter;
+        public IDLock(int parameter) => _parameter = parameter;
 
-        public IDLOCK(int parameter, IStack<IJsmExpression> stack)
+        public IDLock(int parameter, IStack<IJsmExpression> stack)
             : this(parameter)
         {
         }
@@ -29,7 +29,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(IDLOCK)}({nameof(_parameter)}: {_parameter})";
+        public override string ToString() => $"{nameof(IDLock)}({nameof(_parameter)}: {_parameter})";
 
         #endregion Methods
     }

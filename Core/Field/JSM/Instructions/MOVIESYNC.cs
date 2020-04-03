@@ -3,15 +3,15 @@
     /// <summary>
     /// Pauses execution of this script until the current FMV movie is finished playing.
     /// </summary>
-    internal sealed class MOVIESYNC : JsmInstruction
+    internal sealed class MovieSync : JsmInstruction
     {
         #region Constructors
 
-        public MOVIESYNC()
+        public MovieSync()
         {
         }
 
-        public MOVIESYNC(int parameter, IStack<IJsmExpression> stack)
+        public MovieSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -23,7 +23,7 @@
         public override void Format(ScriptWriter sw, IScriptFormatterContext formatterContext, IServices services) => sw.Format(formatterContext, services)
                 .StaticType(nameof(IMovieService))
                 .Method(nameof(IMovieService.Wait))
-                .Comment(nameof(MOVIE));
+                .Comment(nameof(Movie));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -31,7 +31,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MOVIESYNC)}()";
+        public override string ToString() => $"{nameof(MovieSync)}()";
 
         #endregion Methods
     }

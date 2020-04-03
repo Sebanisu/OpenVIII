@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class PDIRA : JsmInstruction
+    internal sealed class PDirA : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public PDIRA(IJsmExpression arg0) => _arg0 = arg0;
+        public PDirA(IJsmExpression arg0) => _arg0 = arg0;
 
-        public PDIRA(int parameter, IStack<IJsmExpression> stack)
+        public PDirA(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(PDIRA)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(PDirA)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

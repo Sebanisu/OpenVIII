@@ -4,7 +4,7 @@
     /// Shade set?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0B3_SHADESET&action=edit&redlink=1"/>
-    public sealed class SHADESET : JsmInstruction
+    public sealed class ShadeSet : JsmInstruction
     {
         #region Fields
 
@@ -14,9 +14,9 @@
 
         #region Constructors
 
-        public SHADESET(IJsmExpression arg0) => _arg0 = arg0;
+        public ShadeSet(IJsmExpression arg0) => _arg0 = arg0;
 
-        public SHADESET(int parameter, IStack<IJsmExpression> stack)
+        public ShadeSet(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -26,7 +26,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(SHADESET)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(ShadeSet)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class AXISSYNC : JsmInstruction
+    internal sealed class AxisSync : JsmInstruction
     {
         #region Constructors
 
-        public AXISSYNC() => throw new NotSupportedException();
+        public AxisSync() => throw new NotSupportedException();
 
         #endregion Constructors
     }

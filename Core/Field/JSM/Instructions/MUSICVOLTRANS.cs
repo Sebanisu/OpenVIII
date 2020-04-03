@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MUSICVOLTRANS : JsmInstruction
+    internal sealed class MusicVolTrans : JsmInstruction
     {
         #region Fields
 
@@ -12,14 +12,14 @@
 
         #region Constructors
 
-        public MUSICVOLTRANS(IJsmExpression flag, IJsmExpression transitionDuration, IJsmExpression volume)
+        public MusicVolTrans(IJsmExpression flag, IJsmExpression transitionDuration, IJsmExpression volume)
         {
             _flag = flag;
             _transitionDuration = transitionDuration;
             _volume = volume;
         }
 
-        public MUSICVOLTRANS(int parameter, IStack<IJsmExpression> stack)
+        public MusicVolTrans(int parameter, IStack<IJsmExpression> stack)
             : this(
                 volume: stack.Pop(),
                 transitionDuration: stack.Pop(),
@@ -37,7 +37,7 @@
                 .Argument("volume", _volume)
                 .Argument("flag", _flag)
                 .Argument("transitionDuration", _transitionDuration)
-                .Comment(nameof(MUSICVOL));
+                .Comment(nameof(MusicVol));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -48,7 +48,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MUSICVOLTRANS)}({nameof(_flag)}: {_flag}, {nameof(_transitionDuration)}: {_transitionDuration}, {nameof(_volume)}: {_volume})";
+        public override string ToString() => $"{nameof(MusicVolTrans)}({nameof(_flag)}: {_flag}, {nameof(_transitionDuration)}: {_transitionDuration}, {nameof(_volume)}: {_volume})";
 
         #endregion Methods
     }

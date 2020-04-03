@@ -4,15 +4,15 @@
     /// Animation Synchronize. Pauses this script until the entity's current animation is finished playing.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/044_ANIMESYNC"/>
-    public sealed class ANIMESYNC : JsmInstruction
+    public sealed class AnimeSync : JsmInstruction
     {
         #region Constructors
 
-        public ANIMESYNC()
+        public AnimeSync()
         {
         }
 
-        public ANIMESYNC(int parameter, IStack<IJsmExpression> stack)
+        public AnimeSync(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -25,11 +25,11 @@
                 .Await()
                 .Property(nameof(FieldObject.Animation))
                 .Method(nameof(FieldObjectAnimation.Wait))
-                .Comment(nameof(ANIMESYNC));
+                .Comment(nameof(AnimeSync));
 
         public override IAwaitable TestExecute(IServices services) => ServiceId.Field[services].Engine.CurrentObject.Animation.Wait();
 
-        public override string ToString() => $"{nameof(ANIMESYNC)}()";
+        public override string ToString() => $"{nameof(AnimeSync)}()";
 
         #endregion Methods
     }

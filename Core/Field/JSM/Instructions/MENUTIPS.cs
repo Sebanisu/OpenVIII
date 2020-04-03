@@ -10,7 +10,7 @@
     /// gflain11, fhdeck4a, gpbigin4, tmele1, fhwisef2, bghall_6, bggate_1, domt3_3, tiagit4, ggview2,
     /// etsta1, testbl6, rgair3, crodin1, cwwood1, cwwood2, cwwood3, cwwood5, cwwood6, cwwood7, bgsido_2,
     /// bdview1, bdifrit1, bgroad_3</remarks>
-    public sealed class MENUTIPS : JsmInstruction
+    public sealed class MenuTips : JsmInstruction
     {
         #region Fields
 
@@ -26,9 +26,9 @@
 
         #region Constructors
 
-        public MENUTIPS(IJsmExpression arg0) => _arg0 = arg0;
+        public MenuTips(IJsmExpression arg0) => _arg0 = arg0;
 
-        public MENUTIPS(int parameter, IStack<IJsmExpression> stack)
+        public MenuTips(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -40,7 +40,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MENUTIPS)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(MenuTips)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

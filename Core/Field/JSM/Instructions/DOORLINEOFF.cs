@@ -4,15 +4,15 @@
     /// door line off? disable door?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/142_DOORLINEOFF&action=edit&redlink=1"/>
-    public sealed class DOORLINEOFF : JsmInstruction
+    public sealed class DoorLineOff : JsmInstruction
     {
         #region Constructors
 
-        public DOORLINEOFF()
+        public DoorLineOff()
         {
         }
 
-        public DOORLINEOFF(int parameter, IStack<IJsmExpression> stack)
+        public DoorLineOff(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DOORLINEOFF)}()";
+        public override string ToString() => $"{nameof(DoorLineOff)}()";
 
         #endregion Methods
     }

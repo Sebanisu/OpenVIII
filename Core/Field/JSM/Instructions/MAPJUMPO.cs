@@ -1,9 +1,9 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Jump the player to the field with the given ID and starting on the given walkmesh triangle. The walkmesh is almost always 0 because MAPJUMPO is intended to be used for teleporting the player into a cutscene, and the cutscenes place the characters where they need to be on initialization, so it doesn't matter where they're initially teleported.
+    /// Jump the player to the field with the given ID and starting on the given walkmesh triangle. The walkmesh is almost always 0 because MapJumpO is intended to be used for teleporting the player into a cutscene, and the cutscenes place the characters where they need to be on initialization, so it doesn't matter where they're initially teleported.
     /// </summary>
-    internal sealed class MAPJUMPO : JsmInstruction
+    internal sealed class MapJumpO : JsmInstruction
     {
         #region Fields
 
@@ -14,13 +14,13 @@
 
         #region Constructors
 
-        public MAPJUMPO(int fieldMapId, int walkmeshId)
+        public MapJumpO(int fieldMapId, int walkmeshId)
         {
             _fieldMapId = fieldMapId;
             _walkmeshId = walkmeshId;
         }
 
-        public MAPJUMPO(int parameter, IStack<IJsmExpression> stack)
+        public MapJumpO(int parameter, IStack<IJsmExpression> stack)
             : this(
                 walkmeshId: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32(),
                 fieldMapId: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
@@ -37,7 +37,7 @@
                 .Method(nameof(IFieldService.GoTo))
                 .Enum(_fieldMapId)
                 .Argument("walkmeshId", _walkmeshId)
-                .Comment(nameof(MAPJUMPO));
+                .Comment(nameof(MapJumpO));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -45,7 +45,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(MAPJUMPO)}({nameof(_fieldMapId)}: {_fieldMapId}, {nameof(_walkmeshId)}: {_walkmeshId})";
+        public override string ToString() => $"{nameof(MapJumpO)}({nameof(_fieldMapId)}: {_fieldMapId}, {nameof(_walkmeshId)}: {_walkmeshId})";
 
         #endregion Methods
     }

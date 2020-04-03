@@ -1,10 +1,13 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace OpenVIII.Fields.Scripts.Instructions
 {
     /// <summary>
-    /// Keysighnchange, only used on test
+    /// Key Signature Change, only used on test, on test only set to 1
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/150_KEYSIGHNCHANGE&action=edit&redlink=1"/>
-    public sealed class KEYSIGHNCHANGE : JsmInstruction
+    [SuppressMessage("ReSharper", "IdentifierTypo")]
+    public sealed class KeySighnChange : JsmInstruction
     {
         #region Fields
 
@@ -14,9 +17,9 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Constructors
 
-        public KEYSIGHNCHANGE(IJsmExpression arg0) => _arg0 = arg0;
+        public KeySighnChange(IJsmExpression arg0) => _arg0 = arg0;
 
-        public KEYSIGHNCHANGE(int parameter, IStack<IJsmExpression> stack)
+        public KeySighnChange(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -26,7 +29,7 @@ namespace OpenVIII.Fields.Scripts.Instructions
 
         #region Methods
 
-        public override string ToString() => $"{nameof(KEYSIGHNCHANGE)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(KeySighnChange)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

@@ -4,15 +4,15 @@
     /// Key
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/139_KEY&action=edit&redlink=1"/>
-    public sealed class KEY : Abstract.KEY
+    public sealed class Key : Abstract.Key
     {
         #region Constructors
 
-        public KEY(KeyFlags flags) : base(flags)
+        public Key(int parameter, KeyFlags flags) : base(parameter,flags)
         {
         }
 
-        public KEY(int parameter, IStack<IJsmExpression> stack) : base(parameter, stack)
+        public Key(int parameter, IStack<IJsmExpression> stack) : base(parameter, stack)
         {
         }
 
@@ -20,7 +20,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(KEY)}({nameof(_flags)}: {_flags})";
+        public override string ToString() => $"{nameof(Key)}({nameof(Flags)}: {Flags})";
 
         #endregion Methods
     }

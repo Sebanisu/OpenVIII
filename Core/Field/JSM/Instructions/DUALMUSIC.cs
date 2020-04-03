@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class DUALMUSIC : JsmInstruction
+    internal sealed class DualMusic : JsmInstruction
     {
         #region Fields
 
@@ -10,9 +10,9 @@
 
         #region Constructors
 
-        public DUALMUSIC(IJsmExpression arg0) => _arg0 = arg0;
+        public DualMusic(IJsmExpression arg0) => _arg0 = arg0;
 
-        public DUALMUSIC(int parameter, IStack<IJsmExpression> stack)
+        public DualMusic(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg0: stack.Pop())
         {
@@ -22,7 +22,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(DUALMUSIC)}({nameof(_arg0)}: {_arg0})";
+        public override string ToString() => $"{nameof(DualMusic)}({nameof(_arg0)}: {_arg0})";
 
         #endregion Methods
     }

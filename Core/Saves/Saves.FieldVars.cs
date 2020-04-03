@@ -175,7 +175,7 @@ namespace OpenVIII
             //[456-457]unused in fields
             public byte[] byte458459;
 
-            //[458-459]Used with MUSICSKIP in some Balamb Garden areas
+            //[458-459]Used with MusicSkip in some Balamb Garden areas
             public byte byte460;
 
             //[460]Random flags (some used for Card Club)
@@ -631,7 +631,7 @@ namespace OpenVIII
 
             //[88]Built-in engine variable. Used exclusively on save points. Never written to with field scripts. Related to Siren's Move-Find ability.
             //[89-103]unused in fields
-            public ulong ulong104; //[104]Seems related to SARALYDISPON/SARALYON/MUSICLOAD/PHSPOWER opcodes
+            public ulong ulong104; //[104]Seems related to SaralyDispOn/SaralyOn/MusicLoad/PHSPower opcodes
              //[108]Music related
             public ulong ulong112; //[112]unused in fields
                                    //[359]Centra ruins related (beat odin?).
@@ -643,7 +643,7 @@ namespace OpenVIII
             public byte UltimeciaArmory;
 
             //[333]Ultimecia Armory chest flags
-            public Fields.Scripts.Instructions.SEALEDOFF.SFlags UltimeciaCastleSeals;
+            public Fields.Scripts.Instructions.SealedOff.SFlags UltimeciaCastleSeals;
 
             //[304-305]Timber Maniacs issues found.
             //[306-319]Reserved for Hacktuar / FF8Voice
@@ -774,7 +774,7 @@ namespace OpenVIII
                 sbyte87 = br.ReadSByte(); //[87]Built-in engine variable. No idea what it does. Scripts always check if it's equal to 0 or 10. Related to music.
                 sbyte88 = br.ReadSByte(); //[88]Built-in engine variable. Used exclusively on save points. Never written to with field scripts. Related to Siren's Move-Find ability.
                 byte89103 = br.ReadBytes(15); //[89-103]unused in fields
-                ulong104 = br.ReadUInt32(); //[104]Seems related to SARALYDISPON/SARALYON/MUSICLOAD/PHSPOWER opcodes
+                ulong104 = br.ReadUInt32(); //[104]Seems related to SaralyDispOn/SaralyOn/MusicLoad/PHSPower opcodes
                 music = br.ReadUInt32(); //[108]Music related
                 ulong112 = br.ReadUInt32(); //[112]unused in fields
                 DrawPtsFeild = br.ReadBytes(32); //[116-147]Draw points in field
@@ -800,7 +800,7 @@ namespace OpenVIII
                 Hacktuar = br.ReadBytes(14); //[306-319]Reserved for Hacktuar / FF8Voice
                 UltimeciaGallery = br.ReadBytes(3); //[320-332]Ultimecia Gallery related (pictures viewed?)
                 UltimeciaArmory = br.ReadByte(); //[333]Ultimecia Armory chest flags
-                UltimeciaCastleSeals = (Fields.Scripts.Instructions.SEALEDOFF.SFlags)br.ReadByte(); //[334]Ultimecia Castle seals. See SEALEDOFF for details.
+                UltimeciaCastleSeals = (Fields.Scripts.Instructions.SealedOff.SFlags)br.ReadByte(); //[334]Ultimecia Castle seals. See SEALEDOFF for details.
                 Card = br.ReadByte(); //[335]Card related
                 BusRelated = br.ReadByte(); //[336]Deling City bus related
                 GatesOpened = br.ReadBytes(3); //[338-340]Deling Sewer gates opened
@@ -858,7 +858,7 @@ namespace OpenVIII
                 byte452 = br.ReadByte(); //[452]Lunatic Pandora areas visited?
                 byte453455 = br.ReadBytes(3); //[453-455]Moomba teleport variables
                 byte456457 = br.ReadBytes(2); //[456-457]unused in fields
-                byte458459 = br.ReadBytes(2); //[458-459]Used with MUSICSKIP in some Balamb Garden areas
+                byte458459 = br.ReadBytes(2); //[458-459]Used with MusicSkip in some Balamb Garden areas
                 byte460 = br.ReadByte(); //[460]Random flags (some used for Card Club)
                 byte461473 = br.ReadBytes(13); //[461-473]unused in fields
                 byte474 = br.ReadByte(); //[474]Random flags (some used for Card Club)

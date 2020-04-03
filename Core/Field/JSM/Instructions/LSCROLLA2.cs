@@ -2,11 +2,11 @@ using System;
 
 namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class LSCROLLA2 : JsmInstruction
+    internal sealed class LScrollA2 : JsmInstruction
     {
         #region Constructors
 
-        public LSCROLLA2() => throw new NotSupportedException();
+        public LScrollA2() => throw new NotSupportedException();
 
         #endregion Constructors
     }

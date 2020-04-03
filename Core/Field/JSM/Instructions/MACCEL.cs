@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class MACCEL : JsmInstruction
+    internal sealed class MAccel : JsmInstruction
     {
         #region Fields
 
@@ -14,7 +14,7 @@
 
         #region Constructors
 
-        public MACCEL(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
+        public MAccel(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3, IJsmExpression arg4)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -23,7 +23,7 @@
             _arg4 = arg4;
         }
 
-        public MACCEL(int parameter, IStack<IJsmExpression> stack)
+        public MAccel(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg4: stack.Pop(),
                 arg3: stack.Pop(),
@@ -37,7 +37,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MACCEL)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
+        public override string ToString() => $"{nameof(MAccel)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3}, {nameof(_arg4)}: {_arg4})";
 
         #endregion Methods
     }

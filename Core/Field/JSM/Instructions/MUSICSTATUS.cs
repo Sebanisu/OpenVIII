@@ -4,15 +4,15 @@
     /// See if music is playing?
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/140_MUSICSTATUS&action=edit&redlink=1"/>
-    public sealed class MUSICSTATUS : JsmInstruction
+    public sealed class MusicStatus : JsmInstruction
     {
         #region Constructors
 
-        public MUSICSTATUS()
+        public MusicStatus()
         {
         }
 
-        public MUSICSTATUS(int parameter, IStack<IJsmExpression> stack)
+        public MusicStatus(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(MUSICSTATUS)}()";
+        public override string ToString() => $"{nameof(MusicStatus)}()";
 
         #endregion Methods
     }

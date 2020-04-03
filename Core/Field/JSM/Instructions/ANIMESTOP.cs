@@ -4,15 +4,15 @@
     /// Resume script, controlled animation. Returns this entity to its base animation.
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/045_ANIMESTOP"/>
-    public sealed class ANIMESTOP : JsmInstruction
+    public sealed class AnimeStop : JsmInstruction
     {
         #region Constructors
 
-        public ANIMESTOP()
+        public AnimeStop()
         {
         }
 
-        public ANIMESTOP(int parameter, IStack<IJsmExpression> stack)
+        public AnimeStop(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ANIMESTOP)}()";
+        public override string ToString() => $"{nameof(AnimeStop)}()";
 
         #endregion Methods
     }

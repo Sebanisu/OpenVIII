@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class FOOTSTEPON : JsmInstruction
+    internal sealed class FootStepOn : JsmInstruction
     {
         #region Constructors
 
-        public FOOTSTEPON()
+        public FootStepOn()
         {
         }
 
-        public FOOTSTEPON(int parameter, IStack<IJsmExpression> stack)
+        public FootStepOn(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -21,7 +21,7 @@
                 .Property(nameof(FieldObject.Model))
                 .Property(nameof(FieldObjectInteraction.SoundFootsteps))
                 .Assign(true)
-                .Comment(nameof(FOOTSTEPON));
+                .Comment(nameof(FootStepOn));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -30,7 +30,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(FOOTSTEPON)}()";
+        public override string ToString() => $"{nameof(FootStepOn)}()";
 
         #endregion Methods
     }

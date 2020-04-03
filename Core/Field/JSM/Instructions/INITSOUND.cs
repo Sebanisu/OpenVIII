@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class INITSOUND : JsmInstruction
+    internal sealed class InitSound : JsmInstruction
     {
         #region Constructors
 
-        public INITSOUND()
+        public InitSound()
         {
         }
 
-        public INITSOUND(int parameter, IStack<IJsmExpression> stack)
+        public InitSound(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(INITSOUND)}()";
+        public override string ToString() => $"{nameof(InitSound)}()";
 
         #endregion Methods
     }

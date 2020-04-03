@@ -4,7 +4,7 @@
     /// Close the last window created by AMES.
     /// I haven't tried this for other types of windows...
     /// </summary>
-    internal sealed class WINCLOSE : JsmInstruction
+    internal sealed class WinClose : JsmInstruction
     {
         #region Fields
 
@@ -14,9 +14,9 @@
 
         #region Constructors
 
-        public WINCLOSE(int channel) => _channel = channel;
+        public WinClose(int channel) => _channel = channel;
 
-        public WINCLOSE(int parameter, IStack<IJsmExpression> stack)
+        public WinClose(int parameter, IStack<IJsmExpression> stack)
             : this(
                 channel: ((Jsm.Expression.PSHN_L)stack.Pop()).Int32())
         {
@@ -30,7 +30,7 @@
                 .StaticType(nameof(IMessageService))
                 .Method(nameof(IMessageService.Close))
                 .Argument("channel", _channel)
-                .Comment(nameof(WINCLOSE));
+                .Comment(nameof(WinClose));
 
         public override IAwaitable TestExecute(IServices services)
         {
@@ -38,7 +38,7 @@
             return DummyAwaitable.Instance;
         }
 
-        public override string ToString() => $"{nameof(WINCLOSE)}({nameof(_channel)}: {_channel})";
+        public override string ToString() => $"{nameof(WinClose)}({nameof(_channel)}: {_channel})";
 
         #endregion Methods
     }

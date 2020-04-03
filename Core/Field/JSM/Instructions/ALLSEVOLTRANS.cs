@@ -4,7 +4,7 @@
     /// Transition Volume of all Sound Effects
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/Field/Script/Opcodes/0C4_ALLSEVOLTRANS"/>
-    public sealed class ALLSEVOLTRANS : JsmInstruction
+    public sealed class AllSEVolTrans : JsmInstruction
     {
         #region Fields
 
@@ -22,13 +22,13 @@
 
         #region Constructors
 
-        public ALLSEVOLTRANS(IJsmExpression arg0, IJsmExpression arg1)
+        public AllSEVolTrans(IJsmExpression arg0, IJsmExpression arg1)
         {
             _arg0 = arg0;
             _arg1 = arg1;
         }
 
-        public ALLSEVOLTRANS(int parameter, IStack<IJsmExpression> stack)
+        public AllSEVolTrans(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg1: stack.Pop(),
                 arg0: stack.Pop())
@@ -39,7 +39,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(ALLSEVOLTRANS)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
+        public override string ToString() => $"{nameof(AllSEVolTrans)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1})";
 
         #endregion Methods
     }

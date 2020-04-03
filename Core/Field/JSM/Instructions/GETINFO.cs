@@ -1,14 +1,14 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class GETINFO : JsmInstruction
+    internal sealed class GetInfo : JsmInstruction
     {
         #region Constructors
 
-        public GETINFO()
+        public GetInfo()
         {
         }
 
-        public GETINFO(int parameter, IStack<IJsmExpression> stack)
+        public GetInfo(int parameter, IStack<IJsmExpression> stack)
             : this()
         {
         }
@@ -17,7 +17,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(GETINFO)}()";
+        public override string ToString() => $"{nameof(GetInfo)}()";
 
         #endregion Methods
     }

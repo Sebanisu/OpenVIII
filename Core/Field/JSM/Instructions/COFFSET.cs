@@ -1,6 +1,6 @@
 ﻿namespace OpenVIII.Fields.Scripts.Instructions
 {
-    internal sealed class COFFSET : JsmInstruction
+    internal sealed class COffset : JsmInstruction
     {
         #region Fields
 
@@ -13,7 +13,7 @@
 
         #region Constructors
 
-        public COFFSET(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3)
+        public COffset(IJsmExpression arg0, IJsmExpression arg1, IJsmExpression arg2, IJsmExpression arg3)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -21,7 +21,7 @@
             _arg3 = arg3;
         }
 
-        public COFFSET(int parameter, IStack<IJsmExpression> stack)
+        public COffset(int parameter, IStack<IJsmExpression> stack)
             : this(
                 arg3: stack.Pop(),
                 arg2: stack.Pop(),
@@ -34,7 +34,7 @@
 
         #region Methods
 
-        public override string ToString() => $"{nameof(COFFSET)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3})";
+        public override string ToString() => $"{nameof(COffset)}({nameof(_arg0)}: {_arg0}, {nameof(_arg1)}: {_arg1}, {nameof(_arg2)}: {_arg2}, {nameof(_arg3)}: {_arg3})";
 
         #endregion Methods
     }
