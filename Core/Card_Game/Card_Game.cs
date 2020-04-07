@@ -95,7 +95,7 @@ namespace OpenVIII.Card
                 var page = 0;
                 var pages = cols / 2;
                 var th = new List<TextureHandler>(pages);
-                ushort i = 0;
+                byte i = 0;
                 var filename = $"cards";
                 while (i < 110 && page < pages)
                 {
@@ -234,7 +234,7 @@ namespace OpenVIII.Card
                     if (texture != null)
                         texture.Dispose();
                     CustomPalette = e.CustomPalette;
-                    texture = temp.GetTexture((ushort)CustomPalette);
+                    texture = temp.GetTexture((byte)CustomPalette);
                 }
                 var data = new Color[(int)(e.Width * e.Height)];
                 var src = e.GetRectangle;
@@ -274,7 +274,7 @@ namespace OpenVIII.Card
             if (Memory.EnableDumpingData)
             {
                 filename = $"text_raw.png";
-                for (ushort i = 0; i < temp.GetClutCount || i == 0 && temp.GetClutCount == 0; i++)
+                for (byte i = 0; i < temp.GetClutCount || i == 0 && temp.GetClutCount == 0; i++)
                 {
                     th.Add(TextureHandler.Create(filename, temp, i));
                 }
@@ -362,7 +362,7 @@ namespace OpenVIII.Card
             }
         }
 
-        private void ReadTIM(int id, BinaryReader br, out TextureHandler[] tex, ushort ForceSetClutColors = 0, ushort ForceSetClutCount = 0)
+        private void ReadTIM(int id, BinaryReader br, out TextureHandler[] tex, byte ForceSetClutColors = 0, byte ForceSetClutCount = 0)
         {
             var temp = new TIM2(br, EXE_Offsets.TIM[year][id]);
             if (ForceSetClutColors > 0)
@@ -371,9 +371,9 @@ namespace OpenVIII.Card
                 temp.ForceSetClutCount(ForceSetClutCount);
             var filename = $"ff8exe{id.ToString("D2")}";
             if (Memory.EnableDumpingData)
-                Memory.MainThreadOnlyActions.Enqueue(() => { temp.SaveCLUT(Path.Combine(Path.GetTempPath(), $"{filename}.CLUT.png")); });
+                Memory.MainThreadOnlyActions.Enqueue(() => { temp.SaveClut(Path.Combine(Path.GetTempPath(), $"{filename}.CLUT.png")); });
             tex = new TextureHandler[temp.GetClutCount == 0 ? 1 : temp.GetClutCount];
-            for (ushort i = 0; i < temp.GetClutCount || i == 0 && temp.GetClutCount == 0; i++)
+            for (byte i = 0; i < temp.GetClutCount || i == 0 && temp.GetClutCount == 0; i++)
             {
                 tex[i] = TextureHandler.Create(filename, temp, i);
             }

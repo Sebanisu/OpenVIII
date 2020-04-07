@@ -295,7 +295,7 @@ namespace OpenVIII
             }
         }
 
-        protected virtual void InitTextures<T>(ArchiveBase aw = null) where T : Texture_Base, new()
+        protected virtual void InitTextures<T>(ArchiveBase aw = null) where T : ITextureBase, new()
         {
             var count = (int)Props.Sum(x => x.Count);
             if (Textures == null)

@@ -858,7 +858,7 @@ namespace OpenVIII.World
                     for (var m = 0; m < width; m++)
                     {
                         var color = br.ReadUInt16();
-                        customPalette[i][m] = Texture_Base.ABGR1555toRGBA32bit(color);
+                        customPalette[i][m] = new ColorABGR1555(color);
                     }
                 }
             }
@@ -1060,23 +1060,31 @@ namespace OpenVIII.World
                 for (var i = 0; i < innerSec.Length; i++)
                 {
                     var tim = new TIM2(buffer, (uint)(sectionPointers[38 - 1] + innerSec[i]));
-                    if (i == (int)Section38_textures.waterTex2)
-                        waterTim = tim;
-                    if (i == (int)Section38_textures.waterTex3)
-                        waterTim2 = tim;
-                    if (i == (int)Section38_textures.waterTex4)
-                        waterTim3 = tim;
-                    if (i == (int)Section38_textures.waterfall)
-                        waterTim4 = tim;
+                    switch ((Section38_textures)i)
+                    {
+                        case Section38_textures.waterTex2:
+                            waterTim = tim;
+                            break;
+                        case Section38_textures.waterTex3:
+                            waterTim2 = tim;
+                            break;
+                        case Section38_textures.waterTex4:
+                            waterTim3 = tim;
+                            break;
+                        case Section38_textures.waterfall:
+                            waterTim4 = tim;
+                            break;
+                    }
+
                     if (tim.GetBytesPerPixel == 4)
                         if (tim.GetClutSize != (tim.GetClutCount * tim.GetColorsCountPerPalette)) //broken header, force our own values
                         {
                             tim.ForceSetClutColors(16);
-                            tim.ForceSetClutCount((ushort)(tim.GetClutSize / 16));
+                            tim.ForceSetClutCount((byte)(tim.GetClutSize / 16));
                         }
                     sec38_textures.Add(new TextureHandler[tim.GetClutCount]);
                     sec38_pals.Add(new Color[tim.GetClutCount][]);
-                    for (ushort k = 0; k < sec38_textures[i].Length; k++)
+                    for (byte k = 0; k < sec38_textures[i].Length; k++)
                     {
                         var table = tim.GetPalette(k);
                         sec38_pals[i][k] = table;
@@ -1318,7 +1326,7 @@ namespace OpenVIII.World
                     var tim = new TIM2(buffer, (uint)(sectionPointers[42 - 1] + innerSec[i]));
                     timOriginHolderList.Add(new Vector2((tim.GetOrigX - SEC42_VRAM_STARTX) * 4, tim.GetOrigY));
                     vehTextures.Add(new TextureHandler[tim.GetClutCount]);
-                    for (ushort k = 0; k < vehTextures[i].Length; k++)
+                    for (byte k = 0; k < vehTextures[i].Length; k++)
                         vehTextures[i][k] = TextureHandler.Create($"wmset_tim42_{(i + 1).ToString("D2")}.tim", tim, k, null);
                 }
             }

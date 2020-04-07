@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OpenVIII
     /// <seealso cref="http://www.elisanet.fi/6581/PSX/doc/Playstation_Hardware.pdf"/>
     /// <seealso cref="http://www.elisanet.fi/6581/PSX/doc/psx.pdf"/>
     /// <remarks>upgraded TIM class, because that first one is a trash</remarks>
-    public class TIM2 : Texture_Base
+    public class TIM2 : ITextureBase
     {
         #region Fields
 
@@ -88,42 +89,42 @@ namespace OpenVIII
         /// <summary>
         /// Gets Bits per pixel
         /// </summary>
-        public override byte GetBytesPerPixel => (byte)BPP;
+        public byte GetBytesPerPixel => (byte)BPP;
 
         /// <summary>
         /// Number of clut color palettes
         /// </summary>
-        public override int GetClutCount => Texture.NumOfCluts;
+        public byte GetClutCount => checked((byte)Texture.NumOfCluts);
 
         /// <summary>
         /// Gets size of clut data as in TIM file
         /// </summary>
-        public override int GetClutSize => Texture.ClutDataSize;
+        public byte GetClutSize => checked((byte)Texture.ClutDataSize);
 
         /// <summary>
         /// Gets number of colors per palette
         /// </summary>
-        public override int GetColorsCountPerPalette => Texture.NumOfColors;
+        public byte GetColorsCountPerPalette => checked((byte)Texture.NumOfColors);
 
         /// <summary>
         /// Height
         /// </summary>
-        public override int GetHeight => Texture.Height;
+        public int GetHeight => Texture.Height;
 
         /// <summary>
         /// Gets origin texture coordinate X for VRAM buffer
         /// </summary>
-        public override int GetOrigX => Texture.ImageOrgX;
+        public int GetOrigX => Texture.ImageOrgX;
 
         /// <summary>
         /// Gets origin texture coordinate Y for VRAM buffer
         /// </summary>
-        public override int GetOrigY => Texture.ImageOrgY;
+        public int GetOrigY => Texture.ImageOrgY;
 
         /// <summary>
         /// Width
         /// </summary>
-        public override int GetWidth => Texture.Width;
+        public int GetWidth => Texture.Width;
 
         public bool IgnoreAlpha { get; set; }
 
@@ -135,24 +136,20 @@ namespace OpenVIII
 
         public bool Assert(bool a)
         {
-            if (!a)
+            if (a) return false;
+            NotTIM = true;
+            if (ThrowExec)
             {
-                NotTIM = true;
-                if (ThrowExec)
-                {
-                    throw new InvalidDataException("Invalid TIM File");
-                }
-                //else
-                //    Debug.Assert(a);
+                throw new InvalidDataException("Invalid TIM File");
             }
-            return !a;
+            return true;
         }
 
-        public override void ForceSetClutColors(ushort newNumOfColors) => Texture.NumOfColors = newNumOfColors;
+        public void ForceSetClutColors(byte newNumOfColors) => Texture.NumOfColors = newNumOfColors;
 
-        public override void ForceSetClutCount(ushort newClut) => Texture.NumOfCluts = newClut;
+        public void ForceSetClutCount(byte newClut) => Texture.NumOfCluts = newClut;
 
-        public override Color[] GetClutColors(ushort clut)
+        public Color[] GetClutColors(byte clut)
         {
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
             {
@@ -160,12 +157,17 @@ namespace OpenVIII
             }
         }
 
+        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Gets Color[] palette from TIM image data
         /// </summary>
         /// <param name="clut">clut index</param>
         /// <returns></returns>
-        public Color[] GetPalette(ushort clut = 0)
+        public Color[] GetPalette(byte clut = 0)
         {
             Color[] colors;
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
@@ -181,7 +183,7 @@ namespace OpenVIII
         /// If true skip size check useful for files with more than just Tim
         /// </param>
         /// <returns>Texture2D</returns>
-        public override Texture2D GetTexture(ushort clut)
+        public Texture2D GetTexture(byte clut)
         {
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
             {
@@ -189,7 +191,7 @@ namespace OpenVIII
             }
         }
 
-        public override Texture2D GetTexture()
+        public Texture2D GetTexture()
         {
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
             {
@@ -197,7 +199,7 @@ namespace OpenVIII
             }
         }
 
-        public override Texture2D GetTexture(Color[] colors)
+        public Texture2D GetTexture(Color[] colors)
         {
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
             {
@@ -231,13 +233,13 @@ namespace OpenVIII
             ReadParameters(br);
         }
 
-        public override void Load(byte[] buffer, uint offset = 0) => _Init(buffer, offset);
+        public void Load(byte[] buffer, uint offset = 0) => _Init(buffer, offset);
 
         /// <summary>
         /// Writes the Tim file to the hard drive.
         /// </summary>
         /// <param name="path">Path where you want file to be saved.</param>
-        public override void Save(string path)
+        public void Save(string path)
         {
             using (var bw = new BinaryWriter(File.Create(path)))
             {
@@ -247,7 +249,7 @@ namespace OpenVIII
             }
         }
 
-        public override void SaveCLUT(string path)
+        public void SaveClut(string path)
         {
             if (!CLP) return;
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
@@ -263,7 +265,7 @@ namespace OpenVIII
         }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public override void SavePNG(string path, short clut = -1)
+        public void SavePNG(string path, short clut = -1)
         {
             if (Buffer == null || Memory.Graphics == null) return;
             if (clut == -1)
@@ -350,7 +352,7 @@ namespace OpenVIII
             else if (BPP == 16) //copied from overture
             {
                 for (var i = 0; i < buffer.Length && br.BaseStream.Position + 2 < br.BaseStream.Length; i++)
-                    buffer[i] = ABGR1555toRGBA32bit(br.ReadUInt16(), IgnoreAlpha);
+                    buffer[i] = new ColorABGR1555(br.ReadUInt16(), IgnoreAlpha);
             }
             else if (BPP == 24) //could be wrong. // assuming it is BGR
             {
@@ -389,7 +391,7 @@ namespace OpenVIII
                 var colorPixels = new Color[Texture.NumOfColors];
                 br.BaseStream.Seek(TIMOffset + 20 + (Texture.NumOfColors * 2 * clut), SeekOrigin.Begin);
                 for (var i = 0; i < Texture.NumOfColors; i++)
-                    colorPixels[i] = ABGR1555toRGBA32bit(br.ReadUInt16(), IgnoreAlpha);
+                    colorPixels[i] = new ColorABGR1555(br.ReadUInt16(), IgnoreAlpha);
                 return colorPixels;
             }
             else throw new Exception($"TIM that has {BPP} bpp mode and has no clut data!");

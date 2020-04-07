@@ -362,12 +362,14 @@
     <Compile Include="Field\WalkMesh\WalkMesh.cs" />
     <Compile Include="FPSCounter.cs" />
     <Compile Include="Image\Bppflag.cs" />
-    <Compile Include="Image\Cluts.cs" />
+    <Compile Include="Image\Cluts1555ABGR.cs" />
+    <Compile Include="Image\ClutsRGBA.cs" />
     <Compile Include="Image\ColorABGR1555.cs" />
+    <Compile Include="Image\ICluts.cs" />
     <Compile Include="Image\TDW.cs" />
     <Compile Include="Image\Texture2DWrapper.cs" />
     <Compile Include="Image\TextureBuffer.cs" />
-    <Compile Include="Image\Texture_Base.cs" />
+    <Compile Include="Image\ITextureBase.cs" />
     <Compile Include="Image\TIMOverture.cs" />
     <Compile Include="ImGuiRenderer.cs" />
     <Compile Include="Input\Buttons.cs" />

@@ -407,7 +407,7 @@ namespace OpenVIII.Battle
             var fullPath = Path.Combine(path,
                 $"{Path.GetFileNameWithoutExtension(Memory.Encounters.Filename)}_Clut.png");
             if (!File.Exists(fullPath))
-                textureInterface.SaveCLUT(fullPath);
+                textureInterface.SaveClut(fullPath);
 
             Textures.ForEach(x => x.Value.Save(path, false));
 

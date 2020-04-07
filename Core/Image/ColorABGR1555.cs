@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace OpenVIII
 {
@@ -6,7 +8,7 @@ namespace OpenVIII
     /// Read 16 bit color.
     /// </summary>
     /// <see cref="https://docs.microsoft.com/en-us/windows/win32/directshow/working-with-16-bit-rgb"/>
-    public readonly struct ColorABGR1555
+    public readonly struct ColorABGR1555 : IEquatable<Color>, IEquatable<ColorABGR1555>
     {
         #region Fields
 
@@ -39,8 +41,15 @@ namespace OpenVIII
 
         #region Constructors
 
-        public ColorABGR1555(ushort value) => Value = value;
+        public ColorABGR1555(ushort value, bool ignoreAlpha = false)
+        {
+            Value = value;
+            if (!ignoreAlpha) return;
+            Value = value==0
+                ? STPMask
+                : (ushort)(value & NotSTPMask);
 
+        }
         public ColorABGR1555(byte r, byte g, byte b, byte a)
         {
             //could be wrong
@@ -75,5 +84,15 @@ namespace OpenVIII
         public static implicit operator ushort(ColorABGR1555 v) => v.Value;
 
         #endregion Methods
+
+        public bool Equals(Color other)
+        {
+            return other.A == A && other.B == B && other.G == G && other.R == R;
+        }
+
+        public bool Equals(ColorABGR1555 other)
+        {
+            return other.Value == Value;
+        }
     }
 }

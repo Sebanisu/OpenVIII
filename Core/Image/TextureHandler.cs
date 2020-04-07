@@ -21,7 +21,7 @@ namespace OpenVIII
         private static readonly ConcurrentDictionary<string, Texture2D> PngCache = new ConcurrentDictionary<string, Texture2D>();
         private static readonly ConcurrentDictionary<string, TextureHandler> TextureHandlerCache = new ConcurrentDictionary<string, TextureHandler>();
 
-        private Texture_Base _classic;
+        private ITextureBase _classic;
 
         private bool _disposedValue;
 
@@ -39,7 +39,7 @@ namespace OpenVIII
         /// <summary>
         /// Original sub 256x265 texture, required for fallback when issues happen.
         /// </summary>
-        public Texture_Base Classic { get => _classic; private set { _classic = value; if (value != null) ClassicSize = new Vector2(value.GetWidth, value.GetHeight); } }
+        public ITextureBase Classic { get => _classic; private set { _classic = value; if (value != null) ClassicSize = new Vector2(value.GetWidth, value.GetHeight); } }
 
         public int ClassicHeight => (int)(ClassicSize == Vector2.Zero ? Size.Y : ClassicSize.Y);
 
@@ -64,7 +64,7 @@ namespace OpenVIII
         public bool Modded { get; private set; }
 
         public string ModdedFilename { get; private set; }
-        public ushort Palette { get; protected set; }
+        public byte Palette { get; protected set; }
 
         /// <summary>
         /// Scale vector from big to original
@@ -109,9 +109,9 @@ namespace OpenVIII
 
         public static TextureHandler Create(string filename, uint cols, uint rows) => Create(filename, null, cols, rows);
 
-        public static TextureHandler Create(string filename, Texture_Base classic, ushort palette = 0, Color[] colors = null) => Create(filename, classic, 1, 1, palette: palette, colors: colors);
+        public static TextureHandler Create(string filename, ITextureBase classic, byte palette = 0, Color[] colors = null) => Create(filename, classic, 1, 1, palette: palette, colors: colors);
 
-        public static TextureHandler Create(string filename, Texture_Base classic, uint cols, uint rows, ushort palette = 0, Color[] colors = null)
+        public static TextureHandler Create(string filename, ITextureBase classic, uint cols, uint rows, byte palette = 0, Color[] colors = null)
         {
             var (pngPath, _) = FindPng(filename, palette);
             if (!string.IsNullOrWhiteSpace(pngPath) && TextureHandlerCache.TryGetValue(pngPath, out var ret)) return ret;
@@ -133,7 +133,7 @@ namespace OpenVIII
             return ret;
         }
 
-        public static TextureHandler CreateFromPng(string filename, int classicWidth, int classicHeight, ushort palette, bool enforceSquare, bool forceReload = false)
+        public static TextureHandler CreateFromPng(string filename, int classicWidth, int classicHeight, byte palette, bool enforceSquare, bool forceReload = false)
         {
             var (s, _) = FindPng(filename, palette);
             if (string.IsNullOrWhiteSpace(s)) return null;
@@ -233,7 +233,7 @@ namespace OpenVIII
             return @new / old;
         }
 
-        public static Vector2 GetScale(Texture_Base old, Texture2D @new) => new Vector2((float)@new.Width / old.GetWidth, (float)@new.Height / old.GetHeight);
+        public static Vector2 GetScale(ITextureBase old, Texture2D @new) => new Vector2((float)@new.Width / old.GetWidth, (float)@new.Height / old.GetHeight);
 
         public static Vector2 GetScale(Point oldSize, Point newSize) => GetScale(oldSize.ToVector2(), newSize.ToVector2());
 
@@ -304,9 +304,9 @@ namespace OpenVIII
 
         public static Vector2 ToVector2(Texture2D t) => t != null ? new Vector2(t.Width, t.Height) : Vector2.Zero;
 
-        public static Texture2D UseBest(Texture_Base old, Texture2D @new, ushort palette = 0, Color[] colors = null) => UseBest(old, @new, out var _, palette, colors);
+        public static Texture2D UseBest(ITextureBase old, Texture2D @new, byte palette = 0, Color[] colors = null) => UseBest(old, @new, out var _, palette, colors);
 
-        public static Texture2D UseBest(Texture_Base old, Texture2D @new, out Vector2 scale, ushort palette = 0, Color[] colors = null)
+        public static Texture2D UseBest(ITextureBase old, Texture2D @new, out Vector2 scale, byte palette = 0, Color[] colors = null)
         {
             if (@new == null && old != null)
             {
@@ -476,7 +476,7 @@ namespace OpenVIII
             if (Memory.Graphics?.GraphicsDevice == null) return;
             var size = Vector2.Zero;
             var oldSize = Vector2.Zero;
-            Texture_Base tex = null;
+            ITextureBase tex = null;
             var aw = ArchiveWorker.Load(Memory.Archives.A_MENU); // TODO remove this should be done outside of texture handler.
             var listOfFiles = aw.GetListOfFiles(); // TODO remove this.
             uint c2 = 0;
@@ -496,7 +496,8 @@ namespace OpenVIII
 
                     if (!string.IsNullOrWhiteSpace(path))
                     {
-                        tex = Texture_Base.Open(aw.GetBinaryFile(path));
+                        // TODO remove this opening of texture inside here.
+                        tex = null;//ITextureBase.Open(aw.GetBinaryFile(path));
                         if (Classic == null && c2 < Cols) oldSize.X += tex?.GetWidth ?? ClassicWidth;
                         pngTex = LoadPNG(path, Palette, _enforceSquare);
                     }

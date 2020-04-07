@@ -49,7 +49,7 @@ namespace OpenVIII.Fields
         /// <summary>
         /// Palettes/Color Lookup Tables
         /// </summary>
-        private Cluts _cluts;
+        private ClutsRGBA _clutsRgba;
 
         public float Degrees;
         private bool _disposedValue;
@@ -94,14 +94,7 @@ namespace OpenVIII.Fields
 
         public bool HasSpriteBatchTexturesLoaded => GetTexturesReadyToDrawClassicSpriteBatch()?.Count > 0;
         public int Height { get => _outputDims.Height; private set => _outputDims.Height = value; }
-        /*
-                public bool Is4Bit => GetTiles?.Any(x => x.Is4Bit) ?? false;
 
-                public bool IsAddBlendMode => GetTiles?.Any(x => x.BlendMode == BlendMode.add) ?? false;
-                public bool IsHalfBlendMode => GetTiles?.Any(x => x.BlendMode == BlendMode.halfadd) ?? false;
-                public bool IsQuarterBlendMode => GetTiles?.Any(x => x.BlendMode == BlendMode.quarteradd) ?? false;
-                public bool IsSubtractBlendMode => GetTiles?.Any(x => x.BlendMode == BlendMode.subtract) ?? false;
-                */
         public Vector3 MouseLocation { get; set; }
         public TimeSpan TotalTime { get; set; }
         public int Width { get => _outputDims.Width; private set => _outputDims.Width = value; }
@@ -704,7 +697,7 @@ namespace OpenVIII.Fields
                     }
 
                     var buffer = new TextureBuffer(textureTypeWidth, height, false);
-                    foreach (var clut in _cluts)
+                    foreach (var clut in _clutsRgba)
                     {
                         ms.Seek(startPixel, SeekOrigin.Begin);
                         var i = 0;
@@ -729,7 +722,7 @@ namespace OpenVIII.Fields
                             else if (bit == 16)
                             {
                                 //i += 1;
-                                input = Texture_Base.ABGR1555toRGBA32bit(br.ReadUInt16());
+                                input = new ColorABGR1555(br.ReadUInt16());
                             }
                             else if (bit == 8)
                             {
@@ -817,11 +810,11 @@ namespace OpenVIII.Fields
         {
             var offset = /*Memory.FieldHolder.FieldID == 76 ? 0 :*/ _textureType?.BytesSkippedPalettes ?? 0;
             var cluts = GetTiles != null
-                ? new Cluts(
+                ? new ClutsRGBA(
                     GetTiles.Select(x => x.PaletteID).Distinct().ToDictionary(x => x, x => new Color[ColorsPerPalette]),
                     false)
                 :
-                new Cluts(
+                new ClutsRGBA(
                     Enumerable.Range(0, 16).Select(x => (byte) x)
                         .ToDictionary(x => x, x => new Color[ColorsPerPalette]), false);
             using (var br = new BinaryReader(new MemoryStream(mim)))
@@ -830,9 +823,9 @@ namespace OpenVIII.Fields
                     var palettePointer = offset + clut.Key * BytesPerPalette;
                     br.BaseStream.Seek(palettePointer, SeekOrigin.Begin);
                     for (var i = 0; i < ColorsPerPalette; i++)
-                        clut.Value[i] = Texture_Base.ABGR1555toRGBA32bit(br.ReadUInt16());
+                        clut.Value[i] = new ColorABGR1555(br.ReadUInt16());
                 }
-            _cluts = cluts;
+            _clutsRgba = cluts;
             SaveCluts();
         }
 
@@ -1010,7 +1003,7 @@ namespace OpenVIII.Fields
                         var color16Bit = BitConverter.ToUInt16(mim, 2 * colorKey + palettePointer);
                         if (color16Bit == 0) // 0 is Color.TransparentBlack So we skip it.
                             continue;
-                        var color = Texture_Base.ABGR1555toRGBA32bit(color16Bit);
+                        Color color = new ColorABGR1555(color16Bit);
 
                         var pos = realDestinationPixel + x + y * Width;
                         var bufferedColor = textureBuffer[pos];
@@ -1099,7 +1092,7 @@ namespace OpenVIII.Fields
                     var fieldName = Module.GetFieldName();
                     _textureIDs = textureIDs.ToDictionary(x => x.Key,
                         x => TextureHandler.Create($"{fieldName}_{x.Key}", new Texture2DWrapper(x.Value),
-                            ushort.MaxValue));
+                            byte.MaxValue));
 
                     if (overlap.Any(x => x.Value.Count > 1))
                     {
@@ -1149,7 +1142,7 @@ namespace OpenVIII.Fields
                                 orderby y, x
                                 select new Point(x, y))
                             {
-                                (var trueX, var trueY) = (tile.loc.X+p.X, tile.loc.Y + p.Y);
+                                var (trueX, trueY) = (tile.loc.X+p.X, tile.loc.Y + p.Y);
                                 var offsetX = is16Bit
                                     ? trueX * 2
                                     : trueX / (is4Bit ? 2 : 1);
@@ -1167,22 +1160,22 @@ namespace OpenVIII.Fields
                                 Color input = default;
                                 if (is8Bit)
                                 {
-                                    input = _cluts[paletteID][br.ReadByte()];
+                                    input = _clutsRgba[paletteID][br.ReadByte()];
                                 }
                                 else if (is16Bit)
                                 {
-                                    input = Texture_Base.ABGR1555toRGBA32bit(br.ReadUInt16());
+                                    input = new ColorABGR1555(br.ReadUInt16());
                                 }
                                 else if (is4Bit)
                                 {
                                     if (p.X % 2 == 0)
                                     {
                                         colorKey = br.ReadByte();
-                                        input = _cluts[paletteID][colorKey & 0xf];
+                                        input = _clutsRgba[paletteID][colorKey & 0xf];
                                     }
                                     else
                                     {
-                                        input = _cluts[paletteID][(colorKey & 0xf0) >> 4];
+                                        input = _clutsRgba[paletteID][(colorKey & 0xf0) >> 4];
                                     }
                                 }
 
@@ -1229,12 +1222,10 @@ namespace OpenVIII.Fields
 
         private void SaveCluts()
         {
-            if (Memory.EnableDumpingData || Module.Toggles.HasFlag(Toggles.DumpingData))
-            {
-                var path = Path.Combine(Module.GetFolder(),
-                    $"{Module.GetFieldName()}_Clut.png");
-                _cluts.Save(path);
-            }
+            if (!Memory.EnableDumpingData && !Module.Toggles.HasFlag(Toggles.DumpingData)) return;
+            var path = Path.Combine(Module.GetFolder(),
+                $"{Module.GetFieldName()}_Clut.png");
+            _clutsRgba.Save(path);
         }
 
         private static void SaveSwizzled(IReadOnlyDictionary<byte, Texture2D> textureIDs, string suf = "")

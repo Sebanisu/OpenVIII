@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace OpenVIII
 {
-    public class TextureBuffer : Texture_Base, ICloneable, ICollection, IStructuralComparable, IStructuralEquatable
+    public class TextureBuffer : ITextureBase, ICloneable, ICollection, IStructuralComparable, IStructuralEquatable
     {
 
         #region Fields
@@ -32,14 +32,14 @@ namespace OpenVIII
         public bool Alert { get; set; }
         public Color[] Colors { get; }
         public int Count => ((ICollection)Colors).Count;
-        public override byte GetBytesPerPixel => 4;
-        public override int GetClutCount => 0;
-        public override int GetClutSize => 0;
-        public override int GetColorsCountPerPalette => 0;
-        public override int GetHeight => Height;
-        public override int GetOrigX => 0;
-        public override int GetOrigY => 0;
-        public override int GetWidth => Width;
+        public byte GetBytesPerPixel => 4;
+        public byte GetClutCount => 0;
+        public byte GetClutSize => 0;
+        public byte GetColorsCountPerPalette => 0;
+        public  int GetHeight => Height;
+        public int GetOrigX => 0;
+        public  int GetOrigY => 0;
+        public  int GetWidth => Width;
         public int Height { get; }
         public bool IsSynchronized => Colors.IsSynchronized;
         public int Length => Colors?.Length ?? 0;
@@ -117,13 +117,10 @@ namespace OpenVIII
 
         public static explicit operator Texture2D(TextureBuffer @in)
         {
-            if (Memory.Graphics?.GraphicsDevice != null && @in.Width > 0 && @in.Height > 0)
-            {
-                var tex = new Texture2D(Memory.Graphics.GraphicsDevice, @in.Width, @in.Height);
-                @in.SetData(tex);
-                return tex;
-            }
-            return null;
+            if (Memory.Graphics?.GraphicsDevice == null || @in.Width <= 0 || @in.Height <= 0) return null;
+            var tex = new Texture2D(Memory.Graphics.GraphicsDevice, @in.Width, @in.Height);
+            @in.SetData(tex);
+            return tex;
         }
 
         public static explicit operator Texture2DWrapper(TextureBuffer @in) => new Texture2DWrapper(@in.GetTexture());
@@ -154,15 +151,19 @@ namespace OpenVIII
 
         public bool Equals(object other, IEqualityComparer comparer) => ((IStructuralEquatable)Colors).Equals(other, comparer);
 
-        public override void ForceSetClutColors(ushort newNumOfColors)
+        public void ForceSetClutColors(byte newNumOfColors)
         {
         }
 
-        public override void ForceSetClutCount(ushort newClut)
+        public void ForceSetClutCount(byte newClut)
         {
         }
 
-        public override Color[] GetClutColors(ushort clut) => null;
+        public Color[] GetClutColors(byte clut) => null;
+        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1)
+        {
+            throw new NotImplementedException();
+        }
 
         public void GetData(Texture2D tex) => tex.GetData(Colors);
 
@@ -170,23 +171,28 @@ namespace OpenVIII
 
         public int GetHashCode(IEqualityComparer comparer) => ((IStructuralEquatable)Colors).GetHashCode(comparer);
 
-        public override Texture2D GetTexture() => (Texture2D)this;
+        public Texture2D GetTexture() => (Texture2D)this;
 
-        public override Texture2D GetTexture(Color[] colors) => (Texture2D)this;
+        public Texture2D GetTexture(Color[] colors) => (Texture2D)this;
 
-        public override Texture2D GetTexture(ushort clut) => (Texture2D)this;
+        public Texture2D GetTexture(byte clut) => (Texture2D)this;
 
-        public override void Load(byte[] buffer, uint offset = 0) => throw new NotImplementedException();
+        public void Load(byte[] buffer, uint offset = 0) => throw new NotImplementedException();
 
-        public override void Save(string path)
+        public void Save(string path)
         {
             using (var tex = GetTexture())
             using (var fs = File.Create(path))
                 tex.SaveAsPng(fs, tex.Width, tex.Height);
         }
 
-        public override void SaveCLUT(string path)
+        public void SaveClut(string path)
         {
+        }
+
+        public void SavePNG(string path, short clut = -1)
+        {
+            throw new NotImplementedException();
         }
 
         public void SetData(Texture2D tex) => tex.SetData(Colors);

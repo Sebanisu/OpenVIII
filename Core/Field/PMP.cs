@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using System.Linq;
@@ -9,15 +10,12 @@ namespace OpenVIII.Fields
     /// Particle Texture
     /// </summary>
     /// <see cref="http://wiki.ffrtt.ru/index.php?title=FF8/FileFormat_PMP"/>
-    public sealed class PMP : Texture_Base
+    public sealed class PMP : ITextureBase
     {
         #region Fields
 
         private byte[] _buffer;
-        private Cluts _clut;
-        private int _height;
-
-        private int _width;
+        private Cluts1555ABGR _clut;
 
         #endregion Fields
 
@@ -29,21 +27,21 @@ namespace OpenVIII.Fields
 
         #region Properties
 
-        public override byte GetBytesPerPixel => 4;
+        public byte GetBytesPerPixel => 4;
 
-        public override int GetClutCount => 16;
+        public byte GetClutCount => 16;
 
-        public override int GetClutSize => 16;
+        public byte GetClutSize => 16;
 
-        public override int GetColorsCountPerPalette => 16;
+        public byte GetColorsCountPerPalette => 16;
 
-        public override int GetHeight => _height;
+        public int GetHeight { get; private set; }
 
-        public override int GetOrigX => 0;
+        public int GetOrigX => 0;
 
-        public override int GetOrigY => 0;
+        public int GetOrigY => 0;
 
-        public override int GetWidth => _width;
+        public int GetWidth { get; private set; }
 
         public byte[] Unknown { get; set; }
 
@@ -51,18 +49,23 @@ namespace OpenVIII.Fields
 
         #region Methods
 
-        public override void ForceSetClutColors(ushort newNumOfColors) => throw new System.NotImplementedException();
+        public void ForceSetClutColors(byte newNumOfColors) => throw new System.NotImplementedException();
 
-        public override void ForceSetClutCount(ushort newClut) => throw new System.NotImplementedException();
+        public void ForceSetClutCount(byte newClut) => throw new System.NotImplementedException();
 
-        public override Color[] GetClutColors(ushort clut) => this._clut[(byte)clut];
-
-        public override Texture2D GetTexture() => GetTexture(0);
-
-        public override Texture2D GetTexture(Color[] colors)
+        public Color[] GetClutColors(byte clut) => _clut[clut].Select(x => (Color)x).ToArray();
+ 
+        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1)
         {
-            var tex = new Texture2D(Memory.Graphics.GraphicsDevice, _width, _height);
-            var textureBuffer = new TextureBuffer(_width, _height, false);
+            throw new System.NotImplementedException();
+        }
+
+        public Texture2D GetTexture() => GetTexture(0);
+
+        public Texture2D GetTexture(Color[] colors)
+        {
+            var tex = new Texture2D(Memory.Graphics.GraphicsDevice, GetWidth, GetHeight);
+            var textureBuffer = new TextureBuffer(GetWidth, GetHeight, false);
             var i = 0;
             foreach (var b in _buffer)
                 textureBuffer[i++] = colors[b];
@@ -70,12 +73,11 @@ namespace OpenVIII.Fields
             return tex;
         }
 
-        public override Texture2D GetTexture(ushort clut) => GetTexture(GetClutColors(clut));
-
-        public override void Load(byte[] buffer, uint offset = 0)
+        public Texture2D GetTexture(byte clut) => GetTexture(GetClutColors(clut));
+        public void Load(byte[] buffer, uint offset = 0)
         {
             if (buffer.Length - offset <= 4) return;
-            _clut = new Cluts();
+            _clut = new Cluts1555ABGR();
             MemoryStream ms;
             using (var br = new BinaryReader(ms = new MemoryStream(buffer)))
             {
@@ -83,21 +85,36 @@ namespace OpenVIII.Fields
                 Unknown = br.ReadBytes(4);
                 foreach (var i in Enumerable.Range(0, 16))
                 {
-                    var colors = Enumerable.Range(0, 16).Select(_ => ABGR1555toRGBA32bit(br.ReadUInt16()))
+                    var colors = Enumerable.Range(0, 16).Select(_ => new ColorABGR1555(br.ReadUInt16()))
                         .ToArray();
                     _clut.Add((byte)i, colors);
                 }
 
                 var size = ms.Length - ms.Position;
-                _height = checked((int)(size / 128));
-                _width = checked((int)(size / _height));
+                GetHeight = checked((int)(size / 128));
+                GetWidth = checked((int)(size / GetHeight));
                 _buffer = br.ReadBytes(checked((int)size));
             }
         }
 
-        public override void Save(string path) => throw new System.NotImplementedException();
+        public void Save(string path) => throw new System.NotImplementedException();
 
-        public override void SaveCLUT(string path) => _clut.Save(path);
+        public void SaveClut(string path) => _clut.Save(path);
+        public void SavePNG(string path, short clut = -1)
+        {
+            foreach (var texOut in _clut.Select(i => new {i.Key, Value = GetClutColors(i.Key)})
+                .Select(x => new {x.Key, Value = GetTexture(x.Value)}))
+            {
+                using (texOut.Value)
+                {
+                    var loPath = $"{path}_{texOut.Key}.png";
+                    using (var fs = new FileStream(loPath,FileMode.Create,FileAccess.Write,FileShare.ReadWrite))
+                    {
+                        texOut.Value.SaveAsPng(fs,texOut.Value.Width,texOut.Value.Height);
+                    }
+                }
+            }
+        }
 
         #endregion Methods
     }

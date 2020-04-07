@@ -85,7 +85,7 @@ namespace OpenVIII
             var bufferTDW = aw.GetBinaryFile("sysfnt.tdw");
             var tim = new TDW(bufferTDW);
             charWidths = tim.CharWidths;
-            menuFont = tim.GetTexture((ushort)ColorID.White);
+            menuFont = tim.GetTexture((byte)ColorID.White);
             
         }
 

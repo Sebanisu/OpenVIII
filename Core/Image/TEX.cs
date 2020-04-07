@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
@@ -14,7 +15,7 @@ namespace OpenVIII
     /// </remarks>
     /// <see cref="https://github.com/MaKiPL/FF8-Rinoa-s-Toolset/blob/master/SerahToolkit_SharpGL/FF8_Core/TEX.cs"/>
     /// <seealso cref="https://github.com/myst6re/vincent-tim/blob/master/TexFile.cpp"/>
-    public sealed class TEX : Texture_Base
+    public sealed class TEX : ITextureBase
     {
         #region Fields
 
@@ -45,14 +46,14 @@ namespace OpenVIII
         #region Properties
 
         public bool CLP => _texture.PaletteFlag != 0;
-        public override byte GetBytesPerPixel => _texture.BytesPerPixel;
-        public override int GetClutCount => _texture.NumOfCluts;
-        public override int GetClutSize => (int)_texture.PaletteSize;
-        public override int GetColorsCountPerPalette => _texture.NumOfColors;
-        public override int GetHeight => _texture.Height;
-        public override int GetOrigX => 0;
-        public override int GetOrigY => 0;
-        public override int GetWidth => _texture.Width;
+        public byte GetBytesPerPixel => _texture.BytesPerPixel;
+        public byte GetClutCount => _texture.NumOfCluts;
+        public byte GetClutSize => checked((byte)_texture.PaletteSize);
+        public byte GetColorsCountPerPalette => checked((byte)_texture.NumOfColors);
+        public int GetHeight => _texture.Height;
+        public int GetOrigX => 0;
+        public int GetOrigY => 0;
+        public int GetWidth => _texture.Width;
 
         /// <summary>
         /// size of header section
@@ -73,11 +74,11 @@ namespace OpenVIII
 
         #region Methods
 
-        public override void ForceSetClutColors(ushort newNumOfColors) => _texture.NumOfColors = newNumOfColors;
+        public void ForceSetClutColors(byte newNumOfColors) => _texture.NumOfColors = newNumOfColors;
 
-        public override void ForceSetClutCount(ushort newClut) => _texture.NumOfCluts = (byte)newClut;
+        public void ForceSetClutCount(byte newClut) => _texture.NumOfCluts = newClut;
 
-        public override Color[] GetClutColors(ushort clut)
+        public Color[] GetClutColors(byte clut)
         {
             if (!CLP || _texture.NumOfCluts == 0)
                 return null;
@@ -97,6 +98,8 @@ namespace OpenVIII
             return colors;
         }
 
+        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1) => throw new NotImplementedException();
+
         /// <summary>
         /// Get Texture2D converted to 32bit color
         /// </summary>
@@ -108,7 +111,7 @@ namespace OpenVIII
         /// more lax and allow any size array and only throw errors if the color key is greater than
         /// size of array. Or we could treat any of those bad matches as transparent.
         /// </remarks>
-        public override Texture2D GetTexture(Color[] colors)
+        public Texture2D GetTexture(Color[] colors)
         {
             if (Memory.Graphics.GraphicsDevice == null) return null;
             if (_texture.PaletteFlag != 0)
@@ -148,7 +151,7 @@ namespace OpenVIII
                     var convertBuffer = new TextureBuffer(_texture.Width, _texture.Height);
                     for (var i = 0; ms.Position + 2 < ms.Length; i++)
                     {
-                        convertBuffer[i] = ABGR1555toRGBA32bit(br.ReadUInt16());
+                        convertBuffer[i] = new ColorABGR1555(br.ReadUInt16());
                     }
 
                     return convertBuffer.GetTexture();
@@ -178,12 +181,14 @@ namespace OpenVIII
             }
         }
 
-        public override Texture2D GetTexture(ushort clut) => GetTexture(GetClutColors(clut));
+        public Texture2D GetTexture(byte clut) => GetTexture(GetClutColors(clut));
 
-        public override void Load(byte[] buffer, uint offset = 0)
+        public Texture2D GetTexture() => GetTexture(0);
+
+        public void Load(byte[] buffer, uint offset = 0)
         {
             _texture = new Texture();
-            this._buffer = buffer;
+            _buffer = buffer;
             ReadParameters();
         }
 
@@ -191,7 +196,7 @@ namespace OpenVIII
         /// Writes the Tim file to the hard drive.
         /// </summary>
         /// <param name="path">Path where you want file to be saved.</param>
-        public override void Save(string path)
+        public void Save(string path)
         {
             using (var bw = new BinaryWriter(File.Create(path)))
             {
@@ -199,11 +204,11 @@ namespace OpenVIII
             }
         }
 
-        public override void SaveCLUT(string path)
+        public void SaveClut(string path)
         {
             using (var clut = new Texture2D(Memory.Graphics.GraphicsDevice, _texture.NumOfColors, _texture.NumOfCluts))
             {
-                for (ushort i = 0; i < _texture.NumOfCluts; i++)
+                for (byte i = 0; i < _texture.NumOfCluts; i++)
                 {
                     clut.SetData(0, new Rectangle(0, i, _texture.NumOfColors, 1), GetClutColors(i), 0, _texture.NumOfColors);
                 }
@@ -211,6 +216,8 @@ namespace OpenVIII
                     clut.SaveAsPng(fs, _texture.NumOfColors, _texture.NumOfCluts);
             }
         }
+
+        public void SavePNG(string path, short clut = -1) => throw new NotImplementedException();
 
         /// <summary>
         /// Read header data from TEX file.

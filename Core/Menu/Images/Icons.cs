@@ -234,7 +234,7 @@ namespace OpenVIII
                 var tex = new T();
                 tex.Load(buffer);
 
-                void add(ushort cult, Color[] colors = null)
+                void add(byte cult, Color[] colors = null)
                 {
                     void oneImage() => Textures.Add(TextureHandler.Create(texProps.Filename, tex, 1, 1, cult, colors));
                     if (ForceOriginal == false && texProps.Big != null && texProps.Big.Count > 0)
@@ -254,10 +254,10 @@ namespace OpenVIII
                     else oneImage();
                 }
                 if (texProps.Colors == null || texProps.Colors.Length == 0)
-                    for (ushort cult = 0; cult < tex.GetClutCount; cult++)
+                    for (byte cult = 0; cult < tex.GetClutCount; cult++)
                         add(cult);
                 else
-                    add((ushort)Textures.Count, texProps.Big?[0]?.Colors ?? texProps.Colors); // Unsure if the big check here is worth doing... or if it'll cause issues.
+                    add((byte)Textures.Count, texProps.Big?[0]?.Colors ?? texProps.Colors); // Unsure if the big check here is worth doing... or if it'll cause issues.
             }
         }
 
