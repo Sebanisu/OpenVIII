@@ -25,7 +25,7 @@ namespace OpenVIII
 
         public byte GetClutCount => 0;
 
-        public byte GetClutSize => 0;
+        public uint GetClutSize => 0;
 
         public byte GetColorsCountPerPalette => 0;
 
@@ -53,15 +53,15 @@ namespace OpenVIII
         {
         }
 
-        public Color[] GetClutColors(byte clut) => null;
-        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1)
+        public IColorData[] GetClutColors(byte clut) => null;
+        public Texture2D GetTexture(Dictionary<int, IColorData> colorOverride, sbyte clut = -1)
         {
             throw new System.NotImplementedException();
         }
 
         public Texture2D GetTexture() => _tex;
 
-        public Texture2D GetTexture(Color[] colors) => _tex;
+        public Texture2D GetTexture(IColorData[] colors) => _tex;
 
         public Texture2D GetTexture(byte clut) => _tex;
 

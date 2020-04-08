@@ -50,7 +50,7 @@ namespace OpenVIII
 
         public int ClassicWidth => (int)(ClassicSize == Vector2.Zero ? Size.X : ClassicSize.X);
 
-        public Color[] Colors { get; private set; }
+        public IColorData[] Colors { get; private set; }
 
         public uint Count { get; protected set; }
 
@@ -109,9 +109,9 @@ namespace OpenVIII
 
         public static TextureHandler Create(string filename, uint cols, uint rows) => Create(filename, null, cols, rows);
 
-        public static TextureHandler Create(string filename, ITextureBase classic, byte palette = 0, Color[] colors = null) => Create(filename, classic, 1, 1, palette: palette, colors: colors);
+        public static TextureHandler Create(string filename, ITextureBase classic, byte palette = 0, IColorData[] colors = null) => Create(filename, classic, 1, 1, palette: palette, colors: colors);
 
-        public static TextureHandler Create(string filename, ITextureBase classic, uint cols, uint rows, byte palette = 0, Color[] colors = null)
+        public static TextureHandler Create(string filename, ITextureBase classic, uint cols, uint rows, byte palette = 0, IColorData[] colors = null)
         {
             var (pngPath, _) = FindPng(filename, palette);
             if (!string.IsNullOrWhiteSpace(pngPath) && TextureHandlerCache.TryGetValue(pngPath, out var ret)) return ret;
@@ -304,9 +304,9 @@ namespace OpenVIII
 
         public static Vector2 ToVector2(Texture2D t) => t != null ? new Vector2(t.Width, t.Height) : Vector2.Zero;
 
-        public static Texture2D UseBest(ITextureBase old, Texture2D @new, byte palette = 0, Color[] colors = null) => UseBest(old, @new, out var _, palette, colors);
+        public static Texture2D UseBest(ITextureBase old, Texture2D @new, byte palette = 0, IColorData[] colors = null) => UseBest(old, @new, out var _, palette, colors);
 
-        public static Texture2D UseBest(ITextureBase old, Texture2D @new, out Vector2 scale, byte palette = 0, Color[] colors = null)
+        public static Texture2D UseBest(ITextureBase old, Texture2D @new, out Vector2 scale, byte palette = 0, IColorData[] colors = null)
         {
             if (@new == null && old != null)
             {

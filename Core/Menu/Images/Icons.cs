@@ -171,14 +171,14 @@ namespace OpenVIII
         protected override void DefaultValues()
         {
             base.DefaultValues();
-            var red = new Color[16];
-            var yellow = new Color[16];
-            red[15] = new Color(255, 30, 30, 255); //red
-            red[14] = new Color(140, 30, 30, 255); //dark red
-            red[13] = new Color(37, 37, 37, 255); //gray
-            yellow[15] = new Color(222, 222, 8, 255); //yellow
-            yellow[14] = new Color(131, 131, 24, 255); //dark yellow
-            yellow[13] = new Color(41, 41, 41, 255); //gray
+            var red = new IColorData[16];
+            var yellow = new IColorData[16];
+            red[15] = new ColorBGRA8888(255, 30, 30, 255); //red
+            red[14] = new ColorBGRA8888(140, 30, 30, 255); //dark red
+            red[13] = new ColorBGRA8888(37, 37, 37, 255); //gray
+            yellow[15] = new ColorBGRA8888(222, 222, 8, 255); //yellow
+            yellow[14] = new ColorBGRA8888(131, 131, 24, 255); //dark yellow
+            yellow[13] = new ColorBGRA8888(41, 41, 41, 255); //gray
 
             //FORCE_ORIGINAL = true;
             Props = new List<TexProps>
@@ -234,7 +234,7 @@ namespace OpenVIII
                 var tex = new T();
                 tex.Load(buffer);
 
-                void add(byte cult, Color[] colors = null)
+                void add(byte cult, IColorData[] colors = null)
                 {
                     void oneImage() => Textures.Add(TextureHandler.Create(texProps.Filename, tex, 1, 1, cult, colors));
                     if (ForceOriginal == false && texProps.Big != null && texProps.Big.Count > 0)

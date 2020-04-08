@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace OpenVIII.Fields
         #region Fields
 
         private byte[] _buffer;
-        private Cluts1555ABGR _clut;
+        private Cluts _clut;
 
         #endregion Fields
 
@@ -31,7 +30,7 @@ namespace OpenVIII.Fields
 
         public byte GetClutCount => 16;
 
-        public byte GetClutSize => 16;
+        public uint GetClutSize => 16;
 
         public byte GetColorsCountPerPalette => 16;
 
@@ -53,16 +52,16 @@ namespace OpenVIII.Fields
 
         public void ForceSetClutCount(byte newClut) => throw new System.NotImplementedException();
 
-        public Color[] GetClutColors(byte clut) => _clut[clut].Select(x => (Color)x).ToArray();
+        public IColorData[] GetClutColors(byte clut) => _clut[clut].Select(x => x).ToArray();
  
-        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1)
+        public Texture2D GetTexture(Dictionary<int, IColorData> colorOverride, sbyte clut = -1)
         {
             throw new System.NotImplementedException();
         }
 
         public Texture2D GetTexture() => GetTexture(0);
 
-        public Texture2D GetTexture(Color[] colors)
+        public Texture2D GetTexture(IColorData[] colors)
         {
             var tex = new Texture2D(Memory.Graphics.GraphicsDevice, GetWidth, GetHeight);
             var textureBuffer = new TextureBuffer(GetWidth, GetHeight, false);
@@ -77,7 +76,7 @@ namespace OpenVIII.Fields
         public void Load(byte[] buffer, uint offset = 0)
         {
             if (buffer.Length - offset <= 4) return;
-            _clut = new Cluts1555ABGR();
+            _clut = new Cluts();
             MemoryStream ms;
             using (var br = new BinaryReader(ms = new MemoryStream(buffer)))
             {
@@ -85,7 +84,7 @@ namespace OpenVIII.Fields
                 Unknown = br.ReadBytes(4);
                 foreach (var i in Enumerable.Range(0, 16))
                 {
-                    var colors = Enumerable.Range(0, 16).Select(_ => new ColorABGR1555(br.ReadUInt16()))
+                    var colors = Enumerable.Range(0, 16).Select(_ => (IColorData)new ColorABGR1555(br.ReadUInt16()))
                         .ToArray();
                     _clut.Add((byte)i, colors);
                 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -13,7 +12,7 @@ namespace OpenVIII
 
         byte GetBytesPerPixel { get; }
         byte GetClutCount { get; }
-        byte GetClutSize { get; }
+        uint GetClutSize { get; }
         byte GetColorsCountPerPalette { get; }
         int GetHeight { get; }
         int GetOrigX { get; }
@@ -28,11 +27,11 @@ namespace OpenVIII
 
         void ForceSetClutCount(byte newClut);
 
-        Color[] GetClutColors(byte clut);
+        IColorData[] GetClutColors(byte clut);
 
-        Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1);
+        Texture2D GetTexture(Dictionary<int, IColorData> colorOverride, sbyte clut = -1);
 
-        Texture2D GetTexture(Color[] colors);
+        Texture2D GetTexture(IColorData[] colors);
 
         Texture2D GetTexture(byte clut);
 

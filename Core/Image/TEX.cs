@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 
 namespace OpenVIII
 {
@@ -48,7 +49,7 @@ namespace OpenVIII
         public bool CLP => _texture.PaletteFlag != 0;
         public byte GetBytesPerPixel => _texture.BytesPerPixel;
         public byte GetClutCount => _texture.NumOfCluts;
-        public byte GetClutSize => checked((byte)_texture.PaletteSize);
+        public uint GetClutSize => _texture.PaletteSize;
         public byte GetColorsCountPerPalette => checked((byte)_texture.NumOfColors);
         public int GetHeight => _texture.Height;
         public int GetOrigX => 0;
@@ -78,27 +79,31 @@ namespace OpenVIII
 
         public void ForceSetClutCount(byte newClut) => _texture.NumOfCluts = newClut;
 
-        public Color[] GetClutColors(byte clut)
+        public unsafe IColorData[] GetClutColors(byte clut)
         {
             if (!CLP || _texture.NumOfCluts == 0)
                 return null;
             if (clut >= _texture.NumOfCluts)
                 throw new Exception($"Desired palette is incorrect use -1 for default or use a smaller number: {clut} > {_texture.NumOfCluts}");
 
-            var colors = new Color[_texture.NumOfColors];
+            
             var k = 0;
-            for (var i = clut * _texture.NumOfColors * 4; i < _texture.PaletteData.Length && k < colors.Length; i += 4)
+            var colors = new IColorData[_texture.NumOfColors];
+            fixed (byte* pd = _texture.PaletteData)
             {
-                colors[k].B = _texture.PaletteData[i];
-                colors[k].G = _texture.PaletteData[i + 1];
-                colors[k].R = _texture.PaletteData[i + 2];
-                colors[k].A = _texture.PaletteData[i + 3];
-                k++;
+                var rpd = (ColorBGRA8888*)pd;
+                for (var i = clut * _texture.NumOfColors;
+                    i < _texture.PaletteData.Length && k < colors.Length;
+                    i++)
+                {
+                    colors[k++] = rpd[i];
+                }
             }
+
             return colors;
         }
 
-        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1) => throw new NotImplementedException();
+        public Texture2D GetTexture(Dictionary<int, IColorData> colorOverride, sbyte clut = -1) => throw new NotImplementedException();
 
         /// <summary>
         /// Get Texture2D converted to 32bit color
@@ -111,7 +116,7 @@ namespace OpenVIII
         /// more lax and allow any size array and only throw errors if the color key is greater than
         /// size of array. Or we could treat any of those bad matches as transparent.
         /// </remarks>
-        public Texture2D GetTexture(Color[] colors)
+        public Texture2D GetTexture(IColorData[] colors)
         {
             if (Memory.Graphics.GraphicsDevice == null) return null;
             if (_texture.PaletteFlag != 0)
@@ -131,6 +136,7 @@ namespace OpenVIII
                 {
                     ms.Seek(TextureLocator, SeekOrigin.Begin);
                     var convertBuffer = new TextureBuffer(_texture.Width, _texture.Height);
+                    
                     for (var i = 0; i < convertBuffer.Length && ms.Position < ms.Length; i++)
                     {
                         var colorKey = br.ReadByte();
@@ -166,13 +172,13 @@ namespace OpenVIII
                 {
                     ms.Seek(TextureLocator, SeekOrigin.Begin);
                     var convertBuffer = new TextureBuffer(_texture.Width, _texture.Height);
-                    var color = new Color { A = 0xFF };
                     for (var i = 0; ms.Position + 3 < ms.Length; i++)
                     {
                         //RGB or BGR so might need to reorder things to RGB
-                        color.B = br.ReadByte();
-                        color.G = br.ReadByte();
-                        color.R = br.ReadByte();
+                        IColorData color = new ColorRGBA8888(b: br.ReadByte(),
+                            g: br.ReadByte(),
+                            r: br.ReadByte(),
+                            a: 0xFF);
                         convertBuffer[i] = color;
                     }
 
@@ -210,7 +216,7 @@ namespace OpenVIII
             {
                 for (byte i = 0; i < _texture.NumOfCluts; i++)
                 {
-                    clut.SetData(0, new Rectangle(0, i, _texture.NumOfColors, 1), GetClutColors(i), 0, _texture.NumOfColors);
+                    clut.SetData(0, new Rectangle(0, i, _texture.NumOfColors, 1), GetClutColors(i).Cast<ColorRGBA8888>().ToArray(), 0, _texture.NumOfColors);
                 }
                 using (var fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
                     clut.SaveAsPng(fs, _texture.NumOfColors, _texture.NumOfCluts);

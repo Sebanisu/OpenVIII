@@ -3,7 +3,7 @@ using System.IO;
 
 namespace OpenVIII
 {
-    public class TDW : TIM2
+    public sealed class TDW : TIM2
     {
         #region Constructors
 

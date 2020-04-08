@@ -18,7 +18,7 @@ namespace OpenVIII
             /// <summary>
             /// Override palette of texture to this and don't load other palettes. If null ignore.
             /// </summary>
-            public Color[] Colors;
+            public IColorData[] Colors;
 
             /// <summary>
             /// Number of Textures

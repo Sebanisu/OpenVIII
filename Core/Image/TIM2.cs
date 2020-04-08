@@ -99,7 +99,7 @@ namespace OpenVIII
         /// <summary>
         /// Gets size of clut data as in TIM file
         /// </summary>
-        public byte GetClutSize => checked((byte)Texture.ClutDataSize);
+        public uint GetClutSize => Texture.ClutDataSize;
 
         /// <summary>
         /// Gets number of colors per palette
@@ -149,7 +149,7 @@ namespace OpenVIII
 
         public void ForceSetClutCount(byte newClut) => Texture.NumOfCluts = newClut;
 
-        public Color[] GetClutColors(byte clut)
+        public IColorData[] GetClutColors(byte clut)
         {
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
             {
@@ -157,7 +157,7 @@ namespace OpenVIII
             }
         }
 
-        public Texture2D GetTexture(Dictionary<int, Color> colorOverride, sbyte clut = -1)
+        public Texture2D GetTexture(Dictionary<int, IColorData> colorOverride, sbyte clut = -1)
         {
             throw new NotImplementedException();
         }
@@ -167,9 +167,9 @@ namespace OpenVIII
         /// </summary>
         /// <param name="clut">clut index</param>
         /// <returns></returns>
-        public Color[] GetPalette(byte clut = 0)
+        public IColorData[] GetPalette(byte clut = 0)
         {
-            Color[] colors;
+            IColorData[] colors;
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
                 colors = GetClutColors(br, clut);
             return colors;
@@ -199,7 +199,7 @@ namespace OpenVIII
             }
         }
 
-        public Texture2D GetTexture(Color[] colors)
+        public Texture2D GetTexture(IColorData[] colors)
         {
             using (var br = new BinaryReader(new MemoryStream(Buffer)))
             {
@@ -257,7 +257,7 @@ namespace OpenVIII
             {
                 for (ushort i = 0; i < Texture.NumOfCluts; i++)
                 {
-                    clut.SetData(0, new Rectangle(0, i, Texture.NumOfColors, 1), GetClutColors(br, i), 0, Texture.NumOfColors);
+                    clut.SetData(0, new Rectangle(0, i, Texture.NumOfColors, 1), GetClutColors(br, i).Cast<ColorRGBA8888>().ToArray(), 0, Texture.NumOfColors);
                 }
                 using (var fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
                     clut.SaveAsPng(fs, Texture.NumOfColors, Texture.NumOfCluts);
@@ -323,7 +323,7 @@ namespace OpenVIII
         /// <remarks>
         /// This allows null palette but it doesn't seem to handle the palette being null
         /// </remarks>
-        protected TextureBuffer CreateImageBuffer(BinaryReader br, Color[] palette = null)
+        protected unsafe TextureBuffer CreateImageBuffer(BinaryReader br, IColorData[] palette = null)
         {
             br.BaseStream.Seek(TextureDataPointer, SeekOrigin.Begin);
             var buffer = new TextureBuffer(Texture.Width, Texture.Height); //ARGB
@@ -359,13 +359,11 @@ namespace OpenVIII
                 for (var i = 0; i < buffer.Length && br.BaseStream.Position + 2 < br.BaseStream.Length; i++)
                 {
                     var pixel = br.ReadBytes(3);
-                    buffer[i] = new Color
+                    
+                    fixed (byte * p = pixel)
                     {
-                        R = pixel[2],
-                        G = pixel[1],
-                        B = pixel[0],
-                        A = 0xFF
-                    };
+                        buffer[i] = *(ColorBGR888*)p;
+                    }
                 }
             }
             else
@@ -381,23 +379,21 @@ namespace OpenVIII
         /// <param name="br">Binary reader pointing to memory stream of data.</param>
         /// <param name="clut">Active clut data</param>
         /// <returns>Color[]</returns>
-        protected Color[] GetClutColors(BinaryReader br, ushort clut)
+        protected IColorData[] GetClutColors(BinaryReader br, ushort clut)
         {
             if (clut >= Texture.NumOfCluts)
                 throw new Exception($"TIM_v2::GetClutColors::given clut {clut} is >= texture number of cluts {Texture.NumOfCluts}");
 
-            if (CLP)
-            {
-                var colorPixels = new Color[Texture.NumOfColors];
-                br.BaseStream.Seek(TIMOffset + 20 + (Texture.NumOfColors * 2 * clut), SeekOrigin.Begin);
-                for (var i = 0; i < Texture.NumOfColors; i++)
-                    colorPixels[i] = new ColorABGR1555(br.ReadUInt16(), IgnoreAlpha);
-                return colorPixels;
-            }
-            else throw new Exception($"TIM that has {BPP} bpp mode and has no clut data!");
+            if(!CLP) throw new Exception($"TIM that has {BPP} bpp mode and has no clut data!");
+            var colorPixels = new IColorData[Texture.NumOfColors];
+            br.BaseStream.Seek(TIMOffset + 20 + (Texture.NumOfColors * 2 * clut), SeekOrigin.Begin);
+            for (var i = 0; i < Texture.NumOfColors; i++)
+                colorPixels[i] = new ColorABGR1555(br.ReadUInt16(), IgnoreAlpha);
+            return colorPixels;
+
         }
 
-        protected Texture2D GetTexture(BinaryReader br, Color[] colors) => CreateImageBuffer(br, colors).GetTexture();
+        protected Texture2D GetTexture(BinaryReader br, IColorData[] colors) => CreateImageBuffer(br, colors).GetTexture();
 
         /// <summary>
         /// Populate Texture structure
@@ -424,7 +420,7 @@ namespace OpenVIII
 
             public byte[] ClutData;
 
-            public int ClutDataSize;
+            public uint ClutDataSize;
 
             /// <summary>
             /// length, in bytes, of the entire CLUT block (including the header)
@@ -455,17 +451,15 @@ namespace OpenVIII
 
             public bool Assert(bool a)
             {
-                if (!a)
+                if (a) return false;
+                NotTIM = true;
+                if (ThrowExec)
                 {
-                    NotTIM = true;
-                    if (ThrowExec)
-                    {
-                        throw new InvalidDataException("Invalid TIM File");
-                    }
-                    //else
-                    //    Debug.Assert(a);
+                    throw new InvalidDataException("Invalid TIM File");
                 }
-                return !a;
+                //else
+                //    Debug.Assert(a);
+                return true;
             }
 
             /// <summary>
@@ -485,7 +479,7 @@ namespace OpenVIII
                     PaletteY = br.ReadUInt16();
                     NumOfColors = br.ReadUInt16(); //width of clut
                     NumOfCluts = br.ReadUInt16(); //height of clut
-                    ClutDataSize = (int)(ClutSize - 12);//(NumOfColors * NumOfCluts*2);
+                    ClutDataSize =ClutSize - 12;//(NumOfColors * NumOfCluts*2);
                     if (Assert(ClutDataSize == NumOfColors * NumOfCluts * 2 || ClutDataSize == NumOfColors * NumOfCluts) ||
                     Assert(PaletteX % 16 == 0) ||
                     Assert(PaletteY <= 511))
@@ -499,10 +493,12 @@ namespace OpenVIII
                         NumOfCluts = checked((ushort)(ClutDataSize / (NumOfColors * 2)));
                     }
                     Assert(bpp == 8 && NumOfColors <= 256 || bpp != 8);
-                    ClutData = br.ReadBytes(ClutDataSize);
+                    ClutData = br.ReadBytes(checked((int)ClutDataSize));
                     //br.BaseStream.Seek(start+clutSize, SeekOrigin.Begin);
                 }
                 //wmsetus uses 4BPP, but sets 256 colors, but actually is 16, but num of clut is 2* 256/16 WTF?
+                //not the only place that does this. sometimes they pack multiple cluts into the row of 1.
+                //you can use functions to override the layout.
 
                 ImageSize = br.ReadUInt32(); // image size + header in bytes
                 ImageOrgX = br.ReadUInt16();

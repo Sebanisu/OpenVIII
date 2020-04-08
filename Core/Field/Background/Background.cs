@@ -49,7 +49,7 @@ namespace OpenVIII.Fields
         /// <summary>
         /// Palettes/Color Lookup Tables
         /// </summary>
-        private ClutsRGBA _clutsRgba;
+        private Cluts _cluts;
 
         public float Degrees;
         private bool _disposedValue;
@@ -313,9 +313,9 @@ namespace OpenVIII.Fields
                                         var unscaledLocation = tile.Source.Location;
                                         unscaledLocation.Offset(p.ToVector2() / scale);
                                         var output = ChangeColor(current, input, unscaledLocation, tile.TextureID, overlap);
-                                        if (!output.HasValue) break;
-                                        if (output.Value.A != 0)
-                                            texIDs[tile.TextureID][dst.X + p.X, dst.Y + p.Y] = output.Value;
+                                        if (output==null) break;
+                                        if (output.A != 0)
+                                            texIDs[tile.TextureID][dst.X + p.X, dst.Y + p.Y] = output;
                                         
                                     }
                                 else if (overlap[tile.TextureID].Count > 1)
@@ -438,34 +438,28 @@ namespace OpenVIII.Fields
             _disposedValue = true;
         }
 
-        private static Color Blend1(Color baseColor, Color color)
+        private static IColorData Blend1(IColorData baseColor, IColorData color)
         {//ClassicSpriteBatch
-            var r = new Color
-            {
-                R = (byte) MathHelper.Clamp(baseColor.R + color.R, 0, 255),
-                G = (byte) MathHelper.Clamp(baseColor.G + color.G, 0, 255),
-                B = (byte) MathHelper.Clamp(baseColor.B + color.B, 0, 255),
-                A = 0xFF
-            };
+            var r = new ColorRGBA8888((byte) MathHelper.Clamp(baseColor.R + color.R, 0, 255),
+                (byte) MathHelper.Clamp(baseColor.G + color.G, 0, 255),
+                (byte) MathHelper.Clamp(baseColor.B + color.B, 0, 255),
+                0xFF);
             return r;
         }
 
-        private static Color Blend2(Color baseColor, Color color)
+        private static IColorData Blend2(IColorData baseColor, IColorData color)
         {//ClassicSpriteBatch
-            var r = new Color
-            {
-                R = (byte) MathHelper.Clamp(baseColor.R - color.R, 0, 255),
-                G = (byte) MathHelper.Clamp(baseColor.G - color.G, 0, 255),
-                B = (byte) MathHelper.Clamp(baseColor.B - color.B, 0, 255),
-                A = 0xFF
-            };
+            var r = new ColorRGBA8888((byte) MathHelper.Clamp(baseColor.R - color.R, 0, 255),
+                (byte) MathHelper.Clamp(baseColor.G - color.G, 0, 255),
+                (byte) MathHelper.Clamp(baseColor.B - color.B, 0, 255),
+                0xFF);
             return r;
         }
 
-        private Color? ChangeColor(Color current, Color input, Point p, byte textureID, IReadOnlyDictionary<byte, HashSet<byte>> overlap)
+        private IColorData ChangeColor(IColorData current, IColorData input, Point p, byte textureID, IReadOnlyDictionary<byte, HashSet<byte>> overlap)
         {
-            if (input.A == 0) return Color.TransparentBlack;
-            if (current.A == 0 || current == input)
+            if (input.A == 0) return (ColorRGBA8888)Color.TransparentBlack;
+            if (current == null || current.A == 0 || current == input)
                 return input;
             IEnumerable<byte> o = (from tile in GetTiles
                 // ReSharper disable once ImplicitlyCapturedClosure
@@ -474,7 +468,6 @@ namespace OpenVIII.Fields
             if (o.Count() <= 1) return input; // two tiles same palette is drawing to same place
             o.ForEach(x => overlap[textureID].Add(x));
             return null;
-
         }
 
         private void DrawBackgroundQuad(TileQuadTexture quad, bool forceBlendModeNone = false, Vector2 scale2 = default)
@@ -498,8 +491,8 @@ namespace OpenVIII.Fields
             {
                 pass.Apply();
 
-                Memory.Graphics.GraphicsDevice.DrawUserPrimitives(primitiveType: PrimitiveType.TriangleList,
-                vertexData: temp, vertexOffset: 0, primitiveCount: 2);
+                Memory.Graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList,
+                temp, 0, 2);
             }
         }
 
@@ -594,20 +587,20 @@ namespace OpenVIII.Fields
                                 break;
 
                             case BlendMode.HalfAdd:
-                                Memory.SpriteBatchStart(bs: Memory.BlendStateAdd, ss: SamplerState.AnisotropicClamp);
+                                Memory.SpriteBatchStart(Memory.BlendStateAdd, SamplerState.AnisotropicClamp);
                                 break;
 
                             case BlendMode.QuarterAdd:
-                                Memory.SpriteBatchStart(bs: Memory.BlendStateAdd, ss: SamplerState.AnisotropicClamp);
+                                Memory.SpriteBatchStart(Memory.BlendStateAdd, SamplerState.AnisotropicClamp);
                                 break;
 
                             case BlendMode.Add:
-                                Memory.SpriteBatchStart(bs: Memory.BlendStateAdd, ss: SamplerState.AnisotropicClamp);
+                                Memory.SpriteBatchStart(Memory.BlendStateAdd, SamplerState.AnisotropicClamp);
                                 break;
 
                             case BlendMode.Subtract:
                                 alpha = .9f;
-                                Memory.SpriteBatchStart(bs: Memory.BlendStateSubtract, ss: SamplerState.AnisotropicClamp);
+                                Memory.SpriteBatchStart(Memory.BlendStateSubtract, SamplerState.AnisotropicClamp);
                                 break;
                         }
                         lastBlendMode = kvp.Key;
@@ -660,8 +653,8 @@ namespace OpenVIII.Fields
                 {
                     pass.Apply();
 
-                    Memory.Graphics.GraphicsDevice.DrawUserPrimitives(primitiveType: PrimitiveType.TriangleList,
-                    vertexData: Module.WalkMesh.Vertices.ToArray(), vertexOffset: 0, primitiveCount: Module.WalkMesh.Count);
+                    Memory.Graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList,
+                    Module.WalkMesh.Vertices.ToArray(), 0, Module.WalkMesh.Count);
                 }
             }
         }
@@ -697,7 +690,7 @@ namespace OpenVIII.Fields
                     }
 
                     var buffer = new TextureBuffer(textureTypeWidth, height, false);
-                    foreach (var clut in _clutsRgba)
+                    foreach (var clut in _cluts)
                     {
                         ms.Seek(startPixel, SeekOrigin.Begin);
                         var i = 0;
@@ -706,18 +699,17 @@ namespace OpenVIII.Fields
                         while (ms.Position + Math.Ceiling(adj) < ms.Length)
                         {
                             var row = i / textureTypeWidth;
-                            Color input;
+                            IColorData input;
                             if (bit == 24) //just to see if anything is there. don't think there is a real usage of 24 bit.
                             {
                                 if (alt && lastRow != row && row % 3 ==0) i++;
                                 //i += 1;
-                                input = new Color
-                                {
-                                    B = br.ReadByte(),
-                                    G = br.ReadByte(),
-                                    R = br.ReadByte(),
-                                    A = 0xFF,
-                                };
+                                input = new ColorBGRA8888(
+                                    b: br.ReadByte(),
+                                    g: br.ReadByte(),
+                                    r: br.ReadByte(),
+                                    a: 0xFF
+                                );
                             }
                             else if (bit == 16)
                             {
@@ -810,13 +802,13 @@ namespace OpenVIII.Fields
         {
             var offset = /*Memory.FieldHolder.FieldID == 76 ? 0 :*/ _textureType?.BytesSkippedPalettes ?? 0;
             var cluts = GetTiles != null
-                ? new ClutsRGBA(
-                    GetTiles.Select(x => x.PaletteID).Distinct().ToDictionary(x => x, x => new Color[ColorsPerPalette]),
+                ? new Cluts(
+                    GetTiles.Select(x => x.PaletteID).Distinct().ToDictionary(x => x, x => new IColorData[ColorsPerPalette]),
                     false)
                 :
-                new ClutsRGBA(
+                new Cluts(
                     Enumerable.Range(0, 16).Select(x => (byte) x)
-                        .ToDictionary(x => x, x => new Color[ColorsPerPalette]), false);
+                        .ToDictionary(x => x, x => new IColorData[ColorsPerPalette]), false);
             using (var br = new BinaryReader(new MemoryStream(mim)))
                 foreach (var clut in cluts)
                 {
@@ -825,7 +817,7 @@ namespace OpenVIII.Fields
                     for (var i = 0; i < ColorsPerPalette; i++)
                         clut.Value[i] = new ColorABGR1555(br.ReadUInt16());
                 }
-            _clutsRgba = cluts;
+            _cluts = cluts;
             SaveCluts();
         }
 
@@ -1003,13 +995,13 @@ namespace OpenVIII.Fields
                         var color16Bit = BitConverter.ToUInt16(mim, 2 * colorKey + palettePointer);
                         if (color16Bit == 0) // 0 is Color.TransparentBlack So we skip it.
                             continue;
-                        Color color = new ColorABGR1555(color16Bit);
+                        IColorData color = new ColorABGR1555(color16Bit);
 
                         var pos = realDestinationPixel + x + y * Width;
                         var bufferedColor = textureBuffer[pos];
                         if (blendMode < BlendMode.None)
                         {
-                            if (color == Color.Black)
+                            if (color.Equals(Color.Black))
                                 continue;
 
                             if (blendMode == BlendMode.Subtract)
@@ -1022,10 +1014,10 @@ namespace OpenVIII.Fields
                                 switch (blendMode)
                                 {
                                     case BlendMode.QuarterAdd:
-                                        color = Color.Multiply(color, .25f);
+                                        color = color.Multiply(.25f);
                                         break;
                                     case BlendMode.HalfAdd:
-                                        color = Color.Multiply(color, .5f);
+                                        color = color.Multiply(.5f);
                                         break;
                                     case BlendMode.Add:
                                         break;
@@ -1045,7 +1037,8 @@ namespace OpenVIII.Fields
                         {
                             throw new Exception("Color is already set something may be wrong.");
                         }
-                        color.A = 0xFF;
+                        //todo see if i need to set value.
+                        //color.A = 0xFF;
                         textureBuffer[pos] = color;
                         hasColor = true;
                     }
@@ -1157,10 +1150,10 @@ namespace OpenVIII.Fields
                                 var point = new Point(p.X + tile.loc.X, p.Y + tile.loc.Y);
 
                                 var paletteID = tile.PaletteID;
-                                Color input = default;
+                                IColorData input = default;
                                 if (is8Bit)
                                 {
-                                    input = _clutsRgba[paletteID][br.ReadByte()];
+                                    input = _cluts[paletteID][br.ReadByte()];
                                 }
                                 else if (is16Bit)
                                 {
@@ -1171,11 +1164,11 @@ namespace OpenVIII.Fields
                                     if (p.X % 2 == 0)
                                     {
                                         colorKey = br.ReadByte();
-                                        input = _clutsRgba[paletteID][colorKey & 0xf];
+                                        input = _cluts[paletteID][colorKey & 0xf];
                                     }
                                     else
                                     {
-                                        input = _clutsRgba[paletteID][(colorKey & 0xf0) >> 4];
+                                        input = _cluts[paletteID][(colorKey & 0xf0) >> 4];
                                     }
                                 }
 
@@ -1184,9 +1177,9 @@ namespace OpenVIII.Fields
                                 {
                                     var current = tex[point.X, point.Y];
                                     var output = ChangeColor(current, input, point, tile.TextureID, overlap);
-                                    if (!output.HasValue) break;
-                                    if (output.Value.A != 0)
-                                        tex[point.X, point.Y] = output.Value;
+                                    if (output==null) break;
+                                    if (output.A != 0)
+                                        tex[point.X, point.Y] = output;
                                 }
                                 else
                                 {
@@ -1225,7 +1218,7 @@ namespace OpenVIII.Fields
             if (!Memory.EnableDumpingData && !Module.Toggles.HasFlag(Toggles.DumpingData)) return;
             var path = Path.Combine(Module.GetFolder(),
                 $"{Module.GetFieldName()}_Clut.png");
-            _clutsRgba.Save(path);
+            _cluts.Save(path);
         }
 
         private static void SaveSwizzled(IReadOnlyDictionary<byte, Texture2D> textureIDs, string suf = "")

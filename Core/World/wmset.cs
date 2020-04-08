@@ -715,7 +715,7 @@ namespace OpenVIII.World
             /// <summary>
             /// Contains palette data for given frame- because section41 is palette (version 17)
             /// </summary>
-            public Color[][] framesPalette;
+            public IColorData[][] framesPalette;
 
             /// <summary>
             /// OpenVIII helper value- if true then index is incrementing- if false then index is decrementing
@@ -798,8 +798,8 @@ namespace OpenVIII.World
                 ms.Seek(4, SeekOrigin.Current); //there are two WORD's that feel like they have again the palette X and Y but why??
             var preImagePosition = (uint)ms.Position;
             var imagePointers = new uint[animation.framesCount];
-            Color[] palette = null;
-            Color[][] customPalette = null;
+            IColorData[] palette = null;
+            IColorData[][] customPalette = null;
             if (texturePointer != -1)
                 palette = GetWorldMapTexturePalette(texturePointer == 0 ?
                 Section38_textures.beach : Section38_textures.beachE, 0);
@@ -810,7 +810,7 @@ namespace OpenVIII.World
                 animationFrames = new Texture2D[imagePointers.Length];
             else
             {
-                customPalette = new Color[imagePointers.Length][];
+                customPalette = new IColorData[imagePointers.Length][];
                 animationFrames = new Texture2D[imagePointers.Length];
             }
             for (var i = 0; i < animation.framesCount; i++)
@@ -826,14 +826,12 @@ namespace OpenVIII.World
                 _ = br.ReadUInt32(); //unknown
                 var width = (ushort)(br.ReadUInt16() * 2);
                 var height = br.ReadUInt16();
-                Texture2D texture;
-                Color[] texBuffer;
                 if (texturePointer != -1)
                 {
-                    texture = new Texture2D(Memory.Graphics.GraphicsDevice, width, height, false, SurfaceFormat.Color);
-                    texBuffer = new Color[width * height]; //32bpp because Color is ARGB byte : struct
+                    var texture = new Texture2D(Memory.Graphics.GraphicsDevice, width, height, false, SurfaceFormat.Color);
+                    var texBuffer = new TextureBuffer(width, height);
 
-                    if (palette.Length == 16)
+                    if (palette != null && palette.Length == 16)
                     {
                         for (var m = 0; m < texBuffer.Length; m += 2)
                         {
@@ -848,13 +846,13 @@ namespace OpenVIII.World
                             var b = br.ReadByte();
                             texBuffer[m] = palette[b];
                         }
-                    texture.SetData(texBuffer);
+                    texBuffer.SetData(texture);
                     animationFrames[i] = texture;
                 }
                 else
                 {
                     width /= 2;
-                    customPalette[i] = new Color[width]; //in sec41 width is the number of colours
+                    customPalette[i] = new IColorData[width]; //in sec41 width is the number of colors
                     for (var m = 0; m < width; m++)
                     {
                         var color = br.ReadUInt16();
@@ -878,7 +876,7 @@ namespace OpenVIII.World
         public Texture2D GetBeachAnimationTextureFrame(int animationId, int frameId)
             => BeachAnimations[animationId].framesTextures[frameId];
 
-        public Color[] GetWaterAnimationPalettes(int animId, int frameId) => waterAnimations[animId].framesPalette[frameId].ToArray();
+        public IColorData[] GetWaterAnimationPalettes(int animId, int frameId) => waterAnimations[animId].framesPalette[frameId].ToArray();
 
         public Texture2D GetWaterAnimationTextureFrame(int animationId, int frameId) => WaterAnimations[animationId].framesTextures[frameId];
 
@@ -1001,7 +999,7 @@ namespace OpenVIII.World
         ///
         private List<TextureHandler[]> sec38_textures;
 
-        private List<Color[][]> sec38_pals; //because other sections rely on palettes of wmset.38
+        private List<IColorData[][]> sec38_pals; //because other sections rely on palettes of wmset.38
 
         private TIM2 waterTim;
         private TIM2 waterTim2;
@@ -1050,7 +1048,7 @@ namespace OpenVIII.World
 
         private void Section38()
         {
-            sec38_pals = new List<Color[][]>();
+            sec38_pals = new List<IColorData[][]>();
             MemoryStream ms;
             using (var br = new BinaryReader(ms = new MemoryStream(buffer)))
             {
@@ -1083,7 +1081,7 @@ namespace OpenVIII.World
                             tim.ForceSetClutCount((byte)(tim.GetClutSize / 16));
                         }
                     sec38_textures.Add(new TextureHandler[tim.GetClutCount]);
-                    sec38_pals.Add(new Color[tim.GetClutCount][]);
+                    sec38_pals.Add(new IColorData[tim.GetClutCount][]);
                     for (byte k = 0; k < sec38_textures[i].Length; k++)
                     {
                         var table = tim.GetPalette(k);
@@ -1161,10 +1159,10 @@ namespace OpenVIII.World
         /// <returns></returns>
         public Texture2D GetWorldMapWaterTexture() => waterAtlas;
 
-        public Color[] GetWorldMapTexturePalette(Section38_textures index, int clut)
+        public IColorData[] GetWorldMapTexturePalette(Section38_textures index, int clut)
         => sec38_pals[(int)index][clut];
 
-        public void UpdateWorldMapWaterTexturePaletteForAnimation(int index, Color[] palette)
+        public void UpdateWorldMapWaterTexturePaletteForAnimation(int index, IColorData[] palette)
         {
             if (waterTim == null)
                 return;
